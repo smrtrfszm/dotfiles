@@ -78,3 +78,6 @@ echo 'Installed: qutebrowser'
 apt install -y alacritty
 echo 'Installed: alacritty'
 
+# Install fish shell
+apt install -y fish
+echo 'Installed: fish shell'
