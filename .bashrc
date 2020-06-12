@@ -129,3 +129,4 @@ export DENO_INSTALL="/home/sztibi/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$PATH:/home/sztibi/depot_tools"
 alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
+
