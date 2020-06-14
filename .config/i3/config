@@ -176,7 +176,7 @@ bar {
 bindsym $mod+l exec xdg-screensaver lock
 
 # Set background image
-exec_always feh --bg-scale /home/sztibi/.config/bg
+exec_always nitrogen --restore
 
 # Auto start Discord
 exec discord
