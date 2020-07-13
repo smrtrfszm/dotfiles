@@ -43,8 +43,8 @@ settings:
     global:
       DEFAULT: https://duckduckgo.com/?q={}
       aw: https://wiki.archlinux.org/?search={}
-      sb: https://hypixel-skyblock.fandom.com/wiki/Special:Search?query={}
       mdn: https://developer.mozilla.org/en-US/search?q={}
+      sb: https://hypixel-skyblock.fandom.com/wiki/Special:Search?query={}
   zoom.levels:
     global:
     - 25%
