@@ -130,3 +130,11 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export PATH="$PATH:/home/sztibi/depot_tools"
 alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
+export PATH=$PATH:/usr/local/go/bin
+
+export GOPATH="~/dev/go/lib"
+export GOPATH="$GOPATH:~/dev/go/code"
+
+export PATH="$PATH:/home/sztibi/scripts"
+
+export OSUB_EXPORT_PATH="/home/sztibi/.PlayOnLinux/wineprefix/osu_on_linux/drive_c/users/sztibi/Local Settings/Application Data/osu!/Songs/"
