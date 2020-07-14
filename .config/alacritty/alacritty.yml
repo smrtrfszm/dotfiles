@@ -77,8 +77,7 @@ visual_bell:
   duration: 0
   color: '#ffffff'
 
-background_opacity: 0.9
-# background_opacity: 1
+background_opacity: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"

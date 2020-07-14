@@ -11,6 +11,7 @@ call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 
 " Fuzzy finder
 Plug 'airblade/vim-rooter'
@@ -36,6 +37,8 @@ noremap! <Left> <Nop>
 noremap <Right> <Nop>
 noremap! <Right> <Nop>
 
+noremap <C-j> <Esc>
+
 " Undo after reopen vim
 set undodir=~/.vimdid
 set undofile
@@ -51,3 +54,6 @@ autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabsto
 
 autocmd Filetype typescript setlocal colorcolumn=121 
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
+
+autocmd Filetype java setlocal colorcolumn=121
+
