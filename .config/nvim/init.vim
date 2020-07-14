@@ -37,7 +37,7 @@ noremap! <Left> <Nop>
 noremap <Right> <Nop>
 noremap! <Right> <Nop>
 
-noremap <C-j> <Esc>
+inoremap <C-j> <Esc>
 
 " Undo after reopen vim
 set undodir=~/.vimdid
