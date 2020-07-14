@@ -137,4 +137,4 @@ export GOPATH="$GOPATH:~/dev/go/code"
 
 export PATH="$PATH:/home/sztibi/scripts"
 
-export OSUB_EXPORT_PATH="/home/sztibi/.PlayOnLinux/wineprefix/osu_on_linux/drive_c/users/sztibi/Local Settings/Application Data/osu!/Songs/"
+export OSUBI_EXPORT_PATH="/home/sztibi/.PlayOnLinux/wineprefix/osu_on_linux/drive_c/users/sztibi/Local Settings/Application Data/osu!/Songs/"

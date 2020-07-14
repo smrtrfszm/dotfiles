@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Check if argument length equals to 1
+if [ $# -eq 1 ]; then
+
+	# Check if the file exists
+	if [ -f "$1" ]; then
+
+		# Check if the environment variable is set
+		if [[ -z "${OSUBI_EXPORT_PATH}" ]]; then 
+			echo "Error: OSUBI_EXPORT_PATH environmental variable isn't set"	
+		else
+			# If file exists
+	
+	
+			relative_path=$1		
+	
+			# Filename with extension but without relative path
+			full_filename=$(basename -- "$relative_path")
+	
+			# Only the filename
+			filename="${full_filename%.*}"
+	
+			# Rename the file to .zip
+			mv "$1" "/tmp/$filename.zip"
+	
+			# Make target folder
+			mkdir "${OSUB_EXPORT_PATH}/$filename"
+	
+			#Unzips to file to the targetfolder
+			unzip -q "/tmp/$filename.zip" -d "${OSUB_EXPORT_PATH}/$filename"
+			
+			#Remove the temp file
+			rm "/tmp/$filename.zip"
+
+			echo "Success"
+		fi
+	else
+		# If the file doesn't exist
+		echo "Error: File doesn't exist"
+	fi
+else
+	# Wrong number of arguments
+	command=$(basename $0)
+	echo "Usage: $command <file>"
+fi
+
