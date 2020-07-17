@@ -132,8 +132,7 @@ alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
 export PATH=$PATH:/usr/local/go/bin
 
-export GOPATH="~/dev/go/lib"
-export GOPATH="$GOPATH:~/dev/go/code"
+export GOPATH="/home/sztibi/dev/go"
 
 export PATH="$PATH:/home/sztibi/scripts"
 
