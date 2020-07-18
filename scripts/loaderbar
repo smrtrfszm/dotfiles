@@ -35,3 +35,4 @@ hashtags=${hashtags// /\#}
 dots=${dots// /\.}
 
 echo -ne "[${hashtags}${dots}] $1%\r"
+
