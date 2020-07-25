@@ -1,4 +1,5 @@
 Config { font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
+       , additionalFonts = ["xft:Liberation Mono:pixelsize=14:antialias=true:hinting=true"]
        , bgColor = "#1d1d1d"
        , fgColor = "white"
        , alpha = 255
@@ -7,19 +8,16 @@ Config { font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
        , pickBroadest = False
        , persistent = True
        , hideOnStart = False
-       , iconRoot = "./icons"
+       , iconRoot = "~/.config/xmobar/icons"
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Network "eth0" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Network "eth1" ["-L","0","-H","32",
-                                          "--normal","green","--high","red"] 10
-                    , Run Cpu ["-L","3","-H","50",
-                               "--normal","green","--high","red"] 10
-                    , Run Memory ["-t","MEM: <usedratio>%"] 10
+       , commands = [ Run Cpu ["-t", "Cpu: <total>%"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
+		    , Run ComX "weather2" [] "N/A" "myWeatherCommand" 6000
+		    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %eth0% - %eth1% }%date%{%cpu% | %memory% "
+       , template = "<fn=1>%UnsafeStdinReader%</fn>}%date% %myWeatherCommand%{%cpu% | %memory% "
        }
