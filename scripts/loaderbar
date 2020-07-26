@@ -25,7 +25,8 @@ fi
 cols=$( tput cols )
 cols=$(( $cols - 7 ))
 
-hashtagsnum=$(( (200*$cols/100*$1 % 2 + 100*$cols/100*$1) / 100 ))
+# hashtagsnum=$(( (200*$cols/100*$1 % 2 + 100*$cols/100*$1) / 100 ))
+hashtagsnum=$(( $cols * $1 / 100 ))
 dotsnum=$(( $cols - $hashtagsnum ))
 
 hashtags=$( printf "%-${hashtagsnum}s" "")
