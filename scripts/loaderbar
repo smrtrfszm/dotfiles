@@ -34,6 +34,7 @@ dots=$( printf "%-${dotsnum}s" "")
 
 hashtags=${hashtags// /\#}
 dots=${dots// /\.}
+percentage=$( printf "%4.4s" "$1%" )
 
-echo -ne "[${hashtags}${dots}] $1%\r"
+echo -ne "[${hashtags}${dots}] ${percentage}\r"
 
