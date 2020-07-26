@@ -1,7 +1,3 @@
---------------------------------------------------------------------------------
--- IMPORTS                                                                    --
---------------------------------------------------------------------------------
-
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -26,6 +22,9 @@ import qualified Data.Map        as M
 -- Set terminal emulator
 terminalEmulator :: String
 terminalEmulator = "alacritty"
+-- Set web browser
+webBrowser :: String
+webBrowser = "qutebrowser"
 -- Focus doesn't follow the mouse pointer
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
@@ -49,7 +48,7 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#ff0000"
 -- workspace names
 myWorkspaces :: [String]
-myWorkspaces = ["1","2","3","4","5","6","7","8","9: Discord"]
+myWorkspaces = ["0","1","2","3","4","5","6","7","8","9: Discord","10","11"]
 
 
 --------------------------------------------------------------------------------
@@ -60,43 +59,47 @@ myKeys conf = mkKeymap conf $
     -- Launch terminal
     [ ("M-<Return>", spawn terminalEmulator)
     -- Launch dmenu
-    , ("M-o", spawn "dmenu_run")
+    , ("M-o",        spawn "dmenu_run")
     -- Close focused window
-    , ("M-S-c", kill)
+    , ("M-S-c",      kill)
     -- Resize viewed windows to the correct size
-    , ("M-n", refresh)
+    , ("M-n",        refresh)
     -- Move focus to the next window
-    , ("M-<Tab>", windows W.focusDown)
+    , ("M-<Tab>",    windows W.focusDown)
     -- Focus the master window
-    , ("M-m", windows W.focusMaster)
+    , ("M-m",        windows W.focusMaster)
     -- Swap the focused window with the master window
-    , ("M-S-m", windows W.swapMaster)
+    , ("M-S-m",      windows W.swapMaster)
     -- Swap the focused window with the next window
-    , ("M-S-j", windows W.swapDown)
+    , ("M-S-j",      windows W.swapDown)
     -- Swap the focosed window with the previous window
-    , ("M-S-k", windows W.swapUp)
+    , ("M-S-k",      windows W.swapUp)
     -- Shrink the master area
-    , ("M-h", sendMessage Shrink)
+    , ("M-h",        sendMessage Shrink)
     -- Expand the master area
-    , ("M-l", sendMessage Expand)
+    , ("M-l",        sendMessage Expand)
     -- Push window back into tiling 
-    , ("M-t", withFocused $ windows . W.sink)
+    , ("M-t",        withFocused $ windows . W.sink)
     -- Quit xmonad
-    , ("M-S-q", io (exitWith ExitSuccess))
+    , ("M-S-q",      io (exitWith ExitSuccess))
     -- Restart xmonad
-    , ("M-r", spawn "killall xmobar; xmonad --recompile; xmonad --restart")
+    , ("M-r",        spawn "xmonad --recompile;killall xmobar;xmonad --restart")
     -- Open browse
-    , ("M-b", spawn "qutebrowser")
+    , ("M-b",        spawn webBrowser)
     -- Toggle windows
-    -- , ("M-d," toggleWindows)
+    , ("M-d",        toggleWindows)
     ]
     ++
+    -- Select or shift to workspace
     [("M-" ++ m ++ k, windows $ f i)
-        | (i, k) <- zip myWorkspaces $ map show [1..9]
+        | (i, k) <- zip myWorkspaces $ map show [0..9]
         , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
         ]
 
-toggleWindows = ()
+toggleWindows :: X ()
+toggleWindows = do
+    spawn "xmessage random szöveg!"
+
 
 --------------------------------------------------------------------------------
 -- MOUSE BINDINGS                                                             --
@@ -137,18 +140,6 @@ myLayout = smartBorders
 -- WINDWO RULES                                                               --
 --------------------------------------------------------------------------------
 
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "discord"        --> doShift "9: Discord"
@@ -174,27 +165,30 @@ myEventHook = mempty
 --
 myLogHook = return ()
 
-------------------------------------------------------------------------
--- Startup hook
+--------------------------------------------------------------------------------
+-- STARTUP HOOK                                                               --
+--------------------------------------------------------------------------------
 
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
+-- This executes everytime when xmonad starts or restarted (Mod + r)
+
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "compton &"
+    spawn "xsetroot -cursor_name left_ptr"
 
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
 
--- Run xmonad with the settings you specify. No need to modify this.
---
+--------------------------------------------------------------------------------
+-- MAIN                                                                       --
+--------------------------------------------------------------------------------
+
+-- This is the main entry point to the window manager
+
 main = do
+    -- Launch xmobar for both monitors
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config"
     xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config"
     xmonad $ fullscreenSupport $ docks def
+        -- Configs
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
         , clickJustFocuses   = myClickJustFocuses
@@ -210,37 +204,16 @@ main = do
         , layoutHook         = myLayout
         , startupHook        = myStartupHook 
         , logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
+            -- Give workspace data to xmobar
             { ppOutput          = \x -> do
                 hPutStrLn xmproc0 x
                 hPutStrLn xmproc1 x
             , ppCurrent         = xmobarColor "#00ff00" "#333333" . wrap "[" "]"
             , ppVisible         = wrap "(" ")"
-            , ppHidden          = xmobarColor "#cccccc" "" . wrap "*" "*"
+            , ppHidden          = xmobarColor "#cccccc" "" . wrap "-" "-"
             , ppHiddenNoWindows = xmobarColor "#888888" "" . wrap " " " "
             , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
             , ppOrder           = \(ws:_:_) -> [ws]
             }
         }
     
-
--- xmobarConfig = def {
---     font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
---     , bgColor = "#1d1d1d"
---     , fgColor = "white"
---     , alpha = 255
---     , position = Top
---     , lowerOnStart = True
---     , pickBroadest = False
---     , persistent = True
---     , hideOnStart = False
---     , allDesktops = True
---     , overrideRedirect = True
---     , commands =
---         [ Run Cpu ["-t", "Cpu: <total>%"] 10
---         , Run Memory ["-t", "Mem: <usedratio>%"] 10
---         , Run Date "%a %b %_d %H:%M:%S" "date" 10
---         ]
---     , sepChar = "%"
---     , alignSep = "}{"
---     , template = "}%date%{%cpu% | %memory% "
---     }
