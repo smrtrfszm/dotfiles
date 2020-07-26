@@ -4,6 +4,9 @@ Config { font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
        , fgColor = "white"
        , alpha = 255
        , position = Top
+       , borderColor = "black"
+       , borderWidth = 1
+       , border = BottomB
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = True
@@ -14,10 +17,9 @@ Config { font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
        , commands = [ Run Cpu ["-t", "Cpu: <total>%"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
-		    , Run ComX "weather2" [] "N/A" "myWeatherCommand" 6000
 		    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<fn=1>%UnsafeStdinReader%</fn>}%date% %myWeatherCommand%{%cpu% | %memory% "
+       , template = " <fn=1>%UnsafeStdinReader%</fn>}%date%{%cpu% | %memory% "
        }
