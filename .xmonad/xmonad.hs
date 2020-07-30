@@ -45,10 +45,10 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 -- Normal border color
 myNormalBorderColor :: String
-myNormalBorderColor = "#dddddd"
+myNormalBorderColor = "#181818"
 -- Focused border color
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#ff0000"
+myFocusedBorderColor = "#cb2520"
 -- workspace names
 myWorkspaces :: [String]
 myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"
@@ -63,7 +63,7 @@ myKeys conf = mkKeymap conf $
     -- Launch terminal
     [ ("M-<Return>", spawn terminalEmulator)
     -- Launch dmenu
-    , ("M-o",        spawn "dmenu_run")
+    , ("M-o",        spawn "dmenu_run -h 20")
     -- Close focused window
     , ("M-S-c",      kill)
     -- Resize viewed windows to the correct size
@@ -91,8 +91,13 @@ myKeys conf = mkKeymap conf $
                      \killall xmobar; xmonad --restart")
     -- Open browse
     , ("M-b",        spawn webBrowser)
+    -- Screenshot
+    , ("<Print>",    spawn "scrot -sf $HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
     -- Toggle windows
     , ("M-d",        toggleWindows)
+    -- Focus screens 0 and 1
+    , ("M-w",        focusScreen 0)
+    , ("M-e",        focusScreen 1)
     
     , ("M-x",        withFocused $ hide)
     ]
@@ -102,6 +107,14 @@ myKeys conf = mkKeymap conf $
         | (i, k) <- zip myWorkspaces $ map show [0..9]
         , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
         ]
+
+-- Focuses the given screen or if invalid id given does nothing
+focusScreen :: ScreenId -> X()
+focusScreen si = do
+    ws <- screenWorkspace si 
+    case ws of
+        Nothing -> return ()
+        Just x  -> windows $ W.view x
 
 toggleWindows :: X ()
 toggleWindows = do
