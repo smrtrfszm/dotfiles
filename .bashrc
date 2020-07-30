@@ -139,3 +139,5 @@ export PATH="$PATH:/home/sztibi/scripts"
 export OSUBI_EXPORT_PATH="/home/sztibi/.PlayOnLinux/wineprefix/osu_on_linux/drive_c/users/sztibi/Local Settings/Application Data/osu!/Songs/"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
+
+alias ":q"="exit"
