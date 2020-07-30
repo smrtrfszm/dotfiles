@@ -170,7 +170,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 	position top
-	font pnago:Liberation Sans 14
+	font pango:Liberation Sans 14
 }
 
 # Lock screen
