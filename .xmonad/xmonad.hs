@@ -1,11 +1,14 @@
 import XMonad
 import Data.Monoid
 import System.Exit
+
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
+
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers (doHideIgnore)
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
@@ -48,7 +51,8 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#ff0000"
 -- workspace names
 myWorkspaces :: [String]
-myWorkspaces = ["0","1","2","3","4","5","6","7","8","9: Discord","10","11"]
+myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"
+    , "10", "11"]
 
 
 --------------------------------------------------------------------------------
@@ -83,11 +87,14 @@ myKeys conf = mkKeymap conf $
     -- Quit xmonad
     , ("M-S-q",      io (exitWith ExitSuccess))
     -- Restart xmonad
-    , ("M-r",        spawn "xmonad --recompile;killall xmobar;xmonad --restart")
+    , ("M-r",        spawn "xmonad --recompile;\
+                     \killall xmobar; xmonad --restart")
     -- Open browse
     , ("M-b",        spawn webBrowser)
     -- Toggle windows
     , ("M-d",        toggleWindows)
+    
+    , ("M-x",        withFocused $ hide)
     ]
     ++
     -- Select or shift to workspace
@@ -128,7 +135,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 mySpacing i = spacingRaw True (Border 0 i 0 i) True (Border i 0 i 0) True
 
-myLayout = smartBorders
+myLayoutHook = smartBorders
     $ avoidStruts
     $ mySpacing gapSize
     $ (masterStack ||| Full)
@@ -137,14 +144,13 @@ myLayout = smartBorders
 
 
 --------------------------------------------------------------------------------
--- WINDWO RULES                                                               --
+-- WINDOW RULES                                                               --
 --------------------------------------------------------------------------------
 
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "discord"        --> doShift "9: Discord"
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    [ className =? "discord"        --> doShift ( myWorkspaces !! 9 ) 
+    , className =? "stalonetray"    --> doHideIgnore 
+    ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -173,8 +179,11 @@ myLogHook = return ()
 
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
-    spawnOnce "compton &"
+    -- spawnOnce "compton &"
     spawn "xsetroot -cursor_name left_ptr"
+    spawnOnce "dunst &"
+    spawnOnce "stalonetray --window-type normal &"
+    spawnOnce "discord &"
 
 
 --------------------------------------------------------------------------------
@@ -201,7 +210,7 @@ main = do
         , mouseBindings      = myMouseBindings
         , manageHook         = myManageHook
         , handleEventHook    = myEventHook
-        , layoutHook         = myLayout
+        , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
         , logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
             -- Give workspace data to xmobar
