@@ -8,7 +8,7 @@ import XMonad.Util.EZConfig
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers (doHideIgnore)
+import XMonad.Hooks.ManageHelpers (doHideIgnore, (/=?))
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
@@ -92,14 +92,13 @@ myKeys conf = mkKeymap conf $
     -- Open browse
     , ("M-b",        spawn webBrowser)
     -- Screenshot
-    , ("<Print>",    spawn "scrot -sf $HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
+    , ("<Print>",    spawn "sleep 0.2; scrot -sf\
+                     \$HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
     -- Toggle windows
     , ("M-d",        toggleWindows)
     -- Focus screens 0 and 1
     , ("M-w",        focusScreen 0)
     , ("M-e",        focusScreen 1)
-    
-    , ("M-x",        withFocused $ hide)
     ]
     ++
     -- Select or shift to workspace
@@ -108,17 +107,18 @@ myKeys conf = mkKeymap conf $
         , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
         ]
 
--- Focuses the given screen or if invalid id given does nothing
-focusScreen :: ScreenId -> X()
+-- Focuses the given screen or if invalid then does nothing
+focusScreen :: ScreenId -> X ()
 focusScreen si = do
-    ws <- screenWorkspace si 
+    ws <- screenWorkspace si
     case ws of
         Nothing -> return ()
         Just x  -> windows $ W.view x
 
+-- Hides every visible window on screen and reveals them when calles again
 toggleWindows :: X ()
 toggleWindows = do
-    spawn "xmessage random szöveg!"
+    withFocused hide
 
 
 --------------------------------------------------------------------------------
@@ -163,6 +163,7 @@ myLayoutHook = smartBorders
 myManageHook = composeAll
     [ className =? "discord"        --> doShift ( myWorkspaces !! 9 ) 
     , className =? "stalonetray"    --> doHideIgnore 
+    , (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     ]
 
 ------------------------------------------------------------------------
