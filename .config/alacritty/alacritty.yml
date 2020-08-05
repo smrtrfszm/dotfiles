@@ -14,8 +14,7 @@ window:
   class:
     instance: Alacritty
     general: Alacritty
-
-dynamic_title: false
+  dynamic_title: false
 
 scrolling:
   history: 10000
@@ -72,7 +71,7 @@ colors:
     - { index: 20, color: '0xb8b8b8' }
     - { index: 21, color: '0xe8e8e8' }
 
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
   color: '#ffffff'
