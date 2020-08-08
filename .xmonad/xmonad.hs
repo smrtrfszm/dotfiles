@@ -87,7 +87,9 @@ myKeys conf = mkKeymap conf $
     -- Quit xmonad
     , ("M-S-q",      io (exitWith ExitSuccess))
     -- Restart xmonad
-    , ("M-r",        spawn "xmonad --recompile;\
+    , ("M-r",        spawn "killall xmobar; xmonad --restart")
+    -- Recompile and restart xmonad
+    , ("M-S-r",      spawn "xmonad --recompile;\
                      \killall xmobar; xmonad --restart")
     -- Open browse
     , ("M-b",        spawn webBrowser)
@@ -118,7 +120,11 @@ focusScreen si = do
 -- Hides every visible window on screen and reveals them when calles again
 toggleWindows :: X ()
 toggleWindows = do
-    withFocused hide
+    focusScreen 0
+    windows $ W.greedyView (myWorkspaces !! 10)
+    focusScreen 1
+    windows $ W.greedyView (myWorkspaces !! 11)
+
 
 
 --------------------------------------------------------------------------------
@@ -210,7 +216,9 @@ main = do
     -- Launch xmobar for both monitors
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config"
     xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config"
-    xmonad $ fullscreenSupport $ docks def
+    xmonad 
+        $ fullscreenSupport
+        $ docks def
         -- Configs
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
