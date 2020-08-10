@@ -14,6 +14,8 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 
+import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
+
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -65,7 +67,7 @@ myKeys conf = mkKeymap conf $
     -- Launch dmenu
     , ("M-o",        spawn "dmenu_run -h 20")
     -- Close focused window
-    , ("M-S-c",      kill)
+    , ("M-<Backspace>",      kill)
     -- Resize viewed windows to the correct size
     , ("M-n",        refresh)
     -- Move focus to the next window
@@ -87,7 +89,7 @@ myKeys conf = mkKeymap conf $
     -- Quit xmonad
     , ("M-S-q",      io (exitWith ExitSuccess))
     -- Restart xmonad
-    , ("M-r",        spawn "killall xmobar; xmonad --restart")
+    , ("M-r",        spawn "xmonad --restart")
     -- Recompile and restart xmonad
     , ("M-S-r",      spawn "xmonad --recompile;\
                      \killall xmobar; xmonad --restart")
@@ -117,9 +119,16 @@ focusScreen si = do
         Nothing -> return ()
         Just x  -> windows $ W.view x
 
+hideScreen :: ScreenId -> X ()
+hideScreen si = do
+    focusScreen si
+    appendWorkspace "hide0"
+    -- appendWorkspace $ printf "hide%d" si
+
 -- Hides every visible window on screen and reveals them when calles again
 toggleWindows :: X ()
 toggleWindows = do
+    hideScreen 0
     focusScreen 0
     windows $ W.greedyView (myWorkspaces !! 10)
     focusScreen 1
