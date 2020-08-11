@@ -14,6 +14,7 @@ source $HOME/.config/nvim/plugins.vim
 source $HOME/.config/nvim/plugin-configs/coc.vim
 source $HOME/.config/nvim/plugin-configs/base16.vim
 source $HOME/.config/nvim/plugin-configs/lightline.vim
+source $HOME/.config/nvim/plugin-configs/ale.vim
 
 " Unbind arrow keys
 noremap <Up> <Nop>

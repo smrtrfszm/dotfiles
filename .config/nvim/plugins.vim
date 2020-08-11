@@ -18,4 +18,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'eagletmt/ghcmod-vim'
+
 call plug#end()
