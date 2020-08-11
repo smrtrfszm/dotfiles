@@ -17,9 +17,10 @@ Config { font = "xft:Liberation Sans:pixelsize=14:antialias=true:hinting=true"
        , commands = [ Run Cpu ["-t", "Cpu: <total>%"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
+		    , Run Com "uname" ["-r"] "" 3600
 		    , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fn=1>%UnsafeStdinReader%</fn>}%date%{%cpu% | %memory% "
+       , template = " <fn=1>%UnsafeStdinReader%</fn>}%date%{%uname% | %cpu% | %memory% "
        }
