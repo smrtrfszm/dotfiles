@@ -22,11 +22,11 @@ scrolling:
 
 font:
   normal:
-    family: monospace
+    family: 'JetBrains Mono'
   bold:
-    family: monospace
+    family: 'JetBrains Mono'
   italic:
-    family: monospace
+    family: 'JetBrains Mono'
 
   size: 11.0
 
