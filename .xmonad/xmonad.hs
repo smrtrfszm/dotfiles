@@ -161,7 +161,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- LAYOUTS                                                                    --
 --------------------------------------------------------------------------------
 
-mySpacing i = spacingRaw True (Border 0 i 0 i) True (Border i 0 i 0) True
+mySpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
 
 myLayoutHook = smartBorders
     $ avoidStruts
