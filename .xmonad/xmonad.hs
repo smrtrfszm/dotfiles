@@ -9,6 +9,7 @@ import XMonad.Util.EZConfig
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers (doHideIgnore, (/=?))
+import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
 
 import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
@@ -53,8 +54,7 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#cb2520"
 -- workspace names
 myWorkspaces :: [String]
-myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"
-    , "10", "11"]
+myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"]
 
 
 --------------------------------------------------------------------------------
@@ -111,6 +111,18 @@ myKeys conf = mkKeymap conf $
         , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
         ]
 
+-- Returns the number of screens
+getScreenNum :: X Int
+getScreenNum = getScreenNum' 0
+
+-- Loop for getScreenNum
+getScreenNum' :: Int -> X Int
+getScreenNum' i = do
+    ws <- screenWorkspace $ S i
+    case ws of
+        Nothing -> return i
+        Just x  -> getScreenNum' (i+1)
+
 -- Focuses the given screen or if invalid then does nothing
 focusScreen :: ScreenId -> X ()
 focusScreen si = do
@@ -119,21 +131,28 @@ focusScreen si = do
         Nothing -> return ()
         Just x  -> windows $ W.view x
 
-hideScreen :: ScreenId -> X ()
+hideScreen :: Int -> X ()
 hideScreen si = do
-    focusScreen si
-    appendWorkspace "hide0"
-    -- appendWorkspace $ printf "hide%d" si
+    focusScreen $ S si
+    appendWorkspace $ "hide" ++ show si
 
--- Hides every visible window on screen and reveals them when calles again
+hideScreens :: X ()
+hideScreens = do
+    screenNum <- getScreenNum
+    hideScreens' screenNum
+
+hideScreens' :: Int -> X ()
+hideScreens' i
+    | i == 0 = return ()
+    | otherwise = do
+        hideScreen (i-1)
+        hideScreens' (i-1)
+    
+
+-- Hides every visible window on screen and reveals them when called again
 toggleWindows :: X ()
 toggleWindows = do
-    hideScreen 0
-    focusScreen 0
-    windows $ W.greedyView (myWorkspaces !! 10)
-    focusScreen 1
-    windows $ W.greedyView (myWorkspaces !! 11)
-
+    hideScreens
 
 
 --------------------------------------------------------------------------------
@@ -190,7 +209,7 @@ myManageHook = composeAll
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = mempty
+myEventHook = EW.fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -226,6 +245,7 @@ main = do
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config"
     xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config"
     xmonad 
+        $ EW.ewmh
         $ fullscreenSupport
         $ docks def
         -- Configs
