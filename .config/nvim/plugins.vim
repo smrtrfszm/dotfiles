@@ -16,8 +16,16 @@ Plug 'junegunn/fzf.vim'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Git
 Plug 'tpope/vim-fugitive'
 
+" I don't know what this is
 Plug 'eagletmt/ghcmod-vim'
 
 call plug#end()
+
+" Plugin configs
+source $HOME/.config/nvim/plugin-configs/coc.vim
+source $HOME/.config/nvim/plugin-configs/base16.vim
+source $HOME/.config/nvim/plugin-configs/lightline.vim
+source $HOME/.config/nvim/plugin-configs/ale.vim

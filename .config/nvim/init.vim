@@ -10,11 +10,6 @@ let mapleader = "\<Space>"
 " Plugins
 source $HOME/.config/nvim/plugins.vim
 
-" Plugin configs
-source $HOME/.config/nvim/plugin-configs/coc.vim
-source $HOME/.config/nvim/plugin-configs/base16.vim
-source $HOME/.config/nvim/plugin-configs/lightline.vim
-source $HOME/.config/nvim/plugin-configs/ale.vim
 
 " Unbind arrow keys
 noremap <Up> <Nop>
@@ -65,4 +60,7 @@ autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
 autocmd Filetype haskell setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
 
 autocmd Filetype java setlocal colorcolumn=121
+
+autocmd Filetype c setlocal colorcolumn=81 
+autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
 
