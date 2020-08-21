@@ -242,8 +242,8 @@ myStartupHook = do
 
 main = do
     -- Launch xmobar for both monitors
-    xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config"
-    xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config"
+    xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config.hs"
+    xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config.hs"
     xmonad 
         $ EW.ewmh
         $ fullscreenSupport
