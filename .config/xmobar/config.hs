@@ -17,16 +17,16 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
        , commands = [ Run Cpu
        			        [ "-t"
 			            , "<fc=#ccc>Cpu:</fc> <total>%"
-		        	    ] 10
+		        	    ] 20
                     , Run Memory
 		    	        [ "-t"
 			            , "<fc=#ccc>Mem:</fc> <usedratio>%"
-			            ] 10
+			            ] 20
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
 		            , Run Com "uname" ["-r"] "" 3600
 		            , Run Network "enp5s0"
 		    	        [ "-t"
-			            , "<fc=#ccc>Net:</fc> ↑ <tx>KB ↓ <rx>KB"] 10
+			            , "<fc=#ccc>Net:</fc> ↑ <tx>KB ↓ <rx>KB"] 20
 		                , Run UnsafeStdinReader
                         ]
        , sepChar = "%"
