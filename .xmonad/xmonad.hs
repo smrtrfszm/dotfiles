@@ -5,6 +5,7 @@ import System.Exit
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
+import XMonad.Util.NamedScratchpad
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -98,6 +99,8 @@ myKeys conf = mkKeymap conf $
     -- Screenshot
     , ("<Print>",    spawn "sleep 0.2; scrot -sf\
                      \$HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
+    -- Toggle discrod scratchpad
+    , ("M-S-d",      namedScratchpadAction scratchpads "discord")
     -- Toggle windows
     , ("M-d",        toggleWindows)
     -- Focus screens 0 and 1
@@ -195,8 +198,8 @@ myLayoutHook = smartBorders
 --------------------------------------------------------------------------------
 
 myManageHook = composeAll
-    [ className =? "discord"        --> doShift ( myWorkspaces !! 9 ) 
-    , className =? "stalonetray"    --> doHideIgnore 
+    -- [ className =? "discord"        --> doShift ( myWorkspaces !! 9 ) 
+    [ className =? "stalonetray"    --> doHideIgnore 
     , (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     ]
 
@@ -226,13 +229,22 @@ myLogHook = return ()
 -- This executes everytime when xmonad starts or restarted (Mod + r)
 
 myStartupHook = do
-    spawnOnce "nitrogen --restore &"
-    -- spawnOnce "compton &"
-    spawn "xsetroot -cursor_name left_ptr"
-    spawnOnce "dunst &"
-    spawnOnce "stalonetray --window-type normal &"
+    -- spawnOnce "nitrogen --restore &"
+    -- spawnOnce "picomp &"
+    -- spawn "xsetroot -cursor_name left_ptr"
+    -- spawnOnce "dunst &"
+    -- spawnOnce "stalonetray --window-type normal &"
     spawnOnce "discord &"
+    
 
+--------------------------------------------------------------------------------
+-- SCRATCHPADS                                                                --
+--------------------------------------------------------------------------------
+
+scratchpads =
+    [ NS "discord" "discord" (className =? "discord")
+        (customFloating $ W.RationalRect 0.95 0.95 0.05 0.05) 
+    ]
 
 --------------------------------------------------------------------------------
 -- MAIN                                                                       --
@@ -259,7 +271,7 @@ main = do
         , focusedBorderColor = myFocusedBorderColor
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
-        , manageHook         = myManageHook
+        , manageHook         = myManageHook <+> namedScratchpadManageHook scratchpads
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
