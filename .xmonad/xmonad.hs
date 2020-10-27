@@ -89,6 +89,8 @@ myKeys conf = mkKeymap conf $
     , ("M-t",        withFocused $ windows . W.sink)
     -- Quit xmonad
     , ("M-S-q",      io (exitWith ExitSuccess))
+    -- Lauch custom dmenu script to prompt shutdown
+    , ("M-x",        spawn "~/scripts/dmenu-shutdown")
     -- Restart xmonad
     , ("M-r",        spawn "xmonad --restart")
     -- Recompile and restart xmonad

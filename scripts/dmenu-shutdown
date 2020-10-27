@@ -1,0 +1,18 @@
+#!/bin/bash
+
+option=$(echo -e 'shutdown\nreboot\nlock' | dmenu -p "Shutdown: ")
+echo $option
+
+case $option in
+	"shutdown")
+		shutdown now
+		;;
+	"reboot")
+		reboot
+		;;
+	"lock")
+		slock
+		;;
+	*)
+esac
+
