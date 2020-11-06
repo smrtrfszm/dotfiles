@@ -10,14 +10,14 @@ set -o vi
 [[ $- != *i* ]] && return
 
 # Path
-[ -d '$HOME/scripts' ]    && PATH='$HOME/scripts/:$PATH'
-[ -d '$HOME/local/.bin' ] && PATH='$HOME/local/.bin/:$PATH'
+[ -d "$HOME/scripts" ]    && PATH="$HOME/scripts/:$PATH"
+[ -d "$HOME/local/.bin" ] && PATH="$HOME/local/.bin/:$PATH"
 
 # shopt
 shopt -s histappend
 shopt -s checkwinsize
 
-PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 
 ## ALIASES ##
