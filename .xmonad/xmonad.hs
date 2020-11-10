@@ -22,9 +22,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 
---------------------------------------------------------------------------------
--- VARIABLES                                                                  --
---------------------------------------------------------------------------------
+-- Variables
 
 -- Set terminal emulator
 terminalEmulator :: String
@@ -58,15 +56,12 @@ myWorkspaces :: [String]
 myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"]
 
 
---------------------------------------------------------------------------------
--- KEYBINDS                                                                   --
---------------------------------------------------------------------------------
-
+-- Keybinds
 myKeys conf = mkKeymap conf $
     -- Launch terminal
     [ ("M-<Return>", spawn terminalEmulator)
     -- Launch dmenu
-    , ("M-o",        spawn "dmenu_run -h 20")
+    , ("M-o",        spawn "dmenu_run")
     -- Close focused window
     , ("M-<Backspace>",      kill)
     -- Resize viewed windows to the correct size
@@ -101,8 +96,8 @@ myKeys conf = mkKeymap conf $
     -- Screenshot
     , ("<Print>",    spawn "sleep 0.2; scrot -sf\
                      \$HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
-    -- Toggle discrod scratchpad
-    , ("M-S-d",      namedScratchpadAction scratchpads "discord")
+    -- Lock screen
+    , ("M-S-l",      spawn "slock")
     -- Toggle windows
     , ("M-d",        toggleWindows)
     -- Focus screens 0 and 1
@@ -160,10 +155,7 @@ toggleWindows = do
     hideScreens
 
 
---------------------------------------------------------------------------------
--- MOUSE BINDINGS                                                             --
---------------------------------------------------------------------------------
-
+-- Mouse bindings
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -181,10 +173,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
 
---------------------------------------------------------------------------------
--- LAYOUTS                                                                    --
---------------------------------------------------------------------------------
-
+-- Layouts
 mySpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
 
 myLayoutHook = smartBorders
@@ -195,25 +184,14 @@ myLayoutHook = smartBorders
         masterStack = Tall 1 (3/100) (1/2)
 
 
---------------------------------------------------------------------------------
--- WINDOW RULES                                                               --
---------------------------------------------------------------------------------
-
+-- Window rules
 myManageHook = composeAll
-    -- [ className =? "discord"        --> doShift ( myWorkspaces !! 9 ) 
     [ className =? "stalonetray"    --> doHideIgnore 
     , (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     ]
 
-------------------------------------------------------------------------
--- Event handling
 
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
+-- Event hook
 myEventHook = EW.fullscreenEventHook
 
 ------------------------------------------------------------------------
@@ -224,40 +202,20 @@ myEventHook = EW.fullscreenEventHook
 --
 myLogHook = return ()
 
---------------------------------------------------------------------------------
--- STARTUP HOOK                                                               --
---------------------------------------------------------------------------------
 
 -- This executes everytime when xmonad starts or restarted (Mod + r)
-
 myStartupHook = do
-    -- spawnOnce "nitrogen --restore &"
-    -- spawnOnce "picomp &"
-    -- spawn "xsetroot -cursor_name left_ptr"
-    -- spawnOnce "dunst &"
-    -- spawnOnce "stalonetray --window-type normal &"
-    spawnOnce "discord &"
-    
+    spawnOnce "stalonetray --window-type normal &"
+    spawnOnce "chromium --app=https://discord.com/app &"
+    spawnOnce "transmission-gtk &"
 
---------------------------------------------------------------------------------
--- SCRATCHPADS                                                                --
---------------------------------------------------------------------------------
-
-scratchpads =
-    [ NS "discord" "discord" (className =? "discord")
-        (customFloating $ W.RationalRect 0.95 0.95 0.05 0.05) 
-    ]
-
---------------------------------------------------------------------------------
--- MAIN                                                                       --
---------------------------------------------------------------------------------
 
 -- This is the main entry point to the window manager
-
 main = do
     -- Launch xmobar for both monitors
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config.hs"
     xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config.hs"
+
     xmonad 
         $ EW.ewmh
         $ fullscreenSupport
