@@ -8,7 +8,7 @@ import XMonad.Util.EZConfig
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers (doHideIgnore, (/=?))
+import XMonad.Hooks.ManageHelpers ((/=?))
 import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
 
 import XMonad.Layout.Spacing
@@ -185,8 +185,7 @@ myLayoutHook = smartBorders
 
 -- Window rules
 myManageHook = composeAll
-    [ className =? "stalonetray"    --> doHideIgnore 
-    , (className =? "Steam" <&&> title /=? "Steam") --> doFloat
+    [ (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     ]
 
 
@@ -204,7 +203,6 @@ myLogHook = return ()
 
 -- This executes everytime when xmonad starts or restarted (Mod + r)
 myStartupHook = do
-    spawnOnce "stalonetray --window-type normal &"
     spawnOnce "chromium --app=https://discord.com/app &"
     spawnOnce "transmission-gtk &"
 
