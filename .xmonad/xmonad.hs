@@ -5,7 +5,6 @@ import System.Exit
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
-import XMonad.Util.NamedScratchpad
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
@@ -231,7 +230,7 @@ main = do
         , focusedBorderColor = myFocusedBorderColor
         , keys               = myKeys
         , mouseBindings      = myMouseBindings
-        , manageHook         = myManageHook <+> namedScratchpadManageHook scratchpads
+        , manageHook         = myManageHook
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
