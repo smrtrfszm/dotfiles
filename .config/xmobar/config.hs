@@ -1,9 +1,9 @@
 Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
-       , textOffset = 15
+       , textOffset = 16
        , bgColor = "#1d1d1d"
        , fgColor = "white"
        , alpha = 255
-       , position = Top
+       , position = TopSize C 100 20
        , borderColor = "black"
        , borderWidth = 1
        , border = BottomB
@@ -24,12 +24,13 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
 			            ] 20
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
 		            , Run Com "uname" ["-r"] "" 3600
-		            , Run Network "enp5s0"
+		            , Run Network "enp6s0"
 		    	        [ "-t"
-			            , "<fc=#ccc>Net:</fc> ↑ <tx>KB ↓ <rx>KB"] 20
-		                , Run UnsafeStdinReader
-                        ]
+			            , "<fc=#ccc>Net:</fc> ↑ <tx> KB/s ↓ <rx> KB/s"
+                        ] 20
+		            , Run UnsafeStdinReader
+                    ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}%date%{%uname% | %cpu% | %memory% | %enp5s0% "
+       , template = " %UnsafeStdinReader%}%date%{%uname% | %cpu% | %memory% | %enp6s0% "
        }
