@@ -1,4 +1,3 @@
-
 # Set vi mode
 set -o vi
 
@@ -7,7 +6,7 @@ set -o vi
 
 # Path
 [ -d "$HOME/scripts" ]    && PATH="$HOME/scripts/:$PATH"
-[ -d "$HOME/local/.bin" ] && PATH="$HOME/local/.bin/:$PATH"
+[ -d "$HOME/local/bin" ] && PATH="$HOME/local/bin/:$PATH"
 
 # shopt
 shopt -s histappend
@@ -33,5 +32,4 @@ alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
 # vim exit in bash
 alias ':q'='exit'
-
 
