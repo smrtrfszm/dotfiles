@@ -4,6 +4,7 @@ set nu rnu
 set nowrap
 set laststatus=2
 set noshowmode
+set cursorline
 
 let mapleader = "\<Space>"
 
@@ -42,25 +43,12 @@ set undofile
 " Syntax
 syntax on
 
-set colorcolumn=81
-
-autocmd Filetype javascript setlocal colorcolumn=121 
-autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
-
-
-autocmd Filetype typescript setlocal colorcolumn=121 
-autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
-
-autocmd Filetype css setlocal colorcolumn=121 
-autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
-
-autocmd Filetype scss setlocal colorcolumn=121 
-autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
-
+autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
+autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
+autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
+autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype haskell setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
-
 autocmd Filetype java setlocal colorcolumn=121
-
-autocmd Filetype c setlocal colorcolumn=81 
-autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
+autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=81
+autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121
 
