@@ -1,6 +1,14 @@
 #!/bin/bash
 
-option=$(echo -e 'shutdown\nreboot\nlock' | dmenu -p "Shutdown: ")
+lock_command="slock"
+
+options="shutdown\nreboot"
+
+if command -v $lock_command &> /dev/null; then
+	options="${options}\n${lock_command}"
+fi
+
+option=$(echo -e $options | dmenu -p "Shutdown: ")
 echo $option
 
 case $option in
@@ -11,7 +19,9 @@ case $option in
 		reboot
 		;;
 	"lock")
-		slock
+		if command -v $lock_command &> /dev/null; then
+			slock
+		fi
 		;;
 	*)
 esac
