@@ -16,21 +16,21 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
        , overrideRedirect = True
        , commands = [ Run Cpu
        			        [ "-t"
-			            , "<fc=#ccc>Cpu:</fc> <total>%"
+			            , "<fc=#86C1B9>Cpu: <total>%</fc>"
 		        	    ] 20
                     , Run Memory
 		    	        [ "-t"
-			            , "<fc=#ccc>Mem:</fc> <usedratio>%"
+			            , "<fc=#A1B56C>Mem: <usedratio>%</fc>"
 			            ] 20
                     , Run Date "%a %b %_d %H:%M:%S" "date" 10
 		            , Run Com "uname" ["-r"] "" 3600
 		            , Run Network "enp6s0"
 		    	        [ "-t"
-			            , "<fc=#ccc>Net:</fc> ↑ <tx> KB/s ↓ <rx> KB/s"
+			            , "<fc=#F7CA88>Net:</fc> <fc=#DC9656>↑ <tx> KB/s</fc> <fc=#A16946>↓ <rx> KB/s</fc>"
                         ] 20
 		            , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}%date%{%uname% | %cpu% | %memory% | %enp6s0% "
+       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %enp6s0% "
        }

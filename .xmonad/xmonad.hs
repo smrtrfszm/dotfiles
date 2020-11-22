@@ -237,10 +237,10 @@ main = do
             { ppOutput          = \x -> do
                 hPutStrLn xmproc0 x
                 hPutStrLn xmproc1 x
-            , ppCurrent         = xmobarColor "#00ff00" "#333333" . wrap "[" "]"
-            , ppVisible         = wrap "(" ")"
-            , ppHidden          = xmobarColor "#cccccc" "" . wrap "-" "-"
-            , ppHiddenNoWindows = xmobarColor "#888888" "" . wrap " " " "
+            , ppCurrent         = xmobarColor "#A1B56C" "" . wrap "[" "]"
+            , ppVisible         = xmobarColor "#F8F8F8" "" . wrap "(" ")"
+            , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
+            , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
             , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
             , ppOrder           = \(ws:_:_) -> [ws]
             }
