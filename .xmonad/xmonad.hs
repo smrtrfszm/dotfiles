@@ -60,7 +60,7 @@ myKeys conf = mkKeymap conf $
     -- Launch terminal
     [ ("M-<Return>", spawn terminalEmulator)
     -- Launch dmenu
-    , ("M-o",        spawn "dmenu_run")
+    , ("M-o",        spawn "dmenu_run -h 24")
     -- Close focused window
     , ("M-<Backspace>",      kill)
     -- Resize viewed windows to the correct size
@@ -93,8 +93,7 @@ myKeys conf = mkKeymap conf $
     -- Open browse
     , ("M-b",        spawn webBrowser)
     -- Screenshot
-    , ("<Print>",    spawn "sleep 0.2; scrot -sf\
-                     \$HOME/Screenshots/%Y-%m-%d-%D:%M:%S.png")
+    , ("<Print>",    spawn "sleep 0.2; scrot -sf")
     -- Lock screen
     , ("M-S-l",      spawn "slock")
     -- Toggle windows
