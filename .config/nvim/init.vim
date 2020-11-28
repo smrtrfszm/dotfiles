@@ -5,6 +5,7 @@ set nowrap
 set laststatus=2
 set noshowmode
 set cursorline
+set scrolloff=5
 
 let mapleader = "\<Space>"
 
@@ -28,8 +29,9 @@ inoremap <C-j> <Esc>
 " Open nerdtree on ctrl + n
 map <C-n> :NERDTreeToggle<cr>
 
-map <C-f> :Files <CR>
+map <C-f> :GFiles <CR>
 nmap <leader>b :Buffers<CR>
+nnoremap <leader><leader> <c-^>
 
 nmap <leader>w :w<CR>
 
@@ -43,8 +45,16 @@ set undofile
 " Syntax
 syntax on
 
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  aug END
+end
+
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
+autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype haskell setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
