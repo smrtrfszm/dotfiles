@@ -22,7 +22,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
 		    	        [ "-t"
 			            , "<fc=#A1B56C>Mem: <usedratio>%</fc>"
 			            ] 20
-                    , Run Date "%a %b %_d %H:%M:%S" "date" 10
+                    , Run Date "%a %b %d %H:%M:%S" "date" 10
 		            , Run Com "uname" ["-r"] "" 3600
 		            , Run Network "enp3s0"
 		    	        [ "-t"
