@@ -25,7 +25,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias vim='nvim'
-alias python='python3.8'
+alias python='python3.9'
 
 # alias for bare config git repo
 alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
