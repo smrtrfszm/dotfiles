@@ -24,7 +24,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
 			            ] 20
                     , Run Date "%a %b %d %H:%M:%S" "date" 10
 		            , Run Com "uname" ["-r"] "" 3600
-		            , Run Network "enp3s0"
+		            , Run DynNetwork
 		    	        [ "-t"
 			            , "<fc=#F7CA88>Net:</fc> <fc=#DC9656>↑ <tx> KB/s</fc> <fc=#A16946>↓ <rx> KB/s</fc>"
                         ] 20
@@ -32,5 +32,5 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %enp3s0% "
+       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %dynnetwork% "
        }
