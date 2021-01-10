@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+xinitrc_folder="$HOME/.config/X11/xinitrc"
+
+wms_string=$(ls -1 "$xinitrc_folder")
+readarray -t window_managers <<< "$wms_string"
+
+trap cleanup SIGHUP SIGINT SIGTERM
+
+echo "Select a window manager:"
+
+selected=0
+
+function update_print {
+	if [[ ${1} -eq 1 ]]; then
+		printf "\033[%dA" ${#window_managers[@]}
+	fi
+
+	for (( i=0; i<${#window_managers[@]}; i++)); do
+		if [[ $i -eq $selected ]]; then
+			echo -n "  [X]"
+		else
+			echo -n "  [ ]"
+		fi
+		echo " ${window_managers[i]}"
+	done
+}
+
+function up_arrow {
+	((selected--))
+	if [[ $selected -lt 0 ]]; then
+		((selected=${#window_managers[@]}-1))
+	fi
+	update_print 1
+}
+
+function down_arrow {
+	((selected++))
+	if [[ $selected -gt ${#window_managers[@]}-1 ]]; then
+		((selected=0))
+	fi
+	update_print 1
+}
+
+function enter {
+	selected_wm="${window_managers[$selected]}"
+
+	file="$HOME/.config/X11/xinitrc/$selected_wm"
+	if [[ ! -f $file ]]; then
+		echo "Cant find xinitrc file for that window manager"
+		cleanup
+	fi
+
+	startx $file
+
+	cleanup
+}
+
+function cleanup {
+	tput cvvis
+	exit
+}
+
+update_print 0
+tput civis
+while read -rsn 1 ui; do
+	case "$ui" in
+	$'\x1b')
+		read -rsn1 -t 0.1 tmp
+		if [[ "$tmp" == "[" ]]; then
+			read -rsn1 -t 0.1 tmp
+			case "$tmp" in
+			"A") up_arrow;;
+			"B") down_arrow;;
+			esac
+		fi
+		read -rsn5 -t 0.1
+		;;
+	'') enter;;
+	**) continue;;
+	esac
+done
