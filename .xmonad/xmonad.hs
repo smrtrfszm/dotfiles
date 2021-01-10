@@ -49,7 +49,7 @@ myNormalBorderColor :: String
 myNormalBorderColor = "#181818"
 -- Focused border color
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#cb2520"
+myFocusedBorderColor = "#86c1b9"
 -- workspace names
 myWorkspaces :: [String]
 myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"]
@@ -84,7 +84,7 @@ myKeys conf = mkKeymap conf $
     -- Quit xmonad
     , ("M-S-q",      io (exitWith ExitSuccess))
     -- Lauch custom dmenu script to prompt shutdown
-    , ("M-x",        spawn "~/scripts/dmenu-shutdown")
+    , ("M-x",        spawn "dmenu-shutdown -h 24")
     -- Restart xmonad
     , ("M-r",        spawn "xmonad --restart")
     -- Recompile and restart xmonad
@@ -93,7 +93,7 @@ myKeys conf = mkKeymap conf $
     -- Open browse
     , ("M-b",        spawn webBrowser)
     -- Screenshot
-    , ("<Print>",    spawn "sleep 0.2; scrot -sf")
+    , ("<Print>",    spawn "sleep 0.2 && screenshot")
     -- Lock screen
     , ("M-S-l",      spawn "slock")
     -- Toggle windows

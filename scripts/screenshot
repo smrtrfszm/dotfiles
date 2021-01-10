@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+scrot --line style=dash,width=2,color="#ffffff" --select --freeze -e "mv $f $HOME/screenshots/" "%Y-%m-%d_$wx$h.png"
