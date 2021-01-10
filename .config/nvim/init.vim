@@ -6,6 +6,7 @@ set laststatus=2
 set noshowmode
 set cursorline
 set scrolloff=5
+set mouse=a
 
 let mapleader = "\<Space>"
 
