@@ -11,7 +11,7 @@ set mouse=a
 let mapleader = "\<Space>"
 
 " Plugins
-source $HOME/.config/nvim/plugins.vim
+source $HOME/.config/nvim/plugins/init.vim
 
 
 " Unbind arrow keys

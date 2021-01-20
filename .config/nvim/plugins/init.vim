@@ -15,7 +15,7 @@ Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 " Plugin configs
-source $HOME/.config/nvim/plugin-configs/coc.vim
-source $HOME/.config/nvim/plugin-configs/base16.vim
-source $HOME/.config/nvim/plugin-configs/lightline.vim
-source $HOME/.config/nvim/plugin-configs/ale.vim
+source $HOME/.config/nvim/plugins/coc.vim
+source $HOME/.config/nvim/plugins/base16.vim
+source $HOME/.config/nvim/plugins/lightline.vim
+source $HOME/.config/nvim/plugins/ale.vim
