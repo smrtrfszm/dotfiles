@@ -62,4 +62,5 @@ autocmd Filetype haskell setlocal tabstop=4 shiftwidth=4 expandtab softtabstop
 autocmd Filetype java setlocal colorcolumn=121
 autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=81
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121
+autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121
 
