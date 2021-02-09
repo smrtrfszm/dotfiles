@@ -7,6 +7,7 @@ set -o vi
 # Path
 [ -d "$HOME/scripts" ]    && PATH="$HOME/scripts/:$PATH"
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin/:$PATH"
+[ -d "$HOME/.yarn/bin" ]  && PATH="$HOME/.yarn/bin/:$PATH"
 
 # shopt
 shopt -s histappend
