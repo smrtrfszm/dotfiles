@@ -27,8 +27,8 @@ noremap! <Right> <Nop>
 " Bind esc to ctrl + j
 inoremap <C-j> <Esc>
 
-" Open nerdtree on ctrl + n
-map <C-n> :NERDTreeToggle<cr>
+" open/close coc-explorer
+:nmap <leader>e :CocCommand explorer<cr>
 
 map <C-f> :GFiles <CR>
 nmap <leader>b :Buffers<CR>
