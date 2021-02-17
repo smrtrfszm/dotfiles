@@ -40,7 +40,7 @@ myBorderWidth :: Dimension
 myBorderWidth = 2
 -- Gap size between borders
 gapSize :: Integer
-gapSize = 10
+gapSize = 8
 -- Modkey (windows key)
 myModMask :: KeyMask
 myModMask = mod4Mask
