@@ -1,12 +1,12 @@
 Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
-       , textOffset = 16
+       , textOffset = 17
        , bgColor = "#1d1d1d"
        , fgColor = "white"
        , alpha = 255
-       , position = TopSize C 100 20
+       , position = BottomSize C 100 20
        , borderColor = "black"
-       , borderWidth = 1
-       , border = BottomB
+       -- , borderWidth = 1
+       -- , border = BottomB
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = True
