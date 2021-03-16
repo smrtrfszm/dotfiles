@@ -1,4 +1,0 @@
-{
-	"coc.preferences.formatOnSaveFiletypes": ["js", "ts", "jsx", "tsx"],
-	"rust-analyzer.inlayHints.enable": false
-}
