@@ -5,7 +5,7 @@ lock_command="slock"
 options="shutdown\nreboot"
 
 if command -v $lock_command &> /dev/null; then
-	options="${options}\n${lock_command}"
+	options="${options}\nlock"
 fi
 
 option=$(echo -e $options | dmenu -p "Shutdown: " $@)
