@@ -163,6 +163,6 @@ let g:coc_global_extensions = [
   \'coc-json',
   \'coc-prettier',
   \'coc-pyright',
-  \'coc-rls',
+  \'coc-rust-analyzer',
   \'coc-tsserver',
   \]
