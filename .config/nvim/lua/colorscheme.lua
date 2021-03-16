@@ -214,3 +214,8 @@ Group.new("javaOperator",     colors.blue, colors.none, styles.none)
 Group.new('GitSignsAdd',    colors.green, colors.gray1, styles.none)
 Group.new('GitSignsChange', colors.blue,  colors.gray1, styles.none)
 Group.new('GitSignsDelete', colors.red,   colors.gray1, styles.none)
+
+Group.new('LspDiagnosticsDefaultError',       colors.red,    colors.none, styles.none)
+Group.new('LspDiagnosticsDefaultWarning',     colors.yellow, colors.none, styles.none)
+Group.new('LspDiagnosticsDefaultInformation', colors.blue,   colors.none, styles.none)
+Group.new('LspDiagnosticsDefaultHint',        colors.gray4,  colors.none, styles.none)

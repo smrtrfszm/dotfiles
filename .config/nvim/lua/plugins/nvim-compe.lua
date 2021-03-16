@@ -33,10 +33,8 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t '<C-n>'
-  elseif check_back_space() then
-    return t '<Tab>'
   else
-    return vim.fn['compe#complete']()
+    return t '<Tab>'
   end
 end
 

@@ -25,4 +25,4 @@ key('n', '<Leader><Leader>', '<C-^>')
 key('i', '<C-j>', '<esc>')
 key('n', '<Leader>w', '<cmd>w<cr>')
 key('n', '<C-f>', '<cmd>Telescope git_files<cr>')
-
+key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')

@@ -3,9 +3,6 @@ luafile $HOME/.config/nvim/init2.lua
 " Plugins
 source $HOME/.config/nvim/plugins/init.vim
 
-" open/close coc-explorer
-nmap <leader>e :CocCommand explorer<cr>
-
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
@@ -17,3 +14,4 @@ autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorco
 autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121
 autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121
 autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab softtabstop
+autocmd Filetype lua setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
