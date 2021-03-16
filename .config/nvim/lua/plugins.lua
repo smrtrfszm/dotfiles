@@ -10,7 +10,6 @@ end
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'chriskempson/base16-vim'
   use 'itchyny/lightline.vim'
   use 'airblade/vim-rooter'
   use {'neoclide/coc.nvim', branch = 'release'}
@@ -22,6 +21,8 @@ require('packer').startup(function()
 --   use 'neovim/nvim-lspconfig'
 --   use 'hrsh7th/nvim-compe'
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+  use 'tjdevries/colorbuddy.nvim'
+  use 'norcalli/nvim-colorizer.lua'
 end)
 
 -- Plugin configs
@@ -29,4 +30,4 @@ require('plugins.kommentary')
 require('plugins.treesitter')
 require('plugins.gitsigns')
 -- require('plugins.nvim-compe')
-require('plugins.base16')
+require('plugins.colorizer')

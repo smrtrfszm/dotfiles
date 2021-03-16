@@ -6,9 +6,6 @@ source $HOME/.config/nvim/plugins/init.vim
 " open/close coc-explorer
 nmap <leader>e :CocCommand explorer<cr>
 
-" Syntax
-syntax on
-
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
