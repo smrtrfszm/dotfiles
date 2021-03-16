@@ -27,6 +27,8 @@ alias egrep='egrep --color=auto'
 
 alias vim='nvim'
 alias python='python3.9'
+alias lg='lazygit'
+alias cg="lazygit -w $HOME -g $HOME/configs"
 
 # alias for bare config git repo
 alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
