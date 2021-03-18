@@ -1,8 +1,5 @@
 luafile $HOME/.config/nvim/init2.lua
 
-" Plugins
-source $HOME/.config/nvim/plugins/init.vim
-
 autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121

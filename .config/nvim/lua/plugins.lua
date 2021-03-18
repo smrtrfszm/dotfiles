@@ -10,9 +10,7 @@ end
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'itchyny/lightline.vim'
   use 'airblade/vim-rooter'
---   use {'neoclide/coc.nvim', branch = 'release'}
   use 'editorconfig/editorconfig-vim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'nvim-treesitter/playground'
@@ -24,6 +22,7 @@ require('packer').startup(function()
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
   use 'kdheepak/lazygit.nvim'
+  use {'glepnir/galaxyline.nvim', branch = 'main'}
 end)
 
 -- Plugin configs
@@ -33,3 +32,4 @@ require('plugins.treesitter')
 require('plugins.gitsigns')
 require('plugins.nvim-compe')
 require('plugins.colorizer')
+require('plugins.galaxyline')
