@@ -21,9 +21,14 @@ key('i', '<Left>', '<nop>')
 key('v', '<Tab>', '>gv')
 key('v', '<S-Tab>', '<gv')
 
+-- Smart tabs
+vim.api.nvim_set_keymap('i', '<TAB>', 'pumvisible() ? "<C-n>" : "<TAB>"', { expr = true, noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : "<S-TAB>"', { expr = true, noremap = true, silent = true })
+
 key('n', '<Leader><Leader>', '<C-^>')
 key('i', '<C-j>', '<esc>')
 key('n', '<Leader>w', '<cmd>w<cr>')
 key('n', '<C-f>', '<cmd>Telescope git_files<cr>')
 key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 key('n', '<Leader>g', '<cmd>LazyGit<cr>')
+
