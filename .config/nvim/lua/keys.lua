@@ -28,7 +28,7 @@ vim.api.nvim_set_keymap('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : "<S-TAB>"', { 
 key('n', '<leader><leader>', '<C-^>')
 key('i', '<C-j>', '<esc>')
 key('n', '<leader>w', '<cmd>w<cr>')
-key('n', '<C-f>', '<cmd>Telescope git_files<cr>')
+key('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
 key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 key('n', '<leader>g', '<cmd>LazyGit<cr>')
 
