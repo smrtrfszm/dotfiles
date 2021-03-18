@@ -22,6 +22,7 @@ require('packer').startup(function()
   use 'norcalli/nvim-colorizer.lua'
   use 'kdheepak/lazygit.nvim'
   use {'glepnir/galaxyline.nvim', branch = 'main'}
+  use 'onsails/lspkind-nvim'
 end)
 
 -- Plugin configs
@@ -32,3 +33,4 @@ require('plugins.gitsigns')
 require('plugins.nvim-compe')
 require('plugins.colorizer')
 require('plugins.galaxyline')
+require('plugins.lspkind')
