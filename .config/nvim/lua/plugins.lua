@@ -23,6 +23,7 @@ require('packer').startup(function()
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
+  use 'kdheepak/lazygit.nvim'
 end)
 
 -- Plugin configs
