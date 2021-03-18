@@ -51,7 +51,7 @@ gls.right = {
   }},
   {GitBranch = {
     provider = 'GitBranch',
-    icon = ' ',
+    icon = ' ',
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = {'none', bg_color},
