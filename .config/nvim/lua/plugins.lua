@@ -13,6 +13,7 @@ require('packer').startup(function()
   use 'airblade/vim-rooter'
   use 'editorconfig/editorconfig-vim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use 'nvim-treesitter/playground'
   use {'b3nj5m1n/kommentary', branch = 'main'}
   use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}}
   use 'neovim/nvim-lspconfig'
