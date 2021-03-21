@@ -11,6 +11,7 @@ local modes = {
   v = {'VISUAL', colors.orange},
   V = {'VISUAL LINE', colors.orange},
   [''] = {'VISUAL BLOCK', colors.orange},
+  t = {'TERMINAL', colors.yellow},
 }
 
 gls.left = {
