@@ -36,3 +36,5 @@ alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
 # vim exit in bash
 alias ':q'='exit'
+
+alias copy="xclip -selection clipboard"
