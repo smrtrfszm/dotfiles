@@ -24,10 +24,12 @@ require('packer').startup(function()
   use 'kdheepak/lazygit.nvim'
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use 'onsails/lspkind-nvim'
+  use 'kabouzeid/nvim-lspinstall'
 end)
 
 -- Plugin configs
 require('plugins.lspconfig')
+require('plugins.lspinstall')
 require('plugins.kommentary')
 require('plugins.treesitter')
 require('plugins.gitsigns')

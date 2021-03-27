@@ -25,13 +25,7 @@ vim.fn.sign_define('LspDiagnosticsSignHint', {
 })
 
 local servers = {
-  'rust_analyzer',
-  'tsserver', 
   'clangd',
-  'cssls',
-  'html',
-  'jsonls',
-  'yamlls',
 }
 
 for _, l in ipairs(servers) do
