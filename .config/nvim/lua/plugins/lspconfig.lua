@@ -23,11 +23,3 @@ vim.fn.sign_define('LspDiagnosticsSignHint', {
   numhl = 'LspDiagnosticsSignHint',
   text = '',
 })
-
-local servers = {
-  'clangd',
-}
-
-for _, l in ipairs(servers) do
-  lsp[l].setup({})
-end
