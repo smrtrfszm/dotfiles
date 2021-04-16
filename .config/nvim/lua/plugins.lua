@@ -9,6 +9,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 require('packer').startup(function()
+require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'airblade/vim-rooter'
   use 'editorconfig/editorconfig-vim'
