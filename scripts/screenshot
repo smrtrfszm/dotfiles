@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
 mkdir -p "$HOME/screenshots"
-scrot --line style=dash,width=2,color="#ffffff" --select --freeze "$HOME/screenshots/%Y%m%d-%H%M%S.png"
+scrot --line style=dash,width=2,color="#ffffff" --select --freeze "$HOME/screenshots/%Y%m%d_%H%M%S.png"
