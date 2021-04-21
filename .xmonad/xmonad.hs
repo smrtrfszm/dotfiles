@@ -6,7 +6,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Util.EZConfig
 
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers ((/=?))
 import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
@@ -19,6 +19,8 @@ import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import Data.Maybe (maybeToList)
+import Control.Monad (join, liftM, when)
 
 
 -- Variables
@@ -199,14 +201,32 @@ myEventHook = EW.fullscreenEventHook
 --
 myLogHook = return ()
 
+addNETSupported :: Atom -> X ()
+addNETSupported x   = withDisplay $ \dpy -> do
+    r               <- asks theRoot
+    a_NET_SUPPORTED <- getAtom "_NET_SUPPORTED"
+    a               <- getAtom "ATOM"
+    liftIO $ do
+       sup <- (join . maybeToList) <$> getWindowProperty32 dpy a_NET_SUPPORTED r
+       when (fromIntegral x `notElem` sup) $
+         changeProperty32 dpy r a_NET_SUPPORTED a propModeAppend [fromIntegral x]
+
+addEWMHFullscreen :: X ()
+addEWMHFullscreen   = do
+    wms <- getAtom "_NET_WM_STATE"
+    wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
+    mapM_ addNETSupported [wms, wfs]
+
 
 -- This executes everytime when xmonad starts or restarted (Mod + r)
 myStartupHook = do
     spawnOnce "chromium --app=https://discord.com/app &"
     spawnOnce "transmission-gtk &"
+    addEWMHFullscreen
 
 
 -- This is the main entry point to the window manager
+main :: IO ()
 main = do
     -- Launch xmobar for both monitors
     xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config.hs"
@@ -244,4 +264,5 @@ main = do
             , ppOrder           = \(ws:_:_) -> [ws]
             }
         }
-    
+
+
