@@ -156,7 +156,7 @@ toggleWindows = do
 
 
 -- Mouse bindings
-myMouseBindings (XMonad.XConfig {XMonad.modMask = modm}) = M.fromList $
+myMouseBindings (XMonad.XConfig {modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
