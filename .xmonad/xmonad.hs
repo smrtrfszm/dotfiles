@@ -5,7 +5,7 @@ import System.Exit (exitWith, ExitCode(..))
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.EZConfig (mkKeymap)
-import qualified XMonad.Util.ExtensibleState as XS
+import qualified XMonad.Util.ExtensibleState as XS (gets, modify)
 
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
@@ -15,6 +15,7 @@ import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
 
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
@@ -114,6 +115,7 @@ myKeys conf = mkKeymap conf $
     -- Focus screens 0 and 1
     , ("M-w",        focusScreen 0)
     , ("M-e",        focusScreen 1)
+    , ("M-f",        withFocused $ sendMessage . maximizeRestore)
     ]
     ++
     -- Select or shift to workspace
@@ -189,6 +191,7 @@ mySpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
 
 myLayoutHook = smartBorders
     $ avoidStruts
+    $ maximizeWithPadding (fromIntegral gapSize)
     $ mySpacing gapSize
     $ (masterStack ||| Full)
     where
