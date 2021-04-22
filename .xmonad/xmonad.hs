@@ -16,6 +16,7 @@ import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
+import XMonad.Layout.IndependentScreens (countScreens)
 
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
@@ -125,19 +126,6 @@ myKeys conf = mkKeymap conf $
         ]
 
 
--- Returns the number of screens
-getScreenNum :: X Int
-getScreenNum = getScreenNum' 0
-
--- Loop for getScreenNum
-getScreenNum' :: Int -> X Int
-getScreenNum' i = do
-    ws <- screenWorkspace $ S i
-    case ws of
-        Nothing -> return i
-        Just x  -> getScreenNum' (i+1)
-
--- Focuses the given screen or if invalid then does nothing
 focusScreen :: ScreenId -> X ()
 focusScreen si = do
     ws <- screenWorkspace si
@@ -152,7 +140,7 @@ hideScreen si = do
 
 hideScreens :: X ()
 hideScreens = do
-    screenNum <- getScreenNum
+    screenNum <- countScreens
     hideScreens' screenNum
 
 hideScreens' :: Int -> X ()
@@ -236,7 +224,7 @@ spawnBars' i = do
 
 spawnBars :: X ()
 spawnBars = do
-    screenNum <- getScreenNum
+    screenNum <- countScreens
     spawnBars' screenNum
 
 myStartupHook :: X ()
