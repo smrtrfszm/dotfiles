@@ -1,26 +1,28 @@
+{-# LANGUAGE DeriveDataTypeable #-}
 import XMonad
-import Data.Monoid
-import System.Exit
+import System.Exit (exitWith, ExitCode(..))
 
-import XMonad.Util.SpawnOnce
-import XMonad.Util.Run
-import XMonad.Util.EZConfig
+import XMonad.Util.SpawnOnce (spawnOnce)
+import XMonad.Util.Run (spawnPipe, hPutStrLn)
+import XMonad.Util.EZConfig (mkKeymap)
+import qualified XMonad.Util.ExtensibleState as XS
 
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
 import XMonad.Hooks.ManageHelpers ((/=?))
 import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
 
-import XMonad.Layout.Spacing
-import XMonad.Layout.Fullscreen
-import XMonad.Layout.NoBorders
+import XMonad.Layout.Spacing (spacingRaw, Border(..))
+import XMonad.Layout.Fullscreen (fullscreenSupport)
+import XMonad.Layout.NoBorders (smartBorders)
 
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
+import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster)
+import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
 import Control.Monad (join, liftM, when)
+import GHC.IO.Handle (Handle)
 
 
 -- Variables
@@ -55,6 +57,16 @@ myFocusedBorderColor = "#86c1b9"
 -- workspace names
 myWorkspaces :: [String]
 myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"]
+-- Status bar PP
+statusBarPP :: PP
+statusBarPP = def
+    { ppCurrent         = xmobarColor "#A1B56C" "" . wrap "[" "]"
+    , ppVisible         = xmobarColor "#F8F8F8" "" . wrap "(" ")"
+    , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
+    , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
+    , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
+    , ppOrder           = \(ws:_:_) -> [ws]
+    }
 
 
 -- Keybinds
@@ -111,6 +123,7 @@ myKeys conf = mkKeymap conf $
         , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
         ]
 
+
 -- Returns the number of screens
 getScreenNum :: X Int
 getScreenNum = getScreenNum' 0
@@ -147,7 +160,6 @@ hideScreens' i
     | otherwise = do
         hideScreen (i-1)
         hideScreens' (i-1)
-    
 
 -- Hides every visible window on screen and reveals them when called again
 toggleWindows :: X ()
@@ -156,7 +168,7 @@ toggleWindows = do
 
 
 -- Mouse bindings
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+myMouseBindings (XMonad.XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -193,14 +205,6 @@ myManageHook = composeAll
 -- Event hook
 myEventHook = EW.fullscreenEventHook
 
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
-myLogHook = return ()
-
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
     r               <- asks theRoot
@@ -217,26 +221,48 @@ addEWMHFullscreen   = do
     wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
     mapM_ addNETSupported [wms, wfs]
 
+data Bars = Bars { bars :: [Handle] } deriving (Typeable)
+instance ExtensionClass Bars where
+    initialValue = Bars []
 
--- This executes everytime when xmonad starts or restarted (Mod + r)
+spawnBars' :: Int -> X()
+spawnBars' 0 = return ()
+spawnBars' i = do
+    handle <- spawnPipe $ "xmobar -x " ++ show (i-1) ++ " ~/.config/xmobar/config.hs"
+    hs <- XS.gets bars
+    XS.modify $ \_ -> Bars $ hs ++ [handle]
+    spawnBars' (i - 1)
+
+spawnBars :: X ()
+spawnBars = do
+    screenNum <- getScreenNum
+    spawnBars' screenNum
+
+myStartupHook :: X ()
 myStartupHook = do
+    spawnBars
+    addEWMHFullscreen
     spawnOnce "chromium --app=https://discord.com/app &"
     spawnOnce "transmission-gtk &"
-    addEWMHFullscreen
 
+sendStatusToBars' :: [Handle] -> String -> IO ()
+sendStatusToBars' [] s = return ()
+sendStatusToBars' h  s = do
+    hPutStrLn (head h) s
+    sendStatusToBars' (tail h) s
 
--- This is the main entry point to the window manager
+sendStatusToBars :: PP -> X ()
+sendStatusToBars pp = do
+    bs <- XS.gets bars
+    s <- dynamicLogString pp
+    io $ sendStatusToBars' bs s
+
 main :: IO ()
 main = do
-    -- Launch xmobar for both monitors
-    xmproc0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/config.hs"
-    xmproc1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/config.hs"
-
     xmonad 
         $ EW.ewmh
         $ fullscreenSupport
         $ docks def
-        -- Configs
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
         , clickJustFocuses   = myClickJustFocuses
@@ -251,18 +277,7 @@ main = do
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
-        , logHook            = myLogHook <+> dynamicLogWithPP xmobarPP
-            -- Give workspace data to xmobar
-            { ppOutput          = \x -> do
-                hPutStrLn xmproc0 x
-                hPutStrLn xmproc1 x
-            , ppCurrent         = xmobarColor "#A1B56C" "" . wrap "[" "]"
-            , ppVisible         = xmobarColor "#F8F8F8" "" . wrap "(" ")"
-            , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
-            , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
-            , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
-            , ppOrder           = \(ws:_:_) -> [ws]
-            }
+        , logHook            = sendStatusToBars statusBarPP
         }
 
 
