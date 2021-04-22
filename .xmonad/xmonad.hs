@@ -102,8 +102,7 @@ myKeys conf = mkKeymap conf $
     -- Restart xmonad
     , ("M-r",        spawn "xmonad --restart")
     -- Recompile and restart xmonad
-    , ("M-S-r",      spawn "xmonad --recompile;\
-                     \killall xmobar; xmonad --restart")
+    , ("M-S-r",      spawn "xmonad --recompile; xmonad --restart")
     -- Open browse
     , ("M-b",        spawn webBrowser)
     -- Screenshot
