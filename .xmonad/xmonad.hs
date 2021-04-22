@@ -23,7 +23,7 @@ import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster)
 import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
-import Control.Monad (join, liftM, when)
+import Control.Monad (join, liftM, when, unless)
 import GHC.IO.Handle (Handle)
 
 
@@ -120,10 +120,20 @@ myKeys conf = mkKeymap conf $
     ]
     ++
     -- Select or shift to workspace
-    [("M-" ++ m ++ k, windows $ f i)
+    [("M-" ++ m ++ k, f i)
         | (i, k) <- zip myWorkspaces $ map show [0..9]
-        , (f, m) <- [(W.greedyView, ""), (W.shift, "S-")]
+        , (f, m) <- [(changeWorkspace, ""), (windows . W.shift, "S-")]
         ]
+
+changeWorkspace :: WorkspaceId -> X ()
+changeWorkspace w = do
+    windows $ W.greedyView w
+    XS.modify $ \_ -> Hidden []
+
+data Hidden = Hidden { hidden :: [(ScreenId, WorkspaceId)] } deriving (Typeable, Show, Read)
+instance ExtensionClass Hidden where
+    initialValue = Hidden []
+    extensionType = PersistentExtension
 
 
 focusScreen :: ScreenId -> X ()
@@ -135,8 +145,14 @@ focusScreen si = do
 
 hideScreen :: Int -> X ()
 hideScreen si = do
-    focusScreen $ S si
-    appendWorkspace $ "hide" ++ show si
+    ws <- screenWorkspace $ S si
+    case ws of
+        Nothing -> return ()
+        Just x  -> do
+            focusScreen $ S si
+            appendWorkspace $ "hide" ++ show si
+            ws <- XS.gets hidden
+            XS.modify $ \_ -> Hidden $ ws ++ [(S si, x)]
 
 hideScreens :: X ()
 hideScreens = do
@@ -149,10 +165,27 @@ hideScreens' i = do
     hideScreen (i-1)
     hideScreens' (i-1)
 
--- Hides every visible window on screen and reveals them when called again
+showScreens' :: [(ScreenId, WorkspaceId)] -> X ()
+showScreens' [] = return ()
+showScreens' x = do
+    focusScreen $ fst y
+    windows $ W.greedyView $ snd y
+    showScreens' $ tail x
+    where
+        y = head x
+
+showScreens :: [(ScreenId, WorkspaceId)] -> X ()
+showScreens ws = do
+    showScreens' ws
+    XS.modify $ \_ -> Hidden []
+
 toggleWindows :: X ()
 toggleWindows = do
-    hideScreens
+    ws <- XS.gets hidden
+    when (null ws) $ do
+        hideScreens
+    unless (null ws) $ do
+        showScreens ws
 
 
 -- Mouse bindings
@@ -183,7 +216,6 @@ myLayoutHook = smartBorders
     $ (masterStack ||| Full)
     where
         masterStack = Tall 1 (3/100) (1/2)
-
 
 -- Window rules
 myManageHook = composeAll
