@@ -156,11 +156,10 @@ hideScreens = do
     hideScreens' screenNum
 
 hideScreens' :: Int -> X ()
-hideScreens' i
-    | i == 0 = return ()
-    | otherwise = do
-        hideScreen (i-1)
-        hideScreens' (i-1)
+hideScreens' 0 = return ()
+hideScreens' i = do
+    hideScreen (i-1)
+    hideScreens' (i-1)
 
 -- Hides every visible window on screen and reveals them when called again
 toggleWindows :: X ()
