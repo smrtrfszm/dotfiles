@@ -141,11 +141,7 @@ instance ExtensionClass Hidden where
 
 
 focusScreen :: ScreenId -> X ()
-focusScreen si = do
-    ws <- screenWorkspace si
-    case ws of
-        Nothing -> return ()
-        Just x  -> windows $ W.view x
+focusScreen si = screenWorkspace si >>= flip whenJust (windows . W.view)
 
 hideScreen :: Int -> X ()
 hideScreen si = do
