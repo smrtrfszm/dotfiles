@@ -2,6 +2,8 @@
 import XMonad
 import System.Exit (exitWith, ExitCode(..))
 
+import XMonad.Actions.CycleWS (toggleWS)
+
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.EZConfig (mkKeymap)
@@ -79,8 +81,6 @@ myKeys conf = mkKeymap conf $
     , ("M-o",        spawn "dmenu_run -h 24")
     -- Close focused window
     , ("M-<Backspace>",      kill)
-    -- Resize viewed windows to the correct size
-    , ("M-n",        refresh)
     -- Move focus to the next window
     , ("M-<Tab>",    windows W.focusDown)
     -- Focus the master window
@@ -117,6 +117,7 @@ myKeys conf = mkKeymap conf $
     , ("M-w",        focusScreen 0)
     , ("M-e",        focusScreen 1)
     , ("M-f",        withFocused $ sendMessage . maximizeRestore)
+    , ("M-n",        toggleWS)
     ]
     ++
     -- Select or shift to workspace
