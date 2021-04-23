@@ -13,6 +13,7 @@ import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
 import XMonad.Hooks.ManageHelpers ((/=?))
 import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
+import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPP)
 
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Layout.Fullscreen (fullscreenSupport)
@@ -223,9 +224,10 @@ myManageHook = composeAll
     [ (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     ]
 
-
--- Event hook
-myEventHook = EW.fullscreenEventHook
+myEventHook :: Event -> X All
+myEventHook = do
+    dynStatusBarEventHook spawnStatusBar (return ())
+    EW.fullscreenEventHook
 
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
@@ -243,41 +245,16 @@ addEWMHFullscreen   = do
     wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
     mapM_ addNETSupported [wms, wfs]
 
-data Bars = Bars { bars :: [Handle] } deriving (Typeable)
-instance ExtensionClass Bars where
-    initialValue = Bars []
-
-spawnBars' :: Int -> X()
-spawnBars' 0 = return ()
-spawnBars' i = do
-    handle <- spawnPipe $ "xmobar -x " ++ show (i-1) ++ " ~/.config/xmobar/config.hs"
-    hs <- XS.gets bars
-    XS.modify $ \_ -> Bars $ hs ++ [handle]
-    spawnBars' (i - 1)
-
-spawnBars :: X ()
-spawnBars = do
-    screenNum <- countScreens
-    spawnBars' screenNum
+spawnStatusBar :: DynamicStatusBar
+spawnStatusBar i = do
+    spawnPipe $ "xmobar -x " ++ (show . fromEnum) i ++ " ~/.config/xmobar/config.hs"
 
 myStartupHook :: X ()
 myStartupHook = do
-    spawnBars
+    dynStatusBarStartup spawnStatusBar (return ())
     addEWMHFullscreen
     spawnOnce "chromium --app=https://discord.com/app &"
     spawnOnce "transmission-gtk &"
-
-sendStatusToBars' :: [Handle] -> String -> IO ()
-sendStatusToBars' [] s = return ()
-sendStatusToBars' h  s = do
-    hPutStrLn (head h) s
-    sendStatusToBars' (tail h) s
-
-sendStatusToBars :: PP -> X ()
-sendStatusToBars pp = do
-    bs <- XS.gets bars
-    s <- dynamicLogString pp
-    io $ sendStatusToBars' bs s
 
 main :: IO ()
 main = do
@@ -299,7 +276,6 @@ main = do
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
-        , logHook            = sendStatusToBars statusBarPP
+        , logHook            = multiPP statusBarPP statusBarPP
         }
-
 
