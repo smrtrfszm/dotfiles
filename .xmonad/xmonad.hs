@@ -120,6 +120,7 @@ myKeys conf = mkKeymap conf $
     , ("M-e",        focusScreen 1)
     , ("M-f",        withFocused $ sendMessage . maximizeRestore)
     , ("M-n",        toggleWS)
+    , ("M-S-d",      spawn "chromium --app=https://discord.com/app")
     ]
     ++
     -- Select or shift to workspace
