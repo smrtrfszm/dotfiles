@@ -26,6 +26,7 @@ import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster)
 import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
+import Data.Monoid (All)
 import Control.Monad (join, liftM, when, unless)
 import GHC.IO.Handle (Handle)
 
