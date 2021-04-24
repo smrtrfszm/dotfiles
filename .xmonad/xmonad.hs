@@ -189,7 +189,7 @@ toggleWindows = do
 -- Mouse bindings
 myMouseBindings (XMonad.XConfig {modMask = modm}) = M.fromList $
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
 
