@@ -231,8 +231,7 @@ addEWMHFullscreen   = do
     mapM_ addNETSupported [wms, wfs]
 
 spawnStatusBar :: DynamicStatusBar
-spawnStatusBar i = do
-    spawnPipe $ "xmobar -x " ++ (show . fromEnum) i ++ " ~/.config/xmobar/config.hs"
+spawnStatusBar i = spawnPipe $ "xmobar -x " ++ (show . fromEnum) i ++ " ~/.config/xmobar/config.hs"
 
 myStartupHook :: X ()
 myStartupHook = do
