@@ -7,7 +7,7 @@ import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.EZConfig (mkKeymap)
-import qualified XMonad.Util.ExtensibleState as XS (gets, modify)
+import qualified XMonad.Util.ExtensibleState as XS (gets, modify, put)
 
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
@@ -132,7 +132,7 @@ myKeys conf = mkKeymap conf $
 changeWorkspace :: WorkspaceId -> X ()
 changeWorkspace w = do
     windows $ W.greedyView w
-    XS.modify $ \_ -> Hidden []
+    XS.put $ Hidden []
 
 data Hidden = Hidden { hidden :: [(ScreenId, WorkspaceId)] } deriving (Typeable, Show, Read)
 instance ExtensionClass Hidden where
@@ -146,13 +146,10 @@ focusScreen si = screenWorkspace si >>= flip whenJust (windows . W.view)
 hideScreen :: Int -> X ()
 hideScreen si = do
     ws <- screenWorkspace $ S si
-    case ws of
-        Nothing -> return ()
-        Just x  -> do
-            focusScreen $ S si
-            appendWorkspace $ "hide" ++ show si
-            ws <- XS.gets hidden
-            XS.modify $ \_ -> Hidden $ ws ++ [(S si, x)]
+    whenJust ws $ \x -> do
+        focusScreen $ S si
+        appendWorkspace $ "hide" ++ show si
+        XS.modify $ (\h -> Hidden $ h ++ [(S si, x)]) . hidden
 
 hideScreens :: X ()
 hideScreens = do
@@ -177,7 +174,7 @@ showScreens' x = do
 showScreens :: [(ScreenId, WorkspaceId)] -> X ()
 showScreens ws = do
     showScreens' ws
-    XS.modify $ \_ -> Hidden []
+    XS.put $ Hidden []
 
 toggleWindows :: X ()
 toggleWindows = do
