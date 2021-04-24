@@ -14,6 +14,7 @@ import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHidd
 import XMonad.Hooks.ManageHelpers ((/=?))
 import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
 import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPP)
+import XMonad.Hooks.CurrentWorkspaceOnTop (currentWorkspaceOnTop)
 
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import XMonad.Layout.Fullscreen (fullscreenSupport)
@@ -251,6 +252,11 @@ myStartupHook = do
     spawnOnce "chromium --app=https://discord.com/app &"
     spawnOnce "transmission-gtk &"
 
+myLogHook :: X ()
+myLogHook = do
+    currentWorkspaceOnTop
+    multiPP statusBarPP statusBarPP
+
 main :: IO ()
 main = do
     xmonad 
@@ -271,6 +277,6 @@ main = do
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
         , startupHook        = myStartupHook 
-        , logHook            = multiPP statusBarPP statusBarPP
+        , logHook            = myLogHook
         }
 
