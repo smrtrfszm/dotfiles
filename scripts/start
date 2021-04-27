@@ -45,7 +45,8 @@ function down_arrow {
 function enter {
 	selected_wm="${window_managers[$selected]}"
 
-	file="$HOME/.config/X11/xinitrc/$selected_wm"
+	config_dir=$XDG_CONFIG_HOME || "$HOME/.config/"
+	file="$config_dir/X11/xinitrc/$selected_wm"
 	if [[ ! -f $file ]]; then
 		echo "Cant find xinitrc file for that window manager"
 		cleanup
