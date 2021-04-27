@@ -1,20 +1,22 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
-import Control.Monad (join, liftM, when, unless, forM_)
+import Control.Monad (join, liftM, when, unless, forM_, liftM2)
 import Control.Monad.Reader (asks, liftIO)
 import System.Exit (exitWith, ExitCode(..))
 
-import Data.Maybe (maybeToList)
+import Data.Maybe (maybeToList, isJust, fromMaybe)
 import Data.Monoid (All)
+import Data.List (intersperse, isPrefixOf)
 import qualified Data.Map as M (fromList)
 
+import XMonad
 import XMonad.Config (def)
 import XMonad.Core
 import XMonad.Layout (Tall(..), Resize(..))
 import XMonad.Main (xmonad)
 import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (-->), doFloat, title)
 import XMonad.Operations (kill, windows, sendMessage, withFocused, screenWorkspace, focus, mouseMoveWindow, mouseResizeWindow)
-import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag)
+import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag, workspace, current, visible, hidden, tag, findTag, stack)
 
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
@@ -22,14 +24,16 @@ import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.SpawnOnce (spawnOnce)
+import XMonad.Util.WorkspaceCompare (WorkspaceSort)
 import qualified XMonad.Util.ExtensibleState as XS (gets, modify, put)
 
 import XMonad.Hooks.CurrentWorkspaceOnTop (currentWorkspaceOnTop)
-import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPP)
-import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
+import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPPFormat, multiPP)
+import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppSort, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP, ppWsSep, ppVisibleNoWindows)
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.ManageHelpers ((/=?))
+import XMonad.Hooks.UrgencyHook (readUrgents)
 
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.IndependentScreens (countScreens)
@@ -81,7 +85,6 @@ statusBarPP = def
     , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
     , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
     , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
-    , ppOrder           = \(ws:_:_) -> [ws]
     }
 
 
@@ -239,10 +242,37 @@ myStartupHook = do
     spawnOnce "discord"
     spawnOnce "transmission-gtk"
 
+sepBy :: String -> [String] -> String
+sepBy sep = concat . intersperse sep . filter (not . null)
+
+pprWindowSet :: WorkspaceSort -> [Window] -> PP -> WindowSet -> String
+pprWindowSet sort' urgents pp s = do
+    let ws = map W.workspace (W.current s : W.visible s) ++ W.hidden s
+    sepBy (ppWsSep pp) . map fmt . sort' . (filter filterHideWS) $ ws
+    where
+        filterHideWS = \x -> not $ isPrefixOf "hide-" (W.tag x)
+        this         = W.currentTag s
+        visibles     = map (W.tag . W.workspace) (W.visible s)
+        fmt w = printer pp (W.tag w)
+            where printer | any (\x -> maybe False (== W.tag w) (W.findTag x s)) urgents  = ppUrgent
+                          | W.tag w == this                                               = ppCurrent
+                          | W.tag w `elem` visibles && isJust (W.stack w)                 = ppVisible
+                          | W.tag w `elem` visibles                                       = liftM2 fromMaybe ppVisible ppVisibleNoWindows
+                          | isJust (W.stack w)                                            = ppHidden
+                          | otherwise                                                     = ppHiddenNoWindows
+
+formatter :: PP -> X String
+formatter pp = do
+    winset <- gets windowset
+    urgents <- readUrgents
+    sort' <- ppSort pp
+    return $ pprWindowSet sort' urgents pp winset
+
+
 myLogHook :: X ()
 myLogHook = do
     currentWorkspaceOnTop
-    multiPP statusBarPP statusBarPP
+    multiPPFormat formatter statusBarPP statusBarPP
 
 main :: IO ()
 main = do
