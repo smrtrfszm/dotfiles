@@ -134,17 +134,18 @@ changeWorkspace :: WorkspaceId -> X ()
 changeWorkspace w = do
     windows $ W.greedyView w
     XS.put $ Hidden
-        { hidden   = []
+        { hiddenWS = []
         , activeWS = ""
         }
 
 data Hidden = Hidden
-    { hidden   :: [(ScreenId, WorkspaceId)]
+    { hiddenWS :: [(ScreenId, WorkspaceId)]
     , activeWS :: WorkspaceId
     } deriving (Typeable, Show, Read)
+
 instance ExtensionClass Hidden where
     initialValue = Hidden
-        { hidden   = []
+        { hiddenWS = []
         , activeWS = ""
         }
     extensionType = PersistentExtension
@@ -155,7 +156,7 @@ focusScreen si = screenWorkspace si >>= flip whenJust (windows . W.view)
 
 toggleWindows :: X ()
 toggleWindows = do
-    ws <- XS.gets hidden
+    ws <- XS.gets hiddenWS
     when (null ws) $ do
         screenNum <- countScreens
         aws <- withWindowSet (pure . W.currentTag)
@@ -165,9 +166,9 @@ toggleWindows = do
                 focusScreen $ S i
                 appendWorkspace $ "hide-" ++ show i
                 XS.modify $ (\h -> Hidden
-                    { hidden   = h ++ [(S i, x)]
+                    { hiddenWS = h ++ [(S i, x)]
                     , activeWS = aws
-                    }) . hidden
+                    }) . hiddenWS
     unless (null ws) $ do
         aws <- XS.gets activeWS
         forM_ ws $ \w -> do
@@ -175,7 +176,7 @@ toggleWindows = do
             windows $ W.greedyView $ snd w
         windows $ W.view aws
         XS.put $ Hidden
-            { hidden   = []
+            { hiddenWS = []
             , activeWS = ""
             }
 
