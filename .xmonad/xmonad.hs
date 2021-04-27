@@ -121,7 +121,7 @@ myKeys conf = mkKeymap conf $
     , ("M-e",        focusScreen 1)
     , ("M-f",        withFocused $ sendMessage . maximizeRestore)
     , ("M-n",        toggleWS)
-    , ("M-S-d",      spawn "chromium --app=https://discord.com/app")
+    , ("M-S-d",      spawn "discord")
     ]
     ++
     -- Select or shift to workspace
@@ -237,8 +237,8 @@ myStartupHook :: X ()
 myStartupHook = do
     dynStatusBarStartup spawnStatusBar (return ())
     addEWMHFullscreen
-    spawnOnce "chromium --app=https://discord.com/app &"
-    spawnOnce "transmission-gtk &"
+    spawnOnce "discord"
+    spawnOnce "transmission-gtk"
 
 myLogHook :: X ()
 myLogHook = do
