@@ -25,6 +25,7 @@ require('packer').startup(function(use)
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use 'onsails/lspkind-nvim'
   use 'kabouzeid/nvim-lspinstall'
+  use 'andweeb/presence.nvim'
 end)
 
 -- Plugin configs
@@ -38,3 +39,4 @@ require('plugins.colorizer')
 require('plugins.galaxyline')
 require('plugins.lspkind')
 require('plugins.telescope')
+require('plugins.presence')
