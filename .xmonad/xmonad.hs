@@ -24,12 +24,11 @@ import XMonad.Layout.IndependentScreens (countScreens)
 
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
-import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster)
+import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag)
 import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
 import Data.Monoid (All)
-import Data.Foldable (forM_)
-import Control.Monad (join, liftM, when, unless)
+import Control.Monad (join, liftM, when, unless, forM_)
 import GHC.IO.Handle (Handle)
 
 
@@ -134,11 +133,20 @@ myKeys conf = mkKeymap conf $
 changeWorkspace :: WorkspaceId -> X ()
 changeWorkspace w = do
     windows $ W.greedyView w
-    XS.put $ Hidden []
+    XS.put $ Hidden
+        { hidden   = []
+        , activeWS = ""
+        }
 
-data Hidden = Hidden { hidden :: [(ScreenId, WorkspaceId)] } deriving (Typeable, Show, Read)
+data Hidden = Hidden
+    { hidden   :: [(ScreenId, WorkspaceId)]
+    , activeWS :: WorkspaceId
+    } deriving (Typeable, Show, Read)
 instance ExtensionClass Hidden where
-    initialValue = Hidden []
+    initialValue = Hidden
+        { hidden   = []
+        , activeWS = ""
+        }
     extensionType = PersistentExtension
 
 
@@ -150,17 +158,26 @@ toggleWindows = do
     ws <- XS.gets hidden
     when (null ws) $ do
         screenNum <- countScreens
+        aws <- withWindowSet (pure . W.currentTag)
         forM_ [0 .. (screenNum - 1)] $ \i -> do
             w <- screenWorkspace $ S i
             whenJust w $ \x -> do
                 focusScreen $ S i
                 appendWorkspace $ "hide-" ++ show i
-                XS.modify $ (\h -> Hidden $ h ++ [(S i, x)]) . hidden
+                XS.modify $ (\h -> Hidden
+                    { hidden   = h ++ [(S i, x)]
+                    , activeWS = aws
+                    }) . hidden
     unless (null ws) $ do
+        aws <- XS.gets activeWS
         forM_ ws $ \w -> do
             focusScreen $ fst w
             windows $ W.greedyView $ snd w
-        XS.put $ Hidden []
+        windows $ W.view aws
+        XS.put $ Hidden
+            { hidden   = []
+            , activeWS = ""
+            }
 
 -- Mouse bindings
 myMouseBindings (XMonad.XConfig {modMask = modm}) = M.fromList $
