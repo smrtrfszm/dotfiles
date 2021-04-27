@@ -1,35 +1,44 @@
 {-# LANGUAGE DeriveDataTypeable #-}
-import XMonad
+
+import Control.Monad (join, liftM, when, unless, forM_)
+import Control.Monad.Reader (asks, liftIO)
 import System.Exit (exitWith, ExitCode(..))
 
-import XMonad.Actions.CycleWS (toggleWS)
-
-import XMonad.Util.SpawnOnce (spawnOnce)
-import XMonad.Util.Run (spawnPipe, hPutStrLn)
-import XMonad.Util.EZConfig (mkKeymap)
-import qualified XMonad.Util.ExtensibleState as XS (gets, modify, put)
-
-import XMonad.Hooks.ManageDocks (docks, avoidStruts)
-import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
-import XMonad.Hooks.ManageHelpers ((/=?))
-import qualified XMonad.Hooks.EwmhDesktops as EW (fullscreenEventHook, ewmh)
-import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPP)
-import XMonad.Hooks.CurrentWorkspaceOnTop (currentWorkspaceOnTop)
-
-import XMonad.Layout.Spacing (spacingRaw, Border(..))
-import XMonad.Layout.Fullscreen (fullscreenSupport)
-import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
-import XMonad.Layout.IndependentScreens (countScreens)
-
-import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
-
-import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag)
-import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
 import Data.Monoid (All)
-import Control.Monad (join, liftM, when, unless, forM_)
-import GHC.IO.Handle (Handle)
+import qualified Data.Map as M (fromList)
+
+import XMonad.Config (def)
+import XMonad.Core
+import XMonad.Layout (Tall(..), Resize(..))
+import XMonad.Main (xmonad)
+import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (-->), doFloat, title)
+import XMonad.Operations (kill, windows, sendMessage, withFocused, screenWorkspace, focus, mouseMoveWindow, mouseResizeWindow)
+import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag)
+
+import XMonad.Actions.CycleWS (toggleWS)
+import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
+
+import XMonad.Util.EZConfig (mkKeymap)
+import XMonad.Util.Run (spawnPipe, hPutStrLn)
+import XMonad.Util.SpawnOnce (spawnOnce)
+import qualified XMonad.Util.ExtensibleState as XS (gets, modify, put)
+
+import XMonad.Hooks.CurrentWorkspaceOnTop (currentWorkspaceOnTop)
+import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPP)
+import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP)
+import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
+import XMonad.Hooks.ManageDocks (docks, avoidStruts)
+import XMonad.Hooks.ManageHelpers ((/=?))
+
+import XMonad.Layout.Fullscreen (fullscreenSupport)
+import XMonad.Layout.IndependentScreens (countScreens)
+import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
+import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.Spacing (spacingRaw, Border(..))
+
+import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3)
+import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend)
 
 
 -- Variables
@@ -181,7 +190,7 @@ toggleWindows = do
             }
 
 -- Mouse bindings
-myMouseBindings (XMonad.XConfig {modMask = modm}) = M.fromList $
+myMouseBindings (XConfig {modMask = modm}) = M.fromList $
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
@@ -205,7 +214,7 @@ myManageHook = composeAll
 myEventHook :: Event -> X All
 myEventHook = do
     dynStatusBarEventHook spawnStatusBar (return ())
-    EW.fullscreenEventHook
+    fullscreenEventHook
 
 addNETSupported :: Atom -> X ()
 addNETSupported x   = withDisplay $ \dpy -> do
@@ -241,7 +250,7 @@ myLogHook = do
 main :: IO ()
 main = do
     xmonad 
-        $ EW.ewmh
+        $ ewmh
         $ fullscreenSupport
         $ docks def
         { terminal           = terminalEmulator
