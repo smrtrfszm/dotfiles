@@ -28,6 +28,7 @@ import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapD
 import qualified Data.Map        as M (fromList)
 import Data.Maybe (maybeToList)
 import Data.Monoid (All)
+import Data.Foldable (forM_)
 import Control.Monad (join, liftM, when, unless)
 import GHC.IO.Handle (Handle)
 
@@ -144,47 +145,22 @@ instance ExtensionClass Hidden where
 focusScreen :: ScreenId -> X ()
 focusScreen si = screenWorkspace si >>= flip whenJust (windows . W.view)
 
-hideScreen :: Int -> X ()
-hideScreen si = do
-    ws <- screenWorkspace $ S si
-    whenJust ws $ \x -> do
-        focusScreen $ S si
-        appendWorkspace $ "hide" ++ show si
-        XS.modify $ (\h -> Hidden $ h ++ [(S si, x)]) . hidden
-
-hideScreens :: X ()
-hideScreens = do
-    screenNum <- countScreens
-    hideScreens' screenNum
-
-hideScreens' :: Int -> X ()
-hideScreens' 0 = return ()
-hideScreens' i = do
-    hideScreen (i-1)
-    hideScreens' (i-1)
-
-showScreens' :: [(ScreenId, WorkspaceId)] -> X ()
-showScreens' [] = return ()
-showScreens' x = do
-    focusScreen $ fst y
-    windows $ W.greedyView $ snd y
-    showScreens' $ tail x
-    where
-        y = head x
-
-showScreens :: [(ScreenId, WorkspaceId)] -> X ()
-showScreens ws = do
-    showScreens' ws
-    XS.put $ Hidden []
-
 toggleWindows :: X ()
 toggleWindows = do
     ws <- XS.gets hidden
     when (null ws) $ do
-        hideScreens
+        screenNum <- countScreens
+        forM_ [0 .. (screenNum - 1)] $ \i -> do
+            w <- screenWorkspace $ S i
+            whenJust w $ \x -> do
+                focusScreen $ S i
+                appendWorkspace $ "hide-" ++ show i
+                XS.modify $ (\h -> Hidden $ h ++ [(S i, x)]) . hidden
     unless (null ws) $ do
-        showScreens ws
-
+        forM_ ws $ \w -> do
+            focusScreen $ fst w
+            windows $ W.greedyView $ snd w
+        XS.put $ Hidden []
 
 -- Mouse bindings
 myMouseBindings (XMonad.XConfig {modMask = modm}) = M.fromList $
