@@ -194,9 +194,8 @@ myLayoutHook = smartBorders
     $ avoidStruts
     $ maximizeWithPadding (fromIntegral gapSize)
     $ mySpacing gapSize
-    $ (masterStack ||| Full)
-    where
-        masterStack = Tall 1 (3/100) (1/2)
+    $ Tall 1 (3/100) (1/2)
+        
 
 -- Window rules
 myManageHook = composeAll
