@@ -33,7 +33,7 @@ import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHidd
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.ManageHelpers ((/=?), currentWs)
-import XMonad.Hooks.UrgencyHook (readUrgents)
+import XMonad.Hooks.UrgencyHook (readUrgents, withUrgencyHook, NoUrgencyHook(..))
 
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.IndependentScreens (countScreens)
@@ -84,7 +84,7 @@ statusBarPP = def
     , ppVisible         = xmobarColor "#F8F8F8" "" . wrap "(" ")"
     , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
     , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
-    , ppUrgent          = xmobarColor "#ff0000" "" . wrap "!" "!"
+    , ppUrgent          = xmobarColor "#f7ca88" "" . wrap "!" "!"
     }
 
 
@@ -318,6 +318,7 @@ main = do
     xmonad 
         $ ewmh
         $ fullscreenSupport
+        $ withUrgencyHook NoUrgencyHook
         $ docks def
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
