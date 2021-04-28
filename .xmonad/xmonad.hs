@@ -21,6 +21,7 @@ import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapD
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
 
+import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.SpawnOnce (spawnOnce)
@@ -42,6 +43,7 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 
 import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3, Window, raiseWindow, Position, resizeWindow)
+import Graphics.X11.Xlib.Cursor (xC_left_ptr)
 import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend, getWindowAttributes, getWMNormalHints, wa_width, wa_height)
 
 
@@ -278,6 +280,7 @@ myStartupHook = do
     mapM_ addNETSupported [wms, wfs]
 
     dynStatusBarStartup spawnStatusBar (return ())
+    setDefaultCursor xC_left_ptr
     spawnOnce "discord"
     spawnOnce "transmission-gtk"
 
