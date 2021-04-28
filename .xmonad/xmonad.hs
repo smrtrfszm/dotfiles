@@ -2,6 +2,7 @@
 
 import Control.Monad (join, liftM, when, unless, forM_, liftM2)
 import Control.Monad.Reader (asks, liftIO)
+import Control.Monad.State (gets)
 import System.Exit (exitWith, ExitCode(..))
 
 import Data.Maybe (maybeToList, isJust, fromMaybe)
@@ -9,13 +10,12 @@ import Data.Monoid (All)
 import Data.List (intersperse, isPrefixOf)
 import qualified Data.Map as M (fromList)
 
-import XMonad
 import XMonad.Config (def)
 import XMonad.Core
 import XMonad.Layout (Tall(..), Resize(..))
 import XMonad.Main (xmonad)
-import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (-->), doFloat, title)
-import XMonad.Operations (kill, windows, sendMessage, withFocused, screenWorkspace, focus, mouseMoveWindow, mouseResizeWindow)
+import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (-->), doFloat, title, liftX, doShift)
+import XMonad.Operations (kill, windows, sendMessage, withFocused, screenWorkspace, focus, mouseMoveWindow, isClient, float, mouseDrag, applySizeHintsContents)
 import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag, workspace, current, visible, hidden, tag, findTag, stack)
 
 import XMonad.Actions.CycleWS (toggleWS)
@@ -41,8 +41,8 @@ import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
 
-import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3)
-import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend)
+import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3, Window, raiseWindow, Position, resizeWindow)
+import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend, getWindowAttributes, getWMNormalHints, wa_width, wa_height)
 
 
 -- Variables
@@ -192,7 +192,41 @@ toggleWindows = do
             , activeWS = ""
             }
 
--- Mouse bindings
+data LastMousePos = LastMousePos
+    { lastMousePos :: Maybe (Position, Position)
+    } deriving (Show, Read)
+
+instance ExtensionClass LastMousePos where
+    initialValue = LastMousePos
+        { lastMousePos = Nothing
+        }
+
+mouseResizeWindow :: Window -> X ()
+mouseResizeWindow w = whenX (isClient w) $ withDisplay $ \d -> do
+    io $ raiseWindow d w
+    mouseDrag (\ex ey -> do
+        lp <- XS.gets lastMousePos
+        case lp of
+            Just (lx, ly) -> do
+                wa <- io $ getWindowAttributes d w
+                sh <- io $ getWMNormalHints d w
+                let dx = lx - ex
+                    dy = ly - ey
+                    width  = fromIntegral $ (wa_width  wa) - (fromIntegral dx)
+                    height = fromIntegral $ (wa_height wa) - (fromIntegral dy)
+
+                io $ resizeWindow d w `uncurry` applySizeHintsContents sh (width, height)
+                XS.put $ LastMousePos $ Just (ex, ey)
+            Nothing -> do
+                float w
+                XS.put $ LastMousePos $ Just (ex, ey)
+        )
+        (do
+            XS.put $ LastMousePos Nothing
+            float w
+        )
+
+
 myMouseBindings (XConfig {modMask = modm}) = M.fromList $
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
