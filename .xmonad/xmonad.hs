@@ -192,44 +192,43 @@ toggleWindows = do
             , activeWS = ""
             }
 
-data LastMousePos = LastMousePos
-    { lastMousePos :: Maybe (Position, Position)
+data FirstMousePos = FirstMousePos
+    { firstMousePos :: Maybe (Position, Position)
     } deriving (Show, Read)
 
-instance ExtensionClass LastMousePos where
-    initialValue = LastMousePos
-        { lastMousePos = Nothing
+instance ExtensionClass FirstMousePos where
+    initialValue = FirstMousePos
+        { firstMousePos = Nothing
         }
 
 mouseResizeWindow :: Window -> X ()
 mouseResizeWindow w = whenX (isClient w) $ withDisplay $ \d -> do
+    wa <- io $ getWindowAttributes d w
+    sh <- io $ getWMNormalHints d w
     io $ raiseWindow d w
     mouseDrag (\ex ey -> do
-        lp <- XS.gets lastMousePos
+        lp <- XS.gets firstMousePos
         case lp of
-            Just (lx, ly) -> do
-                wa <- io $ getWindowAttributes d w
-                sh <- io $ getWMNormalHints d w
-                let dx = lx - ex
-                    dy = ly - ey
+            Just (fx, fy) -> do
+                let dx = fx - ex
+                    dy = fy - ey
                     width  = fromIntegral $ (wa_width  wa) - (fromIntegral dx)
                     height = fromIntegral $ (wa_height wa) - (fromIntegral dy)
 
                 io $ resizeWindow d w `uncurry` applySizeHintsContents sh (width, height)
-                XS.put $ LastMousePos $ Just (ex, ey)
             Nothing -> do
                 float w
-                XS.put $ LastMousePos $ Just (ex, ey)
+                XS.put $ FirstMousePos $ Just (ex, ey)
         )
         (do
-            XS.put $ LastMousePos Nothing
             float w
+            XS.put $ FirstMousePos Nothing
         )
 
 
 myMouseBindings (XConfig {modMask = modm}) = M.fromList $
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster))
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster))
+    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w))
+    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w))
     ]
 
 
