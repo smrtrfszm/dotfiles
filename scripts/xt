@@ -7,7 +7,7 @@ function test_tar() {
 	rm "$1"
 }
 
-command=$(basename $0)
+command=$(basename "$0")
 
 if [[ $# -ne 1 && $# -ne 2 ]]; then
   echo "Usage: $command <file> [destination folder]"
@@ -19,7 +19,7 @@ if ! [[ -f $1 ]]; then
 	exit
 fi
 
-file_name=$(basename $1)
+file_name=$(basename "$1")
 dest_folder="${file_name%.*}"
 ar_dest_folder="."
 
@@ -48,14 +48,14 @@ case "$(file "$1")" in
 		file="$ar_dest_folder/${file_name%.*}"
 		gzip -dc < "$target_file" > "$file"
 		dest_folder=${dest_folder%.*}
-    test_tar $file $dest_folder
+    test_tar "$file" "$dest_folder"
     ;;
 	*"bzip2 compressed data"*)
 		mkdir -p "$ar_dest_folder"
 		file="$ar_dest_folder/${file_name%.*}"
 		bzcat -kd < "$target_file" > "$file"
 		dest_folder=${dest_folder%.*}
-		test_tar $file $dest_folder
+		test_tar "$file" "$dest_folder"
 		;;
   *)
     echo "Unsupported file type"

@@ -8,8 +8,8 @@ if command -v $lock_command &> /dev/null; then
 	options="${options}\nlock"
 fi
 
-option=$(echo -e $options | dmenu -p "Shutdown: " $@)
-echo $option
+option=$(echo -e $options | dmenu -p "Shutdown: " "$@")
+echo "$option"
 
 case $option in
 	"shutdown")

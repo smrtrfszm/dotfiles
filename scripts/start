@@ -52,7 +52,7 @@ function enter {
 		cleanup
 	fi
 
-	startx $file
+	startx "$file"
 
 	cleanup
 }
