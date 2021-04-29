@@ -51,8 +51,7 @@
     per_monitor_dpi = false
 
 [shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
+    close_all = mod4+space
 
 [urgency_low]
     background = "#7CAFC2"
