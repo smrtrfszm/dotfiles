@@ -33,7 +33,7 @@ import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatu
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppSort, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP, ppWsSep, ppVisibleNoWindows)
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
-import XMonad.Hooks.ManageHelpers ((/=?), currentWs)
+import XMonad.Hooks.ManageHelpers ((/=?), currentWs, isDialog)
 import XMonad.Hooks.UrgencyHook (readUrgents, withUrgencyHook, NoUrgencyHook(..))
 
 import XMonad.Layout.Fullscreen (fullscreenSupport)
@@ -241,6 +241,7 @@ isHideWs = do
 myManageHook = composeAll
     [ (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     , (isHideWs) --> doShift (myWorkspaces !! 0)
+    , (isDialog) --> doFloat
     ]
 
 myEventHook :: Event -> X All
