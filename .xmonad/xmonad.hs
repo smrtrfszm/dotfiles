@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
 import Control.Monad (join, liftM, when, unless, forM_, liftM2)
-import Control.Monad.Reader (asks, liftIO)
+import Control.Monad.Reader (asks, liftIO, ask)
 import Control.Monad.State (gets)
 import System.Exit (exitWith, ExitCode(..))
 
@@ -45,6 +45,7 @@ import XMonad.Layout.Spacing (spacingRaw, Border(..))
 import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3, Window, raiseWindow, Position, resizeWindow)
 import Graphics.X11.Xlib.Cursor (xC_left_ptr)
 import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend, getWindowAttributes, getWMNormalHints, wa_width, wa_height)
+import Graphics.X11.Xlib.Misc (queryPointer)
 
 
 -- Variables
@@ -194,38 +195,25 @@ toggleWindows = do
             , activeWS = ""
             }
 
-data FirstMousePos = FirstMousePos
-    { firstMousePos :: Maybe (Position, Position)
-    } deriving (Show, Read)
-
-instance ExtensionClass FirstMousePos where
-    initialValue = FirstMousePos
-        { firstMousePos = Nothing
-        }
-
 mouseResizeWindow :: Window -> X ()
 mouseResizeWindow w = whenX (isClient w) $ withDisplay $ \d -> do
-    wa <- io $ getWindowAttributes d w
-    sh <- io $ getWMNormalHints d w
-    io $ raiseWindow d w
-    mouseDrag (\ex ey -> do
-        lp <- XS.gets firstMousePos
-        case lp of
-            Just (fx, fy) -> do
-                let dx = fx - ex
-                    dy = fy - ey
-                    width  = fromIntegral $ (wa_width  wa) - (fromIntegral dx)
-                    height = fromIntegral $ (wa_height wa) - (fromIntegral dy)
+    XConf { theRoot = root, display = d } <- ask
+    wa                           <- io $ getWindowAttributes d w
+    sh                           <- io $ getWMNormalHints d w
+    (_, _, _, frx, fry, _, _, _) <- io $ queryPointer d root
 
-                io $ resizeWindow d w `uncurry` applySizeHintsContents sh (width, height)
-            Nothing -> do
-                float w
-                XS.put $ FirstMousePos $ Just (ex, ey)
+    io $ raiseWindow d w
+    float w
+
+    mouseDrag (\ex ey -> do
+        let dx = (fromIntegral frx) - ex
+            dy = (fromIntegral fry) - ey
+            width  = fromIntegral $ (wa_width  wa) - (fromIntegral dx)
+            height = fromIntegral $ (wa_height wa) - (fromIntegral dy)
+
+        io $ resizeWindow d w `uncurry` applySizeHintsContents sh (width, height)
         )
-        (do
-            float w
-            XS.put $ FirstMousePos Nothing
-        )
+        (return ())
 
 
 myMouseBindings (XConfig {modMask = modm}) = M.fromList $
