@@ -13,6 +13,7 @@ local modes = {
   V =      {'V LINE', colors.orange},
   [''] = {'V BLCK', colors.orange},
   t =      {'TERMNL', colors.yellow},
+  R =      {'REPLCE', colors.cyan},
 }
 
 local fileformats = {
