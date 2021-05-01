@@ -5,8 +5,6 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
        , alpha = 255
        , position = BottomSize C 100 20
        , borderColor = "black"
-       -- , borderWidth = 1
-       -- , border = BottomB
        , lowerOnStart = True
        , pickBroadest = False
        , persistent = True
