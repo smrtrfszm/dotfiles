@@ -93,50 +93,30 @@ statusBarPP = def
 
 -- Keybinds
 myKeys conf = mkKeymap conf $
-    -- Launch terminal
-    [ ("M-<Return>", spawn terminalEmulator)
-    -- Launch dmenu
-    , ("M-o",        spawn "dmenu_run -h 24")
-    -- Close focused window
-    , ("M-<Backspace>",      kill)
-    -- Move focus to the next window
-    , ("M-<Tab>",    windows W.focusDown)
-    -- Focus the master window
-    , ("M-m",        windows W.focusMaster)
-    -- Swap the focused window with the master window
-    , ("M-S-m",      windows W.swapMaster)
-    -- Swap the focused window with the next window
-    , ("M-S-j",      windows W.swapDown)
-    -- Swap the focosed window with the previous window
-    , ("M-S-k",      windows W.swapUp)
-    -- Shrink the master area
-    , ("M-h",        sendMessage Shrink)
-    -- Expand the master area
-    , ("M-l",        sendMessage Expand)
-    -- Push window back into tiling 
-    , ("M-t",        withFocused $ windows . W.sink)
-    -- Quit xmonad
-    , ("M-S-q",      io (exitWith ExitSuccess))
-    -- Lauch custom dmenu script to prompt shutdown
-    , ("M-x",        spawn "dmenu-shutdown -h 24")
-    -- Restart xmonad
-    , ("M-r",        spawn "xmonad --restart")
-    -- Recompile and restart xmonad
-    , ("M-S-r",      spawn "xmonad --recompile; xmonad --restart")
-    -- Open browse
-    , ("M-b",        spawn webBrowser)
-    -- Screenshot
-    , ("<Print>",    spawn "sleep 0.2 && screenshot")
-    -- Lock screen
-    , ("M-S-l",      spawn "slock")
-    -- Toggle windows
-    , ("M-d",        toggleWindows)
-    -- Focus screens 0 and 1
-    , ("M-w",        focusScreen 0)
-    , ("M-e",        focusScreen 1)
-    , ("M-f",        withFocused $ sendMessage . maximizeRestore)
-    , ("M-n",        toggleWS)
-    , ("M-S-d",      spawn "discord")
+    [ ("M-<Return>",    spawn terminalEmulator)
+    , ("M-o",           spawn "dmenu_run -h 24")
+    , ("M-<Backspace>", kill)
+    , ("M-<Tab>",       windows W.focusDown)
+    , ("M-m",           windows W.focusMaster)
+    , ("M-S-m",         windows W.swapMaster)
+    , ("M-S-j",         windows W.swapDown)
+    , ("M-S-k",         windows W.swapUp)
+    , ("M-h",           sendMessage Shrink)
+    , ("M-l",           sendMessage Expand)
+    , ("M-t",           withFocused $ windows . W.sink)
+    , ("M-S-q",         io $ exitWith ExitSuccess)
+    , ("M-x",           spawn "dmenu-shutdown -h 24")
+    , ("M-r",           spawn "xmonad --restart")
+    , ("M-S-r",         spawn "xmonad --recompile; xmonad --restart")
+    , ("M-b",           spawn webBrowser)
+    , ("<Print>",       spawn "sleep 0.2 && screenshot")
+    , ("M-S-l",         spawn "slock")
+    , ("M-d",           toggleWindows)
+    , ("M-w",           focusScreen 0)
+    , ("M-e",           focusScreen 1)
+    , ("M-f",           withFocused $ sendMessage . maximizeRestore)
+    , ("M-n",           toggleWS)
+    , ("M-S-d",         spawn "discord")
     ]
     ++
     -- Select or shift to workspace
