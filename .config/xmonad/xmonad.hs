@@ -109,14 +109,14 @@ myKeys conf = mkKeymap conf $
     , ("M-r",           spawn "xmonad --restart")
     , ("M-S-r",         spawn "xmonad --recompile; xmonad --restart")
     , ("M-b",           spawn webBrowser)
-    , ("<Print>",       spawn "sleep 0.2 && screenshot")
+    , ("<Print>",       spawn "screenshot")
     , ("M-S-l",         spawn "slock")
     , ("M-d",           toggleWindows)
     , ("M-w",           focusScreen 0)
     , ("M-e",           focusScreen 1)
     , ("M-f",           withFocused $ sendMessage . maximizeRestore)
     , ("M-n",           toggleWS)
-    , ("M-S-d",         spawn "discord")
+    , ("M-S-d",         spawn "dc")
     ]
     ++
     -- Select or shift to workspace
@@ -250,7 +250,7 @@ myStartupHook = do
 
     dynStatusBarStartup spawnStatusBar (return ())
     setDefaultCursor xC_left_ptr
-    spawnOnce "discord"
+    spawnOnce "dc"
     spawnOnce "transmission-gtk"
 
 sepBy :: String -> [String] -> String
