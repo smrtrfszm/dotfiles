@@ -1,3 +1,5 @@
+local vim = _G.vim
+
 vim.api.nvim_set_option('mouse', 'a')
 vim.api.nvim_set_option('scrolloff', 5)
 vim.api.nvim_set_option('laststatus', 2)
@@ -29,3 +31,4 @@ vim.cmd('autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 expandtab softtabs
 vim.cmd('autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab softtabstop')
 vim.cmd('autocmd Filetype lua setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
+vim.cmd('autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=80')
