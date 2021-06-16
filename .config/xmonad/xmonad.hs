@@ -55,7 +55,7 @@ terminalEmulator :: String
 terminalEmulator = "alacritty"
 -- Set web browser
 webBrowser :: String
-webBrowser = "qutebrowser"
+webBrowser = "firefox-nightly"
 -- Focus doesn't follow the mouse pointer
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
