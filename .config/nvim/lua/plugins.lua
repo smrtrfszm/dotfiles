@@ -27,6 +27,7 @@ require('packer').startup(function(use)
   use 'kabouzeid/nvim-lspinstall'
   use 'andweeb/presence.nvim'
   use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-ts-autotag'
 end)
 
 -- Plugin configs
@@ -42,3 +43,4 @@ require('plugins.lspkind')
 require('plugins.telescope')
 require('plugins.presence')
 require('plugins.autopairs')
+require('plugins.autotag')
