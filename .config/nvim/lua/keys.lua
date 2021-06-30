@@ -37,4 +37,3 @@ key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
 key('n', '<leader>g', '<cmd>LazyGit<cr>')
 
 expr('i', '<C-Space>', 'compe#complete()')
-expr('i', '<CR>', 'compe#confirm("<CR>")')

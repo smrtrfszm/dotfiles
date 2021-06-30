@@ -26,6 +26,7 @@ require('packer').startup(function(use)
   use 'onsails/lspkind-nvim'
   use 'kabouzeid/nvim-lspinstall'
   use 'andweeb/presence.nvim'
+  use 'windwp/nvim-autopairs'
 end)
 
 -- Plugin configs
@@ -40,3 +41,4 @@ require('plugins.galaxyline')
 require('plugins.lspkind')
 require('plugins.telescope')
 require('plugins.presence')
+require('plugins.autopairs')
