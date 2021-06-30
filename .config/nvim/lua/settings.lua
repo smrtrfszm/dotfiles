@@ -17,6 +17,8 @@ vim.api.nvim_buf_set_option(0, 'undofile', true)
 
 vim.cmd('syntax on')
 
+vim.cmd('set shortmess+=c')
+
 
 vim.cmd('autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
