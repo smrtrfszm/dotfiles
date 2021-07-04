@@ -28,6 +28,7 @@ require('packer').startup(function(use)
   use 'andweeb/presence.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
+  use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'}
 end)
 
 -- Plugin configs
@@ -44,3 +45,4 @@ require('plugins.telescope')
 require('plugins.presence')
 require('plugins.autopairs')
 require('plugins.autotag')
+require('plugins.todo-comments')
