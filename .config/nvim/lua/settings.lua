@@ -22,7 +22,7 @@ vim.cmd('set shortmess+=c')
 
 vim.cmd('autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype typescriptreact setlocal tabstop=3 shiftwidth=2 expandtab softtabstop colorcolumn=121')
+vim.cmd('autocmd Filetype typescriptreact setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
