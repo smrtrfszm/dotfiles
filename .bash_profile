@@ -3,6 +3,8 @@ export TERM='xterm-256color'
 export HISTCONTROL=ignoredups:erasedups
 export EDITOR='nvim'
 
+export GNUMAKEFLAGS="-j14"
+
 # To work java jwt in any window manager
 export _JAVA_AWT_WM_NONREPARENTING=1
 
