@@ -34,6 +34,7 @@ key('i', '<C-j>', '<esc>')
 key('n', '<leader>w', '<cmd>w<cr>')
 key('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
 key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+key('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
 key('n', '<leader>g', '<cmd>LazyGit<cr>')
 
 expr('i', '<C-Space>', 'compe#complete()')
