@@ -14,7 +14,7 @@ set -o vi
 shopt -s histappend
 shopt -s checkwinsize
 
-PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+PS1='\[\033[1;36m\]\w\[\033[1;33m\] > \[\033[0m\]'
 
 
 ## ALIASES ##
