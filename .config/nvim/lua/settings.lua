@@ -34,3 +34,4 @@ vim.cmd('autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 expandtab softtab
 vim.cmd('autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab softtabstop')
 vim.cmd('autocmd Filetype lua setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
 vim.cmd('autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=80')
+vim.cmd('autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop')
