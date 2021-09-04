@@ -1,0 +1,12 @@
+[user]
+	signingkey = 9619221F40C7324B
+	email = sztibi023@gmail.com
+	name = Szepesi Tibor
+[commit]
+	gpgsign = true
+[credential]
+	helper = store
+[color]
+	ui = true
+[init]
+	defaultBranch = master
