@@ -47,6 +47,8 @@ import Graphics.X11.Xlib.Cursor (xC_left_ptr)
 import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend, getWindowAttributes, getWMNormalHints, wa_width, wa_height)
 import Graphics.X11.Xlib.Misc (queryPointer)
 
+import Brightness (setBrightness, incBrightness, decBrightness)
+
 
 -- Variables
 
@@ -117,9 +119,8 @@ myKeys conf = mkKeymap conf $
     , ("M-f",                     withFocused $ sendMessage . maximizeRestore)
     , ("M-n",                     toggleWS)
     , ("M-S-d",                   spawn "dc")
-    , ("M-S-x",                   spawn "xterm")
-    , ("<XF86MonBrightnessUp>",   spawn "xbacklight -inc 10")
-    , ("<XF86MonBrightnessDown>", spawn "xbacklight -dec 10")
+    , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
+    , ("<XF86MonBrightnessDown>", decBrightness 0.1)
     ]
     ++
     -- Select or shift to workspace
@@ -127,6 +128,7 @@ myKeys conf = mkKeymap conf $
         | (i, k) <- zip myWorkspaces $ map show [0..9]
         , (f, m) <- [(changeWorkspace, ""), (windows . W.shift, "S-")]
         ]
+
 
 changeWorkspace :: WorkspaceId -> X ()
 changeWorkspace w = do
