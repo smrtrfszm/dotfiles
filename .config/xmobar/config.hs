@@ -27,8 +27,11 @@ Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
 			            , "<fc=#F7CA88>Net:</fc> <fc=#DC9656>↑ <tx> KB/s</fc> <fc=#A16946>↓ <rx> KB/s</fc>"
                         ] 20
 		            , Run UnsafeStdinReader
+                    , Run Battery
+                        [ "-t", "Bat: <left>% / <timeleft>"
+                        ] 50
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %dynnetwork% "
+       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %dynnetwork% <fc=#585858>|</fc> %battery% "
        }
