@@ -19,19 +19,37 @@ vim.cmd('syntax on')
 
 vim.cmd('set shortmess+=c')
 
+local indentations = {
+  javascript      = { width=2, style='space', ruler=121 },
+  typescript      = { width=2, style='space', ruler=121 },
+  typescriptreact = { width=2, style='space', ruler=121 },
+  html            = { width=2, style='space', ruler=121 },
+  css             = { width=2, style='space', ruler=121 },
+  scss            = { width=2, style='space', ruler=121 },
+  haskell         = { width=4, style='space' },
+  java            = { width=2, style='space', ruler=121 },
+  c               = { width=4, style='space', ruler=81  },
+  cpp             = { width=4, style='space', ruler=121 },
+  rust            = { width=2, style='space', ruler=121 },
+  yaml            = { width=2, style='space', ruler=121 },
+  lua             = { width=2, style='space', ruler=121 },
+  sh              = { width=4, style='space', ruler=81  },
+  json            = { width=2, style='space', ruler=121 },
+  cmake           = { width=4, style='space', ruler=121 },
+  go              = { width=4, style='tab',   ruler=121 },
+}
 
-vim.cmd('autocmd Filetype javascript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype typescript setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype typescriptreact setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype css setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype scss setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype haskell setlocal tabstop=4 shiftwidth=4 expandtab softtabstop')
-vim.cmd('autocmd Filetype java setlocal colorcolumn=121')
-vim.cmd('autocmd Filetype c setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=81')
-vim.cmd('autocmd Filetype cpp setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype rust setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 expandtab softtabstop')
-vim.cmd('autocmd Filetype lua setlocal tabstop=2 shiftwidth=2 expandtab softtabstop colorcolumn=121')
-vim.cmd('autocmd Filetype sh setlocal tabstop=4 shiftwidth=4 expandtab softtabstop colorcolumn=80')
-vim.cmd('autocmd Filetype json setlocal tabstop=2 shiftwidth=2 expandtab softtabstop')
+for lang, options in pairs(indentations) do
+  local cmd = 'autocmd Filetype ' .. lang .. ' setlocal'
+  cmd = cmd .. ' tabstop=' .. options.width .. ' shiftwidth=' .. options.width .. '  smarttab'
+
+  if options.style == 'space' then
+    cmd = cmd .. ' expandtab softtabstop'
+  end
+
+  if options.ruler then
+    cmd = cmd .. ' colorcolumn=' .. options.ruler
+  end
+
+  vim.cmd(cmd)
+end
