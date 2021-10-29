@@ -119,6 +119,7 @@ myKeys conf = mkKeymap conf $
     , ("M-f",                     withFocused $ sendMessage . maximizeRestore)
     , ("M-n",                     toggleWS)
     , ("M-S-d",                   spawn "dc")
+    , ("M-<Space>",               spawn "dunstctl close-all")
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
     , ("<XF86MonBrightnessDown>", decBrightness 0.1)
     ]
