@@ -1,19 +1,19 @@
-local lspinstall = require('lspinstall')
-lspinstall.setup()
+local lsp_installer = require('nvim-lsp-installer')
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
-}
+local servers = {'angularls', 'bashls', 'clangd', 'cmake', 'cssls', 'dockerls', 'emmet_ls', 'gopls', 'graphql', 'html', 'sumneko_lua', 'pyright', 'rust_analyzer', 'tsserver'}
 
-local servers = lspinstall.installed_servers()
 for _, server in pairs(servers) do
-  require('lspconfig')[server].setup({
-    capabilities = capabilities
-  })
+  local available, requested = lsp_installer_servers.get_server(server)
+  if available then
+    if not requested:is_installed() then
+      requested:install()
+    end
+  end
 end
+
+lsp_installer.on_server_ready(function(server)
+  local opts = {}
+
+  server:setup(opts)
+end)

@@ -23,11 +23,11 @@ require('packer').startup(function(use)
   use 'kdheepak/lazygit.nvim'
   use {'glepnir/galaxyline.nvim', branch = 'main'}
   use 'onsails/lspkind-nvim'
-  use 'kabouzeid/nvim-lspinstall'
   use 'andweeb/presence.nvim'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
   use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'}
+  use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig'}
   use 'nvim-lua/plenary.nvim'
 
   use 'hrsh7th/nvim-cmp'
