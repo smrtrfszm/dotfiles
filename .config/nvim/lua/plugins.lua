@@ -17,7 +17,6 @@ require('packer').startup(function(use)
   use {'b3nj5m1n/kommentary', branch = 'main'}
   use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}}
   use 'neovim/nvim-lspconfig'
-  use 'hrsh7th/nvim-compe'
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use 'tjdevries/colorbuddy.nvim'
   use 'norcalli/nvim-colorizer.lua'
@@ -29,6 +28,15 @@ require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
   use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'}
+  use 'nvim-lua/plenary.nvim'
+
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
 end)
 
 -- Plugin configs
@@ -37,12 +45,11 @@ require('plugins.lspinstall')
 require('plugins.kommentary')
 require('plugins.treesitter')
 require('plugins.gitsigns')
-require('plugins.nvim-compe')
 require('plugins.colorizer')
 require('plugins.galaxyline')
-require('plugins.lspkind')
 require('plugins.telescope')
 require('plugins.presence')
 require('plugins.autopairs')
 require('plugins.autotag')
 require('plugins.todo-comments')
+require('plugins.cmp')

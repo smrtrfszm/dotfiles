@@ -25,10 +25,6 @@ key('i', '<Left>', '<nop>')
 key('v', '<Tab>', '>gv')
 key('v', '<S-Tab>', '<gv')
 
--- Smart tabs
-expr('i', '<TAB>', 'pumvisible() ? "<C-n>" : "<TAB>"')
-expr('i', '<S-TAB>', 'pumvisible() ? "<C-p>" : "<S-TAB>"')
-
 key('n', '<leader><leader>', '<C-^>')
 key('i', '<C-j>', '<esc>')
 key('n', '<leader>w', '<cmd>w<cr>')
