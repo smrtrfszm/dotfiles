@@ -1,5 +1,5 @@
 setxkbmap -layout hu -option caps:ctrl_modifier
-xwallpaper --zoom "$HOME/.config/background.jpg" &
+xwallpaper --zoom "$HOME/.config/background.png" &
 dunst &
 xmonad --recompile
 exec xmonad
