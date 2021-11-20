@@ -22,11 +22,11 @@ scrolling:
 
 font:
   normal:
-    family: 'JetBrainsMono Nerd Font'
+    family: 'JetBrains Mono Nerd Font'
   bold:
-    family: 'JetBrains Mono'
+    family: 'JetBrains Mono Nerd Font'
   italic:
-    family: 'JetBrains Mono'
+    family: 'JetBrains Mono Nerd Font'
 
   size: 10
 

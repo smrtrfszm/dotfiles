@@ -1,4 +1,4 @@
-Config { font = "xft:JetBrains Mono:pixelsize=14:antialias=true:hinting=true"
+Config { font = "xft:JetBrains Mono Nerd Font:pixelsize=14:antialias=true:hinting=true"
        , textOffset = 17
        , bgColor = "#1d1d1d"
        , fgColor = "white"
