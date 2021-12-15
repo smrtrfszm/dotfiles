@@ -9,7 +9,8 @@ set -o vi
 [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin/:$PATH"
 [ -d "$HOME/.yarn/bin" ]  && PATH="$HOME/.yarn/bin/:$PATH"
 [ -d "$HOME/.cargo/bin" ] && PATH="$HOME/.cargo/bin/:$PATH"
-[ -d "$GOPATH/bin/" ]          && PATH="$GOPATH/bin/:$PATH"
+[ -d "$GOPATH/bin/" ]     && PATH="$GOPATH/bin/:$PATH"
+[ -d "$PNPM_HOME"]        && PATH="$PNPM_HOME:$PATH"
 
 # shopt
 shopt -s histappend
@@ -24,8 +25,6 @@ alias ls='exa --color=always --group-directories-first'
 
 # colorize grep
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 alias vim='nvim'
 alias python='python3.9'
