@@ -27,7 +27,7 @@ alias ls='exa --color=always --group-directories-first'
 alias grep='grep --color=auto'
 
 alias vim='nvim'
-alias python='python3.9'
+alias python='python3.10'
 alias lg='lazygit'
 alias cg="lazygit -w $HOME -g $HOME/configs"
 
