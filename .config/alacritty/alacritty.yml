@@ -15,6 +15,7 @@ window:
     instance: Alacritty
     general: Alacritty
   dynamic_title: false
+  opacity: 1
 
 scrolling:
   history: 10000
@@ -75,8 +76,6 @@ bell:
   animation: EaseOutExpo
   duration: 0
   color: '#ffffff'
-
-background_opacity: 1
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
