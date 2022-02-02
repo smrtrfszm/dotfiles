@@ -14,7 +14,7 @@ import XMonad.Config (def)
 import XMonad.Core
 import XMonad.Layout (Tall(..), Resize(..))
 import XMonad.Main (xmonad)
-import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (-->), doFloat, title, liftX, doShift)
+import XMonad.ManageHook (composeAll, className, (=?), (<&&>), (<||>), (-->), doFloat, title, liftX, doShift)
 import XMonad.Operations (kill, windows, sendMessage, withFocused, screenWorkspace, focus, mouseMoveWindow, isClient, float, mouseDrag, applySizeHintsContents)
 import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapDown, swapUp, sink, greedyView, shift, view, shiftMaster, currentTag, workspace, current, visible, hidden, tag, findTag, stack)
 
@@ -33,7 +33,7 @@ import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatu
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppSort, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP, ppWsSep, ppVisibleNoWindows)
 import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
-import XMonad.Hooks.ManageHelpers ((/=?), currentWs, isDialog)
+import XMonad.Hooks.ManageHelpers ((/=?), currentWs, isDialog, isInProperty)
 import XMonad.Hooks.UrgencyHook (readUrgents, withUrgencyHook, NoUrgencyHook(..))
 
 import XMonad.Layout.Fullscreen (fullscreenSupport)
@@ -223,11 +223,14 @@ isHideWs = do
     ws <- liftX (withWindowSet $ return . W.currentTag)
     return $ isPrefixOf "hide-" ws
 
+isModal :: Query Bool
+isModal = isInProperty "_NET_WM_STATE" "_NET_WM_STATE_MODAL"
+
 -- Window rules
 myManageHook = composeAll
     [ (className =? "Steam" <&&> title /=? "Steam") --> doFloat
     , (isHideWs) --> doShift (myWorkspaces !! 0)
-    , (isDialog) --> doFloat
+    , (isDialog <||> isModal) --> doFloat
     ]
 
 myEventHook :: Event -> X All
