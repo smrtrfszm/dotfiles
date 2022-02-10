@@ -5,7 +5,7 @@ cmp.setup({
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(5),
     ['<C-u>'] = cmp.mapping.scroll_docs(-5),
-    ['<CR>'] = cmp.mapping(
+    ['<Tab>'] = cmp.mapping(
       cmp.mapping.confirm(
         {
           behaviour = cmp.ConfirmBehavior.Insert,
@@ -14,14 +14,14 @@ cmp.setup({
         { 'i', 'c' }
       )
     ),
-    ['<Tab>'] = function(fallback)
+    ['<C-n>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       else
         fallback()
       end
     end,
-    ['<S-Tab>'] = function(fallback)
+    ['<C-p>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       else
