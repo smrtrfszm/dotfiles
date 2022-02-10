@@ -10,7 +10,7 @@ set -o vi
 [ -d "$HOME/.yarn/bin" ]  && PATH="$HOME/.yarn/bin/:$PATH"
 [ -d "$HOME/.cargo/bin" ] && PATH="$HOME/.cargo/bin/:$PATH"
 [ -d "$GOPATH/bin/" ]     && PATH="$GOPATH/bin/:$PATH"
-[ -d "$PNPM_HOME" ]        && PATH="$PNPM_HOME:$PATH"
+[ -d "$PNPM_HOME" ]       && PATH="$PNPM_HOME:$PATH"
 
 # shopt
 shopt -s histappend
