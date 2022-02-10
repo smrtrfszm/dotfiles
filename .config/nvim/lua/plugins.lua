@@ -8,7 +8,20 @@ if fn.empty(fn.glob(install_path)) > 0 then
   execute 'packadd packer.nvim'
 end
 
-require('packer').startup(function(use)
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
+
+packer.init({
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'rounded' })
+    end
+  }
+})
+
+packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'airblade/vim-rooter'
   use 'editorconfig/editorconfig-vim'
@@ -32,11 +45,14 @@ require('packer').startup(function(use)
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-nvim-lua'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
 
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
+
+  use 'pantharshit00/vim-prisma'
 end)
 
 -- Plugin configs
