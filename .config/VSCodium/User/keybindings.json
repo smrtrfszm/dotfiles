@@ -1,0 +1,14 @@
+[
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.new"
+    },
+    {
+        "key": "ctrl+a right",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+a left",
+        "command": "workbench.action.focusActiveEditorGroup",
+    }
+]
