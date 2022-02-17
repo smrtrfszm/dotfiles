@@ -1,15 +1,23 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 lock_command="slock"
 
-options="poweroff\nreboot"
+has_lock=false
 
-if command -v $lock_command &> /dev/null; then
-	options="${options}\nlock"
+if command -v $lock_command > /dev/null; then
+    has_lock=true
 fi
 
-option=$(echo -e $options | dmenu -p "Shutdown: " "$@")
-echo "$option"
+options() {
+    echo "poweroff"
+    echo "reboot"
+
+    if $has_lock; then
+        echo $lock_command
+    fi
+}
+
+option=$(options | dmenu -p "Shutdown: " "$@")
 
 case $option in
 	"poweroff")
@@ -19,7 +27,9 @@ case $option in
 		reboot
 		;;
 	"lock")
-		slock
+        if $has_lock; then
+            eval $lock_command
+        fi
 		;;
 	*)
 esac
