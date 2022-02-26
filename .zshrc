@@ -33,8 +33,8 @@ alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-bindkey "^p" down-line-or-search
-bindkey "^n" up-line-or-search
+bindkey "^n" down-line-or-search
+bindkey "^p" up-line-or-search
 bindkey "^j" vi-cmd-mode
 
 function zle-line-init zle-keymap-select {
