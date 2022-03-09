@@ -36,6 +36,7 @@ bindkey "^[[1;5D" backward-word
 bindkey "^n" down-line-or-search
 bindkey "^p" up-line-or-search
 bindkey "^j" vi-cmd-mode
+bindkey '^R' history-incremental-search-backward
 
 function zle-line-init zle-keymap-select {
     case "$KEYMAP" in
