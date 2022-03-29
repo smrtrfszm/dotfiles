@@ -14,3 +14,7 @@ path+=("$HOME/.cargo/bin")
 path+=("$GOPATH/bin")
 path+=("$PNPM_HOME")
 
+if [ -n "$DESKTOP_SESSION" ]; then
+	eval $(gnome-keyring-daemon --start)
+	export SSH_AUTH_SOCK
+fi
