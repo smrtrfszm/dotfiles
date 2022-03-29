@@ -1,0 +1,17 @@
+font=monospace 10
+sort=-priority
+layer=overlay
+width=350
+border-size=0
+border-radius=3
+default-timeout=5000
+padding=12
+text-color=#ffffff
+icons=0
+icon-location=left
+# background-color=#383838
+background-color=#585858
+progress-color=source #ffffff
+
+[urgency=high]
+background-color=#900000
