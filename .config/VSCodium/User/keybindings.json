@@ -10,5 +10,13 @@
     {
         "key": "ctrl+a left",
         "command": "workbench.action.focusActiveEditorGroup",
+    },
+    {
+        "key": "ctrl+a l",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+a h",
+        "command": "workbench.action.focusActiveEditorGroup",
     }
 ]
