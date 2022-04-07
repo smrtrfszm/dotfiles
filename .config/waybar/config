@@ -59,6 +59,7 @@
 	},
 	"network": {
 		"interval": 2,
+		"format": "",
 		"format-disconnected": "Offline",
 		"format-wifi": "{essid} ",
 		"on-click": "cmst",
