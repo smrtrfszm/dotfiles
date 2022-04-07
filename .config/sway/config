@@ -11,7 +11,7 @@ set $lock swaylock -f --color 000000
 
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-output * bg ${XDG_CONFIG_HOME:-$HOME/.config}/background.png fill
+output * bg #222222 solid_color
 
 floating_modifier $mod normal
 
