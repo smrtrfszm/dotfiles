@@ -8,23 +8,23 @@
 }
 
 window#waybar {
-  background-color: #1d1d1d;
+  background-color: #000;
   color: #fff;
 }
 
 #workspaces button {
-  color: #b8b8b8;
+  color: #fff;
   padding: 0 2px;
   border-radius: 0;
 }
 
 #workspaces button:hover {
-  color: #b8b8b8;
+  color: #fff;
   background: none;
 }
 
 #workspaces button.focused {
-  color: #1d1d1d;
+  color: #000;
   background-color: #86c1b9;
 }
 
@@ -66,7 +66,7 @@ window#waybar {
 }
 
 #battery.critical {
-  color: #1d1d1d;
+  color: #000;
   background-color: #ab4642;
 }
 
