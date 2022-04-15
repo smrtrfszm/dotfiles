@@ -6,7 +6,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export LESSHISTFILE=-
-export PNPM_HOME="/home/smrtrfszm/.local/share/pnpm"
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 
 path+=("$HOME/scripts")
 path+=("$HOME/.local/bin")
