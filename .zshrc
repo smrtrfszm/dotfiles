@@ -5,7 +5,7 @@ PROMPT='%B%F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
 bindkey -v
 KEYTIMEOUT=1
 
-HISTFILE="$HOME/.histfile"
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
 
