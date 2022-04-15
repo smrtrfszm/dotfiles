@@ -94,6 +94,7 @@ mode "resize" {
     }
 }
 
+smart_borders on
 
 bar swaybar_command waybar
 
