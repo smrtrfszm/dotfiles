@@ -19,7 +19,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
 
 path+=("$HOME/scripts")
 path+=("$HOME/.local/bin")
-path+=("$HOME/.cargo/bin")
+path+=("$CARGO_HOME/bin")
 path+=("$GOPATH/bin")
 path+=("$PNPM_HOME")
 
