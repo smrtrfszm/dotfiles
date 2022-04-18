@@ -28,9 +28,9 @@ alias vim="nvim"
 alias :q="exit"
 alias copy="xclip -selection clipboard"
 alias lg="lazygit"
-alias cg="lazygit -w $HOME -g $HOME/configs"
+alias cg="lazygit -w $HOME -g $HOME/.dotfiles"
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias python="python3.10"
-alias config='git --git-dir=$HOME/configs --work-tree=$HOME'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
