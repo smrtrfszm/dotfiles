@@ -19,7 +19,8 @@ setopt HIST_SAVE_NO_DUPS
 
 zstyle :compinstall filename '/home/smrtrfszm/.zshrc'
 autoload -Uz compinit
-compinit
+mkdir -p "$XDG_CACHE_HOME/zsh"
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 alias ls="exa --color=always --group-directories-first"
 alias grep="grep --color=auto"
