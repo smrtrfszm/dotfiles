@@ -11,6 +11,9 @@ set $lock swaylock -f --color 000000
 
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
+set $wob $XDG_RUNTIME_DIR/wob.sock
+exec_always rm -f $wob && mkfifo $wob && tail -f $wob | wob
+
 output * bg #222222 solid_color
 
 floating_modifier $mod normal
@@ -75,8 +78,9 @@ bindsym $mod+minus scratchpad show
 
 
 bindsym {
-    XF86MonBrightnessDown exec brightnessctl set 5%-
-    XF86MonBrightnessUp exec brightnessctl set +5%
+    XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $wob
+    XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $wob
+
     XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
