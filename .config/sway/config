@@ -12,7 +12,7 @@ set $lock swaylock -f --color 000000
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
 set $wob $XDG_RUNTIME_DIR/wob.sock
-exec_always rm -f $wob && mkfifo $wob && tail -f $wob | wob
+exec_always rm -f $wob && mkfifo $wob && tail -f $wob | wob -a bottom
 
 output * bg #222222 solid_color
 
