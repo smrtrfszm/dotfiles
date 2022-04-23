@@ -9,7 +9,7 @@ set $term alacritty
 set $browser firefox
 set $lock swaylock -f --color 000000
 
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu dmenu_path | dmenu -h 24 -nb \#000000 | xargs swaymsg exec --
 
 set $wob $XDG_RUNTIME_DIR/wob.sock
 exec_always rm -f $wob && mkfifo $wob && tail -f $wob | wob -a bottom
