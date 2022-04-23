@@ -31,7 +31,7 @@ local indentations = {
   java            = { width=2, style='space', ruler=121 },
   c               = { width=4, style='space', ruler=81  },
   cpp             = { width=4, style='space', ruler=121 },
-  rust            = { width=2, style='space', ruler=121 },
+  rust            = { width=4, style='space', ruler=121 },
   yaml            = { width=2, style='space', ruler=121 },
   lua             = { width=2, style='space', ruler=121 },
   sh              = { width=4, style='space', ruler=81  },
