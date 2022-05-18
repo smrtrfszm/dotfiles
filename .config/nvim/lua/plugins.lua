@@ -44,6 +44,17 @@ packer.startup(function(use)
   use 'numToStr/Comment.nvim'
   use {'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main'}
 
+  use {
+    'NTBBloodbath/rest.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    ft = 'http',
+    config = function ()
+      local rest_nvim = require('rest_nvim')
+      rest_nvim.setup({})
+      vim.keymap.set('n', '<leader>rn', rest_nvim.run)
+    end,
+  }
+
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-nvim-lua'
