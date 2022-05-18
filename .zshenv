@@ -23,7 +23,6 @@ export XMONAD_CACHE_DIR="$XDG_CACHE_HOME/xmonad"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 
-path+=("$HOME/scripts")
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
 path+=("$GOPATH/bin")
