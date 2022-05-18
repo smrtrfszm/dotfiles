@@ -55,6 +55,20 @@ packer.startup(function(use)
     end,
   }
 
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function ()
+      vim.opt.list = true
+      vim.opt.listchars:append("eol:↴")
+
+      require("indent_blankline").setup({
+        show_end_of_line = true,
+        char_highlight_list = {"Comment"},
+        show_trailing_blankline_indent = false,
+      })
+    end,
+  }
+
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-nvim-lua'
