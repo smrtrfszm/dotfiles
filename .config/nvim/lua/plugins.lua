@@ -27,7 +27,6 @@ packer.startup(function(use)
   use 'editorconfig/editorconfig-vim'
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
   use 'nvim-treesitter/playground'
-  use {'b3nj5m1n/kommentary', branch = 'main'}
   use {'nvim-telescope/telescope.nvim', requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}}
   use 'neovim/nvim-lspconfig'
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
@@ -42,6 +41,8 @@ packer.startup(function(use)
   use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'}
   use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig'}
   use 'nvim-lua/plenary.nvim'
+  use 'numToStr/Comment.nvim'
+  use {'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main'}
 
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -58,7 +59,6 @@ end)
 -- Plugin configs
 require('plugins.lspconfig')
 require('plugins.lspinstall')
-require('plugins.kommentary')
 require('plugins.treesitter')
 require('plugins.gitsigns')
 require('plugins.colorizer')
@@ -69,3 +69,4 @@ require('plugins.autopairs')
 require('plugins.autotag')
 require('plugins.todo-comments')
 require('plugins.cmp')
+require('plugins.comment')
