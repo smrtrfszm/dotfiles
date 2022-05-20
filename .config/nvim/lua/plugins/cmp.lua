@@ -28,6 +28,7 @@ cmp.setup({
         fallback()
       end
     end,
+    ['<C-space>'] = cmp.mapping.complete(),
   },
   sources = {
     { name = 'nvim_lsp' },

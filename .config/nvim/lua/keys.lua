@@ -1,36 +1,18 @@
--- Helper function
-local function key(mode, key, action)
-  vim.api.nvim_set_keymap(mode, key, action, {noremap = true, silent = true})
-end
-
-local function expr(mode, key, action)
-  vim.api.nvim_set_keymap(mode, key, action, {expr = true, noremap = true, silent = true})
-end
-
--- Set leader key
 vim.g.mapleader = ' '
-key('n', '<Space>', '<NOP>')
+vim.keymap.set('n', '<space>', '<nop>')
 
--- Disable arrom keys
-key('', '<Up>', '<nop>')
-key('', '<Right>', '<nop>')
-key('', '<Down>', '<nop>')
-key('', '<Left>', '<nop>')
-key('i', '<Up>', '<nop>')
-key('i', '<Right>', '<nop>')
-key('i', '<Down>', '<nop>')
-key('i', '<Left>', '<nop>')
+vim.keymap.set({'', 'i'}, '<up>', '<nop>')
+vim.keymap.set({'', 'i'}, '<right>', '<nop>')
+vim.keymap.set({'', 'i'}, '<down>', '<nop>')
+vim.keymap.set({'', 'i'}, '<left>', '<nop>')
 
--- Indentation
-key('v', '<Tab>', '>gv')
-key('v', '<S-Tab>', '<gv')
+vim.keymap.set('v', '<tab>', '>gv')
+vim.keymap.set('v', '<s-tab>', '<gv')
 
-key('n', '<leader><leader>', '<C-^>')
-key('i', '<C-j>', '<esc>')
-key('n', '<leader>w', '<cmd>w<cr>')
-key('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
-key('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-key('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<cr>')
-key('n', '<leader>g', '<cmd>LazyGit<cr>')
-
-expr('i', '<C-Space>', 'compe#complete()')
+vim.keymap.set('n', '<leader><leader>', '<c-^>')
+vim.keymap.set('i', '<c-j>', '<esc>')
+vim.keymap.set('n', '<leader>w', '<cmd>w<cr>')
+vim.keymap.set('n', '<c-f>', function () require('telescope.builtin').find_files() end)
+vim.keymap.set('n', 'gd', function () vim.lsp.buf.definition() end)
+vim.keymap.set('n', '<leader>', function () vim.lsp.buf.rename() end)
+vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>')
