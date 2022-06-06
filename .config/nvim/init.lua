@@ -140,7 +140,7 @@ packer.startup(function(use)
     requires = {'nvim-lua/plenary.nvim'},
     ft = 'http',
     config = function ()
-      local rest_nvim = require('rest_nvim')
+      local rest_nvim = require('rest-nvim')
       rest_nvim.setup({})
       vim.keymap.set('n', '<leader>rn', rest_nvim.run)
     end,
