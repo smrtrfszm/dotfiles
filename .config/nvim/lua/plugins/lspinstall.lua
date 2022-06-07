@@ -13,7 +13,5 @@ for _, server in pairs(servers) do
 end
 
 lsp_installer.on_server_ready(function(server)
-  local opts = {}
-
-  server:setup(opts)
+  server:setup {}
 end)

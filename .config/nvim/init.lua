@@ -87,10 +87,44 @@ packer.startup(function(use)
   use 'kdheepak/lazygit.nvim'
 
   use {
-    'glepnir/galaxyline.nvim',
-    branch = 'main',
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     config = function ()
-      require('plugins.galaxyline')
+      local colors = require('colors')
+      require('lualine').setup {
+        options = {
+          theme = {
+            normal = {
+              a = {bg = colors.white, fg = colors.black, gui = 'bold'},
+              b = {bg = colors.black, fg = colors.white},
+              c = {bg = colors.gray2, fg = colors.white}
+            },
+            insert = {
+              a = {bg = colors.green, fg = colors.black, gui = 'bold'},
+              b = {bg = colors.black, fg = colors.green},
+            },
+            visual = {
+              a = {bg = colors.blue, fg = colors.black, gui = 'bold'},
+              b = {bg = colors.black, fg = colors.blue},
+            },
+            replace = {
+              a = {bg = colors.orange, fg = colors.black, gui = 'bold'},
+              b = {bg = colors.black, fg = colors.orange},
+            },
+            command = {
+              a = {bg = colors.red, fg = colors.black, gui = 'bold'},
+              b = {bg = colors.black, fg = colors.red},
+            },
+            inactive = {
+              a = {bg = colors.gray1, fg = colors.gray4, gui = 'bold'},
+              b = {bg = colors.gray1, fg = colors.gray4},
+              c = {bg = colors.gray1, fg = colors.gray4}
+            },
+          },
+          component_separators = '',
+          section_separator = '',
+        }
+      }
     end,
   }
 
@@ -119,6 +153,7 @@ packer.startup(function(use)
       }
     end,
   }
+
 
   use {
     'williamboman/nvim-lsp-installer',
