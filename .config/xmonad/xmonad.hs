@@ -54,7 +54,7 @@ import Brightness (setBrightness, incBrightness, decBrightness)
 
 -- Set terminal emulator
 terminalEmulator :: String
-terminalEmulator = "alacritty"
+terminalEmulator = "kitty"
 -- Set web browser
 webBrowser :: String
 webBrowser = "firefox-nightly"
