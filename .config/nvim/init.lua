@@ -195,6 +195,7 @@ packer.startup(function(use)
         show_current_context = true,
         space_char_blankline = ' ',
         char_highlight_list = {'IndentLine'},
+        char = '▏',
         context_highlight_list = {'IndentLineContext'},
         show_trailing_blankline_indent = false,
       })
