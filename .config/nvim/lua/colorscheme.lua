@@ -220,3 +220,6 @@ Group.new('LspDiagnosticsDefaultError',       colors.red,    colors.none, styles
 Group.new('LspDiagnosticsDefaultWarning',     colors.yellow, colors.none, styles.none)
 Group.new('LspDiagnosticsDefaultInformation', colors.blue,   colors.none, styles.none)
 Group.new('LspDiagnosticsDefaultHint',        colors.gray4,  colors.none, styles.none)
+
+Group.new('IndentLine',        colors.gray1, colors.none, styles.none)
+Group.new('IndentLineContext', colors.gray3, colors.none, styles.none)
