@@ -165,6 +165,7 @@ packer.startup(function(use)
 
   use {
     'numToStr/Comment.nvim',
+    requires = {'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main'},
     config = function ()
       require('plugins.comment')
     end,
@@ -183,9 +184,6 @@ packer.startup(function(use)
 
   use {
     'lukas-reineke/indent-blankline.nvim',
-    requires = {
-      {'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main'},
-    },
     config = function ()
       vim.opt.list = true
       vim.opt.listchars:append('eol:↴')
