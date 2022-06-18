@@ -22,6 +22,7 @@ export XMONAD_CONFIG_DIR="$XDG_CONFIG_HOME/xmonad"
 export XMONAD_CACHE_DIR="$XDG_CACHE_HOME/xmonad"
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
+export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 path+=("$HOME/.local/bin")
