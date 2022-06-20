@@ -5,7 +5,7 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term kitty
 set $browser firefox
 set $lock swaylock -f --color 000000
 
