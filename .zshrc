@@ -32,6 +32,7 @@ alias cg="lazygit -w $HOME -g $HOME/.dotfiles"
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias python="python3.10"
 alias kubectl="kubectl --cache-dir='$XDG_CACHE_HOME/kube'"
+alias k="kubectl"
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
