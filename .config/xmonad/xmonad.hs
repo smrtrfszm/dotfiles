@@ -25,16 +25,17 @@ import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (mkKeymap)
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import XMonad.Util.SpawnOnce (spawnOnce)
-import XMonad.Util.WorkspaceCompare (WorkspaceSort)
+import XMonad.Util.WorkspaceCompare (WorkspaceSort, getSortByIndex)
 import qualified XMonad.Util.ExtensibleState as XS (gets, modify, put)
 
 import XMonad.Hooks.CurrentWorkspaceOnTop (currentWorkspaceOnTop)
-import XMonad.Hooks.DynamicBars (DynamicStatusBar, dynStatusBarStartup, dynStatusBarEventHook, multiPPFormat, multiPP)
 import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHiddenNoWindows, ppSort, ppUrgent, ppOrder, dynamicLogString, xmobarPP, xmobarColor, wrap, PP, ppWsSep, ppVisibleNoWindows)
-import XMonad.Hooks.EwmhDesktops (fullscreenEventHook, ewmh)
+import XMonad.Hooks.EwmhDesktops (ewmhFullscreen, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.ManageHelpers ((/=?), currentWs, isDialog, isInProperty)
 import XMonad.Hooks.UrgencyHook (readUrgents, withUrgencyHook, NoUrgencyHook(..))
+import XMonad.Hooks.StatusBar (statusBarPipe, StatusBarConfig, dynamicSBs)
+import XMonad.Hooks.StatusBar.PP (PP(..))
 
 import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.IndependentScreens (countScreens)
@@ -46,6 +47,8 @@ import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3, Windo
 import Graphics.X11.Xlib.Cursor (xC_left_ptr)
 import Graphics.X11.Xlib.Extras (Event, getWindowProperty32, changeProperty32, propModeAppend, getWindowAttributes, getWMNormalHints, wa_width, wa_height)
 import Graphics.X11.Xlib.Misc (queryPointer)
+
+import System.Directory (getXdgDirectory, XdgDirectory(XdgConfig))
 
 import Brightness (setBrightness, incBrightness, decBrightness)
 
@@ -90,7 +93,14 @@ statusBarPP = def
     , ppHidden          = xmobarColor "#B8B8B8" "" . wrap "-" "-"
     , ppHiddenNoWindows = xmobarColor "#585858" "" . wrap " " " "
     , ppUrgent          = xmobarColor "#f7ca88" "" . wrap "!" "!"
+    , ppSep             = ""
+    , ppTitle           = \_ -> ""
+    , ppLayout          = \_ -> ""
+    , ppSort            = (.filterOutHideWs) <$> getSortByIndex
     }
+
+filterOutHideWs :: WorkspaceSort
+filterOutHideWs = filter (\workspace -> not $ isPrefixOf "hide-" (W.tag workspace))
 
 
 -- Keybinds
@@ -122,6 +132,7 @@ myKeys conf = mkKeymap conf $
     , ("M-<Space>",               spawn "dunstctl close-all")
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
     , ("<XF86MonBrightnessDown>", decBrightness 0.1)
+    , ("<KP_Insert>",             spawn "curl 127.0.0.1:50633")
     ]
     ++
     -- Select or shift to workspace
@@ -216,7 +227,6 @@ myLayoutHook = smartBorders
     $ maximizeWithPadding (fromIntegral gapSize)
     $ mySpacing gapSize
     $ Tall 1 (3/100) (1/2)
-        
 
 isHideWs :: Query Bool
 isHideWs = do
@@ -234,68 +244,34 @@ myManageHook = composeAll
     ]
 
 myEventHook :: Event -> X All
-myEventHook = do
-    dynStatusBarEventHook spawnStatusBar (return ())
-    fullscreenEventHook
-
-addNETSupported :: Atom -> X ()
-addNETSupported x   = withDisplay $ \dpy -> do
-    r               <- asks theRoot
-    a_NET_SUPPORTED <- getAtom "_NET_SUPPORTED"
-    a               <- getAtom "ATOM"
-    liftIO $ do
-       sup <- (join . maybeToList) <$> getWindowProperty32 dpy a_NET_SUPPORTED r
-       when (fromIntegral x `notElem` sup) $
-         changeProperty32 dpy r a_NET_SUPPORTED a propModeAppend [fromIntegral x]
-
-spawnStatusBar :: DynamicStatusBar
-spawnStatusBar i = spawnPipe $ "xmobar -x " ++ (show . fromEnum) i ++ " ~/.config/xmobar/config.hs"
+myEventHook = mempty
 
 myStartupHook :: X ()
 myStartupHook = do
-    wms <- getAtom "_NET_WM_STATE"
-    wfs <- getAtom "_NET_WM_STATE_FULLSCREEN"
-    mapM_ addNETSupported [wms, wfs]
-
-    dynStatusBarStartup spawnStatusBar (return ())
     setDefaultCursor xC_left_ptr
     spawnOnce "transmission-gtk"
-
-sepBy :: String -> [String] -> String
-sepBy sep = concat . intersperse sep . filter (not . null)
-
-pprWindowSet :: WorkspaceSort -> [Window] -> PP -> WindowSet -> String
-pprWindowSet sort' urgents pp s = do
-    let ws = map W.workspace (W.current s : W.visible s) ++ W.hidden s
-    sepBy (ppWsSep pp) . map fmt . sort' . (filter filterHideWS) $ ws
-    where
-        filterHideWS = \x -> not $ isPrefixOf "hide-" (W.tag x)
-        this         = W.currentTag s
-        visibles     = map (W.tag . W.workspace) (W.visible s)
-        fmt w = printer pp (W.tag w)
-            where printer | any (\x -> maybe False (== W.tag w) (W.findTag x s)) urgents  = ppUrgent
-                          | W.tag w == this                                               = ppCurrent
-                          | W.tag w `elem` visibles && isJust (W.stack w)                 = ppVisible
-                          | W.tag w `elem` visibles                                       = liftM2 fromMaybe ppVisible ppVisibleNoWindows
-                          | isJust (W.stack w)                                            = ppHidden
-                          | otherwise                                                     = ppHiddenNoWindows
-
-formatter :: PP -> X String
-formatter pp = do
-    winset <- gets windowset
-    urgents <- readUrgents
-    sort' <- ppSort pp
-    return $ pprWindowSet sort' urgents pp winset
-
 
 myLogHook :: X ()
 myLogHook = do
     currentWorkspaceOnTop
-    multiPPFormat formatter statusBarPP statusBarPP
+
+getXmobarConfigPath :: IO FilePath
+getXmobarConfigPath = do
+    dir <- getXdgDirectory XdgConfig "xmobar"
+    pure $ dir ++ "/config.hs"
+
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner screen = do
+    xmobarConfig <- getXmobarConfigPath
+    let command = concat ["xmobar -x ", (show . fromEnum) screen, " ", xmobarConfig]
+    config <- statusBarPipe command (pure statusBarPP)
+    pure config
 
 main :: IO ()
 main = do
-    xmonad 
+    xmonad
+        $ dynamicSBs barSpawner
+        $ ewmhFullscreen
         $ ewmh
         $ fullscreenSupport
         $ withUrgencyHook NoUrgencyHook
@@ -313,7 +289,7 @@ main = do
         , manageHook         = myManageHook
         , handleEventHook    = myEventHook
         , layoutHook         = myLayoutHook
-        , startupHook        = myStartupHook 
+        , startupHook        = myStartupHook
         , logHook            = myLogHook
         }
 
