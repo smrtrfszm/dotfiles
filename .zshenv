@@ -24,6 +24,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/startup.py"
 export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
 export _JAVA_AWT_WM_NONREPARENTING=1
+export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
