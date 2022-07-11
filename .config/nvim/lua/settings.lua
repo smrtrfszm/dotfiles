@@ -38,6 +38,7 @@ local indentations = {
   json            = { width=2, style='space', ruler=121 },
   cmake           = { width=4, style='space', ruler=121 },
   go              = { width=4, style='tab',   ruler=121 },
+  xml             = { width=2, style='space' },
 }
 
 for lang, options in pairs(indentations) do
