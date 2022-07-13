@@ -122,7 +122,7 @@ myKeys conf = mkKeymap conf $
     , ("M-S-r",                   spawn "xmonad --recompile; xmonad --restart")
     , ("M-b",                     spawn webBrowser)
     , ("<Print>",                 spawn "screenshot")
-    , ("M-S-l",                   spawn "i3lock -f --color 000000")
+    , ("M-C-l",                   spawn "i3lock -f --color 000000")
     , ("M-d",                     toggleWindows)
     , ("M-w",                     focusScreen 0)
     , ("M-e",                     focusScreen 1)
