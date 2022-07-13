@@ -26,6 +26,7 @@ export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")

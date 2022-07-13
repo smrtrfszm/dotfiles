@@ -17,7 +17,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 
-zstyle :compinstall filename '/home/smrtrfszm/.zshrc'
+zstyle :compinstall filename "$XDG_CONFIG_HOME/zsh/.zshrc"
 autoload -Uz compinit
 mkdir -p "$XDG_CACHE_HOME/zsh"
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
