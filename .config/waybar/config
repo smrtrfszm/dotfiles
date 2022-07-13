@@ -26,7 +26,8 @@
 		"format": "{name}"
 	},
 	"custom/kernel": {
-		"exec": "uname -r"
+		"exec": "uname -r",
+		"tooltip": false
 	},
 	"clock": {
 		"interval": 1,
