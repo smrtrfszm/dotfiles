@@ -39,6 +39,7 @@ local indentations = {
   cmake           = { width=4, style='space', ruler=121 },
   go              = { width=4, style='tab',   ruler=121 },
   xml             = { width=2, style='space' },
+  zig             = { width=4, style='space', ruler=121 },
 }
 
 for lang, options in pairs(indentations) do
