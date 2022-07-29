@@ -4,23 +4,24 @@ SCREENSHOT_DIR="$HOME/screenshots"
 FILE_NAME="$(date +%Y%m%d_%H%M%S).png"
 FULL_PATH="$SCREENSHOT_DIR/$FILE_NAME"
 
-if
-    [[ "$XDG_SESSION_TYPE" == "wayland" ]] \
-    && command -v "grim" &> /dev/null \
-    && command -v "slurp" &> /dev/null
-then
-    pos=$(slurp 2> /dev/null)
-    if ! [ -z "$pos" ]; then
-        mkdir -p "$SCREENSHOT_DIR"
-        grim -g "$pos" "$FULL_PATH"
+if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+    if command -v "grim" &> /dev/null && command -v "slurp" &> /dev/null; then
+        pos=$(slurp 2> /dev/null)
+        if ! [ -z "$pos" ]; then
+            mkdir -p "$SCREENSHOT_DIR"
+            grim -g "$pos" "$FULL_PATH"
+        fi
+    else
+        echo "error: grim or slurp not found"
     fi
-fi
-
-if
-    [[ "$XDG_SESSION_TYPE" == "x11" ]] \
-    && command -v "scrot" &> /dev/null
-then
-    mkdir -p "$SCREENSHOT_DIR"
-    scrot --line style=dash,width=2,color="#ffffff" \
-        --select --freeze "$FULL_PATH"
+elif [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
+    if command -v "scrot" &> /dev/null; then
+        mkdir -p "$SCREENSHOT_DIR"
+        scrot --line style=dash,width=2,color="#ffffff" \
+            --select --freeze "$FULL_PATH"
+    else
+        echo "error: scrot not found"
+    fi
+else
+    echo "error: XDG_SESSION_TYPE is not set"
 fi
