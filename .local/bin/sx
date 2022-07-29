@@ -44,5 +44,7 @@ trap 'cleanup exit' EXIT HUP TERM QUIT
 # USR1 signal trap which obviates the need to poll for server readiness.
 trap 'DISPLAY=:$tty exec "${@:-$cfgdir/sxrc}" & wait "$!"' USR1
 
+export XDG_SESSION_TYPE="x11"
+
 (trap '' USR1 && exec Xorg :"$tty" -keeptty vt"$tty" -noreset -auth "$XAUTHORITY") & pid=$!
 wait "$pid"

@@ -1,4 +1,20 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-mkdir -p "$HOME/screenshots"
-scrot --line style=dash,width=2,color="#ffffff" --select --freeze "$HOME/screenshots/%Y%m%d_%H%M%S.png"
+SCREENSHOT_DIR="$HOME/screenshots"
+
+if
+    [[ "$XDG_SESSION_TYPE" == "wayland" ]] \
+    && command -v "grim" &> /dev/null \
+    && command -v "slurp" &> /dev/null
+then
+    echo "wayland"
+fi
+
+if
+    [[ "$XDG_SESSION_TYPE" == "x11" ]] \
+    && command -v "scrot" &> /dev/null
+then
+    mkdir -p "$SCREENSHOT_DIR"
+    scrot --line style=dash,width=2,color="#ffffff" \
+        --select --freeze "$HOME/screenshots/%Y%m%d_%H%M%S.png"
+fi
