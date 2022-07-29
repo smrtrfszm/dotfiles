@@ -22,6 +22,8 @@ elif [[ "$XDG_SESSION_TYPE" == "x11" ]]; then
     else
         echo "error: scrot not found"
     fi
+elif [[ "$XDG_SESSION_TYPE" == "tty" ]]; then
+    echo "error: can't screenshot in a tty"
 else
     echo "error: XDG_SESSION_TYPE is not set"
 fi
