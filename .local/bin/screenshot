@@ -1,13 +1,19 @@
 #!/bin/sh
 
 SCREENSHOT_DIR="$HOME/screenshots"
+FILE_NAME="$(date +%Y%m%d_%H%M%S).png"
+FULL_PATH="$SCREENSHOT_DIR/$FILE_NAME"
 
 if
     [[ "$XDG_SESSION_TYPE" == "wayland" ]] \
     && command -v "grim" &> /dev/null \
     && command -v "slurp" &> /dev/null
 then
-    echo "wayland"
+    pos=$(slurp 2> /dev/null)
+    if ! [ -z "$pos" ]; then
+        mkdir -p "$SCREENSHOT_DIR"
+        grim -g "$pos" "$FULL_PATH"
+    fi
 fi
 
 if
@@ -16,5 +22,5 @@ if
 then
     mkdir -p "$SCREENSHOT_DIR"
     scrot --line style=dash,width=2,color="#ffffff" \
-        --select --freeze "$HOME/screenshots/%Y%m%d_%H%M%S.png"
+        --select --freeze "$FULL_PATH"
 fi

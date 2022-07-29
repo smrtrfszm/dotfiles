@@ -12,7 +12,7 @@ set $lock swaylock -f --color 000000
 set $menu dmenu_path | dmenu -h 24 -nb \#000000 | xargs swaymsg exec --
 
 set $wob $XDG_RUNTIME_DIR/wob.sock
-exec_always killall wob && rm -f $wob && mkfifo $wob && tail -f $wob | wob -a bottom
+exec_always killall wob; rm -f $wob && mkfifo $wob && tail -f $wob | wob -a bottom
 
 output * bg #222222 solid_color
 
@@ -85,7 +85,7 @@ bindsym {
     XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    Print exec grim -g "$(slurp)" "$HOME/screenshots/$(date +%Y%m%_d_%H%M%S.png)"
+    Print exec screenshot
 }
 
 mode "resize" {
