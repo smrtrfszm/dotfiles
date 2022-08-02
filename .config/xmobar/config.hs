@@ -20,7 +20,7 @@ Config { font = "xft:JetBrains Mono Nerd Font:pixelsize=14:antialias=true:hintin
 		    	        [ "-t"
 			            , "<fc=#A1B56C>Mem: <usedratio>%</fc>"
 			            ] 20
-                    , Run Date "%a %b %d %H:%M:%S" "date" 10
+                    , Run Date "%a %b %-d %H:%M:%S" "date" 11
 		            , Run Com "uname" ["-r"] "" 3600
 		            , Run DynNetwork
 		    	        [ "-t"
