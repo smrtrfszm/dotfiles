@@ -7,7 +7,7 @@ FULL_PATH="$SCREENSHOT_DIR/$FILE_NAME"
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
     if command -v "grim" &> /dev/null && command -v "slurp" &> /dev/null; then
         pos=$(slurp 2> /dev/null)
-        if ! [ -z "$pos" ]; then
+        if [ -n "$pos" ]; then
             mkdir -p "$SCREENSHOT_DIR"
             grim -g "$pos" "$FULL_PATH"
         fi
