@@ -22,13 +22,15 @@ autoload -Uz compinit
 mkdir -p "$XDG_CACHE_HOME/zsh"
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
+DOTFILES_DIR="$XDG_DATA_HOME/dotfiles/"
+
 alias ls="exa --color=always --group-directories-first"
 alias grep="grep --color=auto"
 alias vim="nvim"
 alias :q="exit"
 alias lg="lazygit"
-alias cg="lazygit -w $HOME -g $HOME/.dotfiles"
-alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias cg="lazygit -w $HOME -g $DOTFILES_DIR"
+alias config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
 alias python="python3.10"
 alias kubectl="kubectl --cache-dir='$XDG_CACHE_HOME/kube'"
 alias k="kubectl"
