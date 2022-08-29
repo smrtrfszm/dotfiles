@@ -1,6 +1,10 @@
 [[ $- != *i* ]] && return
 
-PROMPT='%B%F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
+if [[ -z "$SSH_CONNECTION" ]]; then
+    PROMPT='%B%F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
+else
+    PROMPT='%B%F{green}%m %F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
+fi
 
 bindkey -v
 KEYTIMEOUT=1
