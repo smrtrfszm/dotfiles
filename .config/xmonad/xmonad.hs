@@ -249,7 +249,6 @@ myEventHook = mempty
 myStartupHook :: X ()
 myStartupHook = do
     setDefaultCursor xC_left_ptr
-    spawnOnce "transmission-gtk"
 
 myLogHook :: X ()
 myLogHook = do
