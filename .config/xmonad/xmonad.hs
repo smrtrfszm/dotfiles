@@ -60,7 +60,7 @@ terminalEmulator :: String
 terminalEmulator = "kitty"
 -- Set web browser
 webBrowser :: String
-webBrowser = "firefox-nightly"
+webBrowser = "firefox"
 -- Focus doesn't follow the mouse pointer
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
