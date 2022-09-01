@@ -28,6 +28,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
