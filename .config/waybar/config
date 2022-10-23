@@ -74,6 +74,7 @@
 			"critical": 15
 		},
 		"format": "{icon} {capacity}%{time}",
+		"format-charging": "{icon} {capacity}%{time} ",
 		"format-icons": ["", "", "", "", ""],
 		"format-time": " {H}:{M:02}",
 		"tooltip": false
