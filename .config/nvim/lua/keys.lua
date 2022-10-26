@@ -16,3 +16,5 @@ vim.keymap.set('n', '<c-f>', function () require('telescope.builtin').find_files
 vim.keymap.set('n', 'gd', function () vim.lsp.buf.definition() end)
 vim.keymap.set('n', '<leader>', function () vim.lsp.buf.rename() end)
 vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>')
+
+vim.keymap.set('n', 'q:', '<nop>')
