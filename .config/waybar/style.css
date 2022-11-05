@@ -49,6 +49,10 @@ window#waybar {
   border-left: 1px solid #585858;
 }
 
+#pulseaudio, #clock, #battery {
+  color: #ffffff;
+}
+
 #custom-kernel {
   color: #ba88af;
 }
