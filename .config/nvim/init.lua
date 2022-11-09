@@ -78,13 +78,6 @@ packer.startup(function(use)
   }
 
   use {
-    'tjdevries/colorbuddy.nvim',
-    config = function ()
-      require('colorscheme')
-    end,
-  }
-
-  use {
     'norcalli/nvim-colorizer.lua',
     config = function ()
       require('colorizer').setup()
@@ -198,9 +191,7 @@ packer.startup(function(use)
         show_end_of_line = true,
         show_current_context = true,
         space_char_blankline = ' ',
-        char_highlight_list = {'IndentLine'},
         char = '▏',
-        context_highlight_list = {'IndentLineContext'},
         show_trailing_blankline_indent = false,
       })
     end,

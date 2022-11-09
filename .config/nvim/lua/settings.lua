@@ -1,5 +1,7 @@
 local vim = _G.vim
 
+vim.cmd('colorscheme base16-default-dark')
+
 vim.api.nvim_set_option('mouse', 'a')
 vim.api.nvim_set_option('scrolloff', 5)
 vim.api.nvim_set_option('laststatus', 3)
