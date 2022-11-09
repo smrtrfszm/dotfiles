@@ -10,6 +10,9 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
   autotag = {
-    enalbe = true,
-  }
+    enable = true,
+  },
+  rainbow = {
+    enable = true,
+  },
 }
