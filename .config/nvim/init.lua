@@ -42,6 +42,11 @@ packer.startup(function(use)
   }
 
   use {
+    'nvim-treesitter/playground',
+    requires = 'nvim-treesitter/nvim-treesitter',
+  }
+
+  use {
     'nvim-telescope/telescope.nvim',
     requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
     config = function ()
