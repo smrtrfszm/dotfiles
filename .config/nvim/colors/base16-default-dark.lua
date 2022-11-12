@@ -101,11 +101,11 @@ local highlights = {
   DiffLine = { fg = colors.blue, bg = colors.black },
   DiffRemoved = { fg = colors.red, bg = colors.black },
 
-  rainbowcol1 = { fg = colors.green },
-  rainbowcol2 = { fg = colors.cyan },
-  rainbowcol3 = { fg = colors.magenta },
-  rainbowcol4 = { fg = colors.blue },
-  rainbowcol5 = { fg = colors.brown },
+  rainbowcol1 = { fg = colors.brown },
+  rainbowcol2 = { fg = colors.green },
+  rainbowcol3 = { fg = colors.cyan },
+  rainbowcol4 = { fg = colors.magenta },
+  rainbowcol5 = { fg = colors.blue },
   rainbowcol6 = { fg = colors.orange },
   rainbowcol7 = { fg = colors.yellow },
 
@@ -135,9 +135,17 @@ local highlights = {
   IndentBlanklineChar = { fg = colors.gray1, nocombine = true };
   IndentBlanklineContextChar = { fg = colors.gray3, nocombine = true };
 
-  ['@namespace'] = { fg = colors.blue },
-  ['@include']   = { fg = colors.cyan },
-  ['@tag']       = { fg = colors.red },
+  ['@keyword']               = { link = 'Keyword' },
+  ['@preproc']               = { link = '@keyword' },
+  ['@storageclass']          = { link = '@keyword' },
+  ['@type.qualifier']        = { link = '@keyword' },
+  ['@namespace']             = { fg = colors.blue },
+  ['@include']               = { fg = colors.cyan },
+  ['@tag']                   = { fg = colors.red },
+  ['@tag.delimiter']         = { fg = colors.gray3 },
+  ['@tag.attribute']         = { fg = colors.yellow },
+  ['@storageclass.lifetime'] = { fg = colors.cyan },
+
 }
 
 vim.cmd('hi clear')
