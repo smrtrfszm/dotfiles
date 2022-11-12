@@ -112,9 +112,10 @@ local highlights = {
   TelescopeNormal = { link = 'Normal' },
   TelescopeBorder = { fg = colors.gray4 },
 
-  GitSignsAdd = { fg = colors.green, bg = colors.gray1 },
-  GitSignsChange = { fg = colors.blue, bg = colors.gray1 },
-  GitSignsDelete = { fg = colors.red, bg = colors.gray1 },
+  GitSignsAdd       = { fg = colors.green, bg = colors.gray1 },
+  GitSignsChange    = { fg = colors.blue, bg = colors.gray1 },
+  GitSignsDelete    = { fg = colors.red, bg = colors.gray1 },
+  GitSignsUntracked = { fg = colors.green, bg = colors.gray1 },
 
   DiagnosticError = { fg = colors.red },
   DiagnosticWarn  = { fg = colors.yellow },
