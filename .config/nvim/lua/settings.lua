@@ -1,5 +1,3 @@
-local vim = _G.vim
-
 vim.cmd('colorscheme base16-default-dark')
 
 vim.api.nvim_set_option('mouse', 'a')
@@ -47,6 +45,7 @@ local indentations = {
   go              = { width=4, style='tab',   ruler=121 },
   xml             = { width=2, style='space' },
   zig             = { width=4, style='space', ruler=121 },
+  php             = { width=2, style='space', ruler=121 },
 }
 
 for lang, options in pairs(indentations) do
