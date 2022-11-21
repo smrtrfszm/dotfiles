@@ -145,6 +145,8 @@ local highlights = {
   ['@tag.delimiter']         = { fg = colors.gray3 },
   ['@tag.attribute']         = { fg = colors.yellow },
   ['@storageclass.lifetime'] = { fg = colors.cyan },
+  ['@variable']              = { fg = colors.white },
+  ['@variable.builtin']      = { fg = colors.blue },
 
 }
 
