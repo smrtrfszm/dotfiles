@@ -50,10 +50,9 @@ packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
     config = function ()
-      require('plugins.telescope')
-    end,
-  }
-
+      require('telescope').setup {
+        file_ignore_patterns = {'node_modules/.*', '.git/.*', 'target/.*'}
+      }
     end,
   }
 
@@ -149,7 +148,6 @@ packer.startup(function(use)
       }
     end,
   }
-
 
   use {
     'williamboman/mason.nvim',
