@@ -55,7 +55,7 @@ local highlights = {
   ColorColumn  = { bg = colors.gray1 },
   CursorColumn = { bg = colors.gray1 },
   CursorLine   = { bg = colors.gray1 },
-  CursorLineNr = { fg = colors.gray4, bg = colors.gray1,  },
+  CursorLineNr = { fg = colors.white, bg = colors.gray1 },
   QuickFixLine = { bg = colors.gray1 },
   PMenu        = { fg = colors.gray5, bg = colors.gray1 },
   PMenuSel     = { fg = colors.gray1, bg = colors.gray5 },
