@@ -20,6 +20,7 @@ import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapD
 
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
+import qualified XMonad.Actions.FlexibleManipulate as Flex
 
 import XMonad.Util.Cursor (setDefaultCursor)
 import XMonad.Util.EZConfig (mkKeymap)
@@ -192,32 +193,10 @@ toggleWindows = do
             , activeWS = ""
             }
 
-mouseResizeWindow :: Window -> X ()
-mouseResizeWindow w = whenX (isClient w) $ withDisplay $ \d -> do
-    XConf { theRoot = root, display = d } <- ask
-    wa                           <- io $ getWindowAttributes d w
-    sh                           <- io $ getWMNormalHints d w
-    (_, _, _, frx, fry, _, _, _) <- io $ queryPointer d root
-
-    io $ raiseWindow d w
-    float w
-
-    mouseDrag (\ex ey -> do
-        let dx = (fromIntegral frx) - ex
-            dy = (fromIntegral fry) - ey
-            width  = fromIntegral $ (wa_width  wa) - (fromIntegral dx)
-            height = fromIntegral $ (wa_height wa) - (fromIntegral dy)
-
-        io $ resizeWindow d w `uncurry` applySizeHintsContents sh (width, height)
-        )
-        (return ())
-
-
 myMouseBindings (XConfig {modMask = modm}) = M.fromList $
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w))
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w))
+    [ ((modm, button1), (\w -> focus w >> Flex.mouseWindow Flex.position w))
+    , ((modm, button3), (\w -> focus w >> Flex.mouseWindow Flex.resize w))
     ]
-
 
 -- Layouts
 mySpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
