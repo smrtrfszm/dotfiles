@@ -11,13 +11,15 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-require('settings')
-require('keys')
-
 local status_ok, packer = pcall(require, 'packer')
 if not status_ok then
   return
 end
+
+require('impatient')
+
+require('settings')
+require('keys')
 
 packer.init({
   display = {
@@ -29,6 +31,7 @@ packer.init({
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'lewis6991/impatient.nvim'
 
   use 'airblade/vim-rooter'
   use 'editorconfig/editorconfig-vim'
@@ -80,6 +83,7 @@ packer.startup(function(use)
       require('colorizer').setup()
     end,
   }
+
   use 'kdheepak/lazygit.nvim'
 
   use {
