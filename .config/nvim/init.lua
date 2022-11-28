@@ -79,6 +79,7 @@ packer.startup(function(use)
 
   use {
     'norcalli/nvim-colorizer.lua',
+    ft = {'css', 'scss'},
     config = function ()
       require('colorizer').setup()
     end,
@@ -139,6 +140,7 @@ packer.startup(function(use)
 
   use {
     'windwp/nvim-ts-autotag',
+    ft = 'html',
     requires = "nvim-treesitter/nvim-treesitter",
   }
 
