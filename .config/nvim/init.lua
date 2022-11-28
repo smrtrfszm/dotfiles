@@ -16,7 +16,7 @@ if not status_ok then
   return
 end
 
-require('impatient')
+local _, _ = pcall(require, 'impatient')
 
 require('settings')
 require('keys')
