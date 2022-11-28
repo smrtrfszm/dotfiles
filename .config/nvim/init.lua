@@ -129,8 +129,6 @@ packer.startup(function(use)
     end,
   }
 
-  use 'onsails/lspkind-nvim'
-
   use {
     'windwp/nvim-autopairs',
     config = function ()
@@ -155,6 +153,7 @@ packer.startup(function(use)
       }
     end,
   }
+
 
   use {
     'williamboman/mason.nvim',
@@ -232,14 +231,15 @@ packer.startup(function(use)
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
+      'onsails/lspkind-nvim',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function ()
       require('plugins.cmp')
     end,
   }
 
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
 
   if packer_bootstrap then
     require('packer').sync()
