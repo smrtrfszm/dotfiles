@@ -29,6 +29,7 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
+export GHCUP_USE_XDG_DIRS="true"
 
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
