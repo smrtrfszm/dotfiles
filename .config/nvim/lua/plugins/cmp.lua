@@ -33,6 +33,7 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
+    { name = 'crates' },
     { name = 'path' },
     { name = 'buffer', keyword_length = 3 },
   },

@@ -154,6 +154,15 @@ packer.startup(function(use)
   }
 
   use {
+    'saecki/crates.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    event = { 'BufRead Cargo.toml' },
+    config = function()
+      require('crates').setup()
+    end,
+  }
+
+  use {
     'williamboman/mason.nvim',
     requires = {
       'williamboman/mason-lspconfig.nvim',
