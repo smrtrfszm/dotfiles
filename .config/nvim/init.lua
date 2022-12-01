@@ -33,7 +33,6 @@ packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'lewis6991/impatient.nvim'
 
-  use 'airblade/vim-rooter'
   use 'editorconfig/editorconfig-vim'
 
   use {
@@ -154,13 +153,13 @@ packer.startup(function(use)
     end,
   }
 
-
   use {
     'williamboman/mason.nvim',
     requires = {
       'williamboman/mason-lspconfig.nvim',
       'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
+      'ahmedkhalf/project.nvim',
     },
     config = function ()
       require('mason').setup()
@@ -186,6 +185,7 @@ packer.startup(function(use)
           }
         end,
       }
+      require("project_nvim").setup {}
     end,
   }
 
