@@ -169,15 +169,33 @@ packer.startup(function(use)
       'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
       'ahmedkhalf/project.nvim',
+      'nvim-lua/plenary.nvim',
+      'mfussenegger/nvim-dap',
+      'simrat39/rust-tools.nvim',
     },
     config = function ()
       require('mason').setup()
       require('mason-lspconfig').setup {}
 
+      local dap = require('dap')
+      local dapui = require('dapui')
+
+      dap.listeners.after.event_initialized['dapui_config'] = function ()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated['dapui_config'] = function ()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited['dapui_config'] = function ()
+        dapui.close()
+      end
+
+
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       require('mason-lspconfig').setup_handlers {
         function (server_name)
+
           require('lspconfig')[server_name].setup {
             capabilities = capabilities,
           }
@@ -193,9 +211,40 @@ packer.startup(function(use)
             },
           }
         end,
+        rust_analyzer = function ()
+          local pkg = require('mason-registry')
+          local install_path = pkg.get_package('codelldb'):get_install_path() .. '/extension'
+
+          local opts = {
+            dap = {
+              adapter = require('rust-tools.dap').get_codelldb_adapter(
+                install_path .. '/adapter/codelldb',
+                install_path .. '/lldb/lib/liblldb.so'
+              ),
+              hover_actions = {
+                border = 'none',
+              }
+            },
+            tools = {
+              inlay_hints = {
+                only_current_line = true,
+              }
+            }
+          }
+
+          require('rust-tools').setup(opts)
+        end,
       }
       require("project_nvim").setup {}
     end,
+  }
+
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = "mfussenegger/nvim-dap",
+    config = function ()
+      require('dapui').setup()
+    end
   }
 
   use {
