@@ -17,4 +17,7 @@ vim.keymap.set('n', 'gd', function () vim.lsp.buf.definition() end)
 vim.keymap.set('n', '<leader>', function () vim.lsp.buf.rename() end)
 vim.keymap.set('n', '<leader>g', '<cmd>LazyGit<cr>')
 
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
+
 vim.keymap.set('n', 'q:', '<nop>')
