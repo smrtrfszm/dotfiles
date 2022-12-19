@@ -1,10 +1,16 @@
 #!/bin/sh
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    if command -v "wl-copy" 1> /dev/null; then
-        wl-copy
-    else
+    if ! command -v "wl-copy" 1> /dev/null; then
         echo "error: wl-copy not found"
+        exit 1
+    fi
+
+    if [ -t 0 ]; then
+        [ ! -f "$1" ] && echo "error: No such file: $1" && exit 1
+        wl-copy < "$1"
+    else
+        wl-copy
     fi
 elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
     if command -v "xsel" 1> /dev/null; then
