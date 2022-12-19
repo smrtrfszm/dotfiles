@@ -175,7 +175,10 @@ packer.startup(function(use)
     },
     config = function ()
       require('mason').setup()
-      require('mason-lspconfig').setup {}
+
+      require('mason-lspconfig').setup {
+        ensure_installed = { "rust_analyzer", "sumneko_lua", "tsserver", "bashls", "clangd" },
+      }
 
       local dap = require('dap')
       local dapui = require('dapui')
