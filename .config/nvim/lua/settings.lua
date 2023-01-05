@@ -47,6 +47,7 @@ local indentations = {
   xml             = { width=2, style='space' },
   zig             = { width=4, style='space', ruler=121 },
   php             = { width=2, style='space', ruler=121 },
+  toml            = { width=4, style='space', ruler=121 },
 }
 
 for lang, options in pairs(indentations) do
