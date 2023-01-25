@@ -1,25 +1,25 @@
 #!/bin/sh
 
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    if ! command -v "wl-copy" 1> /dev/null; then
-        echo "error: wl-copy not found"
-        exit 1
-    fi
+input_file="$1"
+
+error() {
+    echo "error: $1"
+    exit 1
+}
+
+copy() {
+    ( ! command -v "$1" 1> /dev/null ) && error "$1 not found"
 
     if [ -t 0 ]; then
-        [ ! -f "$1" ] && echo "error: No such file: $1" && exit 1
-        wl-copy < "$1"
+        [ -n "$input_file" ] && "$@" < "$input_file" || exit 0
     else
-        wl-copy
+        "$@"
     fi
-elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
-    if command -v "xsel" 1> /dev/null; then
-        xsel --clipboard
-    else
-        echo "error: xsel not found"
-    fi
-elif [ "$XDG_SESSION_TYPE" = "tty" ]; then
-    echo "error: can't copy in a tty"
-else
-    echo "error: XDG_SESSION_TYPE is not set"
-fi
+}
+
+case "$XDG_SESSION_TYPE" in
+    "wayland") copy wl-copy;;
+    "x11") copy xsel --clipboard;;
+    "tty") error "can't copy in a tty";;
+    *) error "XDG_SESSION_TYPE is not set or not supported";;
+esac
