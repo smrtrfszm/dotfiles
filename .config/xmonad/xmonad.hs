@@ -52,6 +52,10 @@ import Graphics.X11.Xlib.Misc (queryPointer)
 import System.Directory (getXdgDirectory, XdgDirectory(XdgConfig))
 
 import Brightness (setBrightness, incBrightness, decBrightness)
+import GtkFrameExtents (gtkFrameExtents, gtkRemoveFrameExtents)
+
+
+
 
 
 -- Variables
@@ -134,6 +138,7 @@ myKeys conf = mkKeymap conf $
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
     , ("<XF86MonBrightnessDown>", decBrightness 0.1)
     , ("<KP_Insert>",             spawn "curl 127.0.0.1:50633")
+    , ("M-S-x",                   gtkRemoveFrameExtents)
     ]
     ++
     -- Select or shift to workspace
@@ -228,6 +233,7 @@ myEventHook = mempty
 myStartupHook :: X ()
 myStartupHook = do
     setDefaultCursor xC_left_ptr
+    spawnOnce "picom"
 
 myLogHook :: X ()
 myLogHook = do
@@ -253,6 +259,7 @@ main = do
         $ ewmh
         $ fullscreenSupport
         $ withUrgencyHook NoUrgencyHook
+        $ gtkFrameExtents
         $ docks def
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
