@@ -177,7 +177,7 @@ packer.startup(function(use)
       require('mason').setup()
 
       require('mason-lspconfig').setup {
-        ensure_installed = { "rust_analyzer", "sumneko_lua", "tsserver", "bashls", "clangd" },
+        ensure_installed = { "rust_analyzer", "lua_ls", "tsserver", "bashls", "clangd" },
       }
 
       local dap = require('dap')
@@ -203,8 +203,8 @@ packer.startup(function(use)
             capabilities = capabilities,
           }
         end,
-        sumneko_lua = function ()
-          require('lspconfig').sumneko_lua.setup {
+        lua_ls = function ()
+          require('lspconfig').lua_ls.setup {
             settings = {
               Lua = {
                 diagnostics = {
