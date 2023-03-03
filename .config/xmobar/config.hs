@@ -1,9 +1,9 @@
-Config { font = "xft:JetBrains Mono Nerd Font:pixelsize=14:antialias=true:hinting=true"
-       , textOffset = 17
+Config { font = "JetBrains Mono Nerd Font 10"
+       , textOffset = 0
        , bgColor = "#1d1d1d"
        , fgColor = "white"
        , alpha = 255
-       , position = BottomSize C 100 20
+       , position = BottomSize C 100 22
        , borderColor = "black"
        , lowerOnStart = True
        , pickBroadest = False
@@ -33,5 +33,5 @@ Config { font = "xft:JetBrains Mono Nerd Font:pixelsize=14:antialias=true:hintin
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " %UnsafeStdinReader%}<fn=#F8F8F8>%date%</fn>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %dynnetwork% "
+       , template = " %UnsafeStdinReader%}<fc=#F8F8F8>%date%</fc>{<fc=#BA8BAF>%uname%</fc> <fc=#585858>|</fc> %cpu% <fc=#585858>|</fc> %memory% <fc=#585858>|</fc> %dynnetwork% "
        }
