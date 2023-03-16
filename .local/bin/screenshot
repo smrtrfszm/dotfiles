@@ -1,29 +1,36 @@
 #!/bin/sh
 
-SCREENSHOT_DIR="$HOME/screenshots"
-FILE_NAME="$(date +%Y%m%d_%H%M%S).png"
-FULL_PATH="$SCREENSHOT_DIR/$FILE_NAME"
+screenshot_dir="$HOME/screenshots"
+file_name="$(date +%Y%m%d_%H%M%S).png"
+full_path="$screenshot_dir/$file_name"
 
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-    if command -v "grim" 1> /dev/null && command -v "slurp" 1> /dev/null; then
+error() {
+    echo "error: $1"
+    exit 1
+}
+
+check_command() {
+    ( ! command -v "$1" 1> /dev/null ) && error "$1 not found"
+}
+
+mkdir -p "$screenshot_dir"
+
+case "$XDG_SESSION_TYPE" in
+    "wayland")
+        check_command "grim"
+        check_command "slurp"
+
         pos=$(slurp 2> /dev/null)
         if [ -n "$pos" ]; then
-            mkdir -p "$SCREENSHOT_DIR"
-            grim -g "$pos" "$FULL_PATH"
+            grim -g "$pos" "$full_path"
         fi
-    else
-        echo "error: grim or slurp not found"
-    fi
-elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
-    if command -v "scrot" 1> /dev/null; then
-        mkdir -p "$SCREENSHOT_DIR"
+        ;;
+    "x11")
+        check_command "scrot"
+
         scrot --line style=dash,width=2,color="#ffffff" \
-            --select --freeze "$FULL_PATH"
-    else
-        echo "error: scrot not found"
-    fi
-elif [ "$XDG_SESSION_TYPE" = "tty" ]; then
-    echo "error: can't screenshot in a tty"
-else
-    echo "error: XDG_SESSION_TYPE is not set"
-fi
+            --select --freeze "$full_path"
+        ;;
+    "tty") error "can't screenshot in a tty";;
+    *) error "XDG_SESSION_TYPE is not set or not supported";;
+esac
