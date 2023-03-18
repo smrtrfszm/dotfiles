@@ -89,7 +89,7 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#86c1b9"
 -- workspace names
 myWorkspaces :: [String]
-myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9: Discord"]
+myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 -- Status bar PP
 statusBarPP :: PP
 statusBarPP = def
