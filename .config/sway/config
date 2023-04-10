@@ -6,7 +6,7 @@ set $up k
 set $right l
 
 set $term kitty
-set $browser firefox
+set $browser librewolf
 set $lock swaylock -f --color 000000
 
 set $menu dmenu_path | dmenu -h 24 -nb \#000000 | xargs swaymsg exec --
