@@ -3,6 +3,7 @@
 	"position": "bottom",
 
 	"modules-left": [
+		"wlr/workspaces",
 		"sway/workspaces",
 		"sway/mode"
 	],
@@ -22,6 +23,10 @@
 		"format": "{}"
 	},
 	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+	"wlr/workspaces": {
 		"disable-scroll": true,
 		"format": "{name}"
 	},
