@@ -148,6 +148,23 @@ local highlights = {
   ['@variable']              = { fg = colors.white },
   ['@variable.builtin']      = { fg = colors.blue },
 
+  ["@lsp.type.class"]                      = {},
+  ["@lsp.type.function"]                   = {},
+  ["@lsp.type.method"]                     = {},
+  ["@lsp.type.comment"]                    = { link = '@comment' },
+  ["@lsp.type.enum"]                       = {},
+  ["@lsp.type.interface"]                  = { fg = colors.cyan },
+  ["@lsp.type.keyword"]                    = {},
+  ["@lsp.type.namespace"]                  = {},
+  ["@lsp.type.parameter"]                  = {},
+  ["@lsp.type.property"]                   = {},
+  ["@lsp.type.variable"]                   = {},
+  ['@lsp.type.type']                       = {},
+  ['@lsp.type.struct']                     = {},
+  ['@lsp.type.enumMember']                 = { fg = colors.orange },
+  ['@lsp.type.macro']                      = {},
+  ['@lsp.type.decorator']                  = {},
+  ['@lsp.mod.deprecated']                  = { strikethrough = true },
 }
 
 vim.cmd('hi clear')
