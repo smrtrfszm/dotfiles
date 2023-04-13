@@ -132,6 +132,8 @@ local highlights = {
   DiagnosticSignInfo  = { fg = colors.blue, bg = colors.gray1 },
   DiagnosticSignHint  = { fg = colors.gray4, bg = colors.gray1 },
 
+  DiagnosticUnnecessary = { fg = colors.gray3, undercurl = false },
+
   IndentBlanklineChar = { fg = colors.gray1, nocombine = true };
   IndentBlanklineContextChar = { fg = colors.gray3, nocombine = true };
 
