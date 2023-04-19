@@ -1,0 +1,8 @@
+let mapleader = ' '
+
+set commentary
+
+imap <C-j> <esc>
+nmap <leader>w :w<cr>
+nmap <leader><leader> <action>(Back)
+nmap gd <action>(GotoDeclaration)
