@@ -8,3 +8,4 @@ nmap <leader><leader> <action>(Back)
 nmap gd <action>(GotoDeclaration)
 vmap <tab> >gv
 vmap <s-tab> <gv
+nmap <c-f> <action>(GotoFile)
