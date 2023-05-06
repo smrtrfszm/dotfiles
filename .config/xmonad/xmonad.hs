@@ -52,7 +52,7 @@ import Graphics.X11.Xlib.Misc (queryPointer)
 import System.Directory (getXdgDirectory, XdgDirectory(XdgConfig))
 
 import Brightness (setBrightness, incBrightness, decBrightness)
-import GtkFrameExtents (gtkFrameExtents, gtkRemoveFrameExtents)
+import GtkFrameExtents (gtkFrameExtents)
 
 
 
@@ -138,7 +138,6 @@ myKeys conf = mkKeymap conf $
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
     , ("<XF86MonBrightnessDown>", decBrightness 0.1)
     , ("<KP_Insert>",             spawn "curl 127.0.0.1:50633")
-    , ("M-S-x",                   gtkRemoveFrameExtents)
     ]
     ++
     -- Select or shift to workspace

@@ -1,6 +1,5 @@
 module GtkFrameExtents (
     gtkFrameExtents,
-    gtkRemoveFrameExtents,
     ) where
 
 import XMonad
@@ -13,17 +12,6 @@ gtkFrameExtents c = c { startupHook = startupHook c <> gtkFrameExtentsStartUp
 
 gtkFrameExtentsStartUp :: X ()
 gtkFrameExtentsStartUp = addSupported ["_GTK_FRAME_EXTENTS", "_NET_WM_STATE_MAXIMIZED_HORZ", "_NET_WM_STATE_MAXIMIZED_VERT"]
-
-gtkRemoveFrameExtents :: X ()
-gtkRemoveFrameExtents = withFocused $ \w -> do
-    withDisplay $ \dpy -> do
-        -- io $ spawn "xmessage asd"
-        at <- getAtom "_NET_WM_STATE"
-        atoms <- mapM getAtom
-            [ "_NET_WM_STATE_MAXIMIZED_HORZ"
-            , "_NET_WM_STATE_MAXIMIZED_VERT"
-            ]
-        io $ changeProperty32 dpy w at aTOM propModeAppend (fmap fromIntegral atoms)
 
 gtkFrameExtentsRemove :: ManageHook
 gtkFrameExtentsRemove = ask >>= \w -> liftX $ do
