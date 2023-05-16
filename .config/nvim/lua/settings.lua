@@ -22,8 +22,14 @@ vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSi
 vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint"})
 
 vim.cmd('syntax on')
-
 vim.cmd('set shortmess+=c')
+
+vim.api.nvim_create_autocmd('CursorHold', {
+  pattern = '*',
+  callback = function ()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end
+})
 
 local indentations = {
   javascript      = { width=2, style='space', ruler=121 },
