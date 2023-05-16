@@ -52,16 +52,21 @@ local indentations = {
 }
 
 for lang, options in pairs(indentations) do
-  local cmd = 'autocmd Filetype ' .. lang .. ' setlocal'
-  cmd = cmd .. ' tabstop=' .. options.width .. ' shiftwidth=' .. options.width .. '  smarttab'
+  vim.api.nvim_create_autocmd('Filetype', {
+    pattern = lang,
+    callback = function ()
+      vim.opt_local.tabstop = options.width
+      vim.opt_local.shiftwidth = options.width
+      vim.opt_local.smarttab = true
 
-  if options.style == 'space' then
-    cmd = cmd .. ' expandtab softtabstop'
-  end
+      if options.style == 'space' then
+        vim.opt_local.expandtab = true
+        vim.opt_local.softtabstop = options.width
+      end
 
-  if options.ruler then
-    cmd = cmd .. ' colorcolumn=' .. options.ruler
-  end
-
-  vim.cmd(cmd)
+      if options.ruler then
+        vim.opt_local.colorcolumn = { options.ruler }
+      end
+    end
+  })
 end
