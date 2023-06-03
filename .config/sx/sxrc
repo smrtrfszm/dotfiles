@@ -2,6 +2,7 @@ setxkbmap -layout hu -option caps:ctrl_modifier
 xwallpaper --output DP-5 --zoom "$HOME/.config/background.png" --output HDMI-0 --zoom "$HOME/.config/background2.png" &
 dunst &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark &
 mkdir -p "$XMONAD_CACHE_DIR" "$XMONAD_DATA_DIR"
 xmonad --recompile
 exec xmonad
