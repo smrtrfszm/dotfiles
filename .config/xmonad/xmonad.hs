@@ -221,7 +221,7 @@ isModal = isInProperty "_NET_WM_STATE" "_NET_WM_STATE_MODAL"
 
 -- Window rules
 myManageHook = composeAll
-    [ (className =? "Steam" <&&> title /=? "Steam") --> doFloat
+    [ (className =? "steam" <&&> title =? "Friends List") --> doFloat
     , (isHideWs) --> doShift (myWorkspaces !! 0)
     , (isDialog <||> isModal) --> doFloat
     ]
