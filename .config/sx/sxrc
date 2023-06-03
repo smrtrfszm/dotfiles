@@ -3,6 +3,8 @@ xwallpaper --output DP-5 --zoom "$HOME/.config/background.png" --output HDMI-0 -
 dunst &
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark &
+xsettingsd &
+
 mkdir -p "$XMONAD_CACHE_DIR" "$XMONAD_DATA_DIR"
 xmonad --recompile
 exec xmonad
