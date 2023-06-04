@@ -111,7 +111,8 @@ filterOutHideWs = filter (\workspace -> not $ isPrefixOf "hide-" (W.tag workspac
 -- Keybinds
 myKeys conf = mkKeymap conf $
     [ ("M-<Return>",              spawn terminalEmulator)
-    , ("M-o",                     spawn "dmenu_run -h 24")
+    -- , ("M-o",                     spawn "dmenu_run -h 24")
+    , ("M-o",                     spawn "rofi -show run")
     , ("M-<Backspace>",           kill)
     , ("M-<Tab>",                 windows W.focusDown)
     , ("M-m",                     windows W.focusMaster)
