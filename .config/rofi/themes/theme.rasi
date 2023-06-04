@@ -1,0 +1,82 @@
+* {
+    black   : #181818;
+    gray1   : #282828;
+    gray2   : #383838;
+    gray3   : #585858;
+    gray4   : #b8b8b8;
+    gray5   : #d8d8d8;
+    gray6   : #e8e8e8;
+    white   : #f8f8f8;
+    red     : #ab4642;
+    orange  : #dc9656;
+    yellow  : #f7ca88;
+    green   : #a1b56c;
+    cyan    : #86c1b9;
+    blue    : #7cafc2;
+    magenta : #ba8baf;
+    brown   : #a16946;
+
+    background: var(black);
+    text: var(white);
+}
+
+* {
+    background-color: transparent;
+}
+
+
+inputbar {
+    text-color: var(white);
+    background-color: var(background);
+    children: ["entry", "num-filtered-rows", "textbox-num-sep", "num-rows"];
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: 1px solid;
+    border-color: var(gray1);
+}
+
+entry {
+    text-color: inherit;
+    cursor: text;
+    placeholder-color: var(gray3);
+    placeholder: "Run";
+}
+
+num-filtered-rows {
+    expand: false;
+    text-color: inherit;
+}
+
+num-rows {
+    expand: false;
+    text-color: inherit;
+}
+
+textbox-num-sep {
+    expand: false;
+    str: "/";
+    text-color: inherit;
+}
+
+listview {
+    text-color: var(white);
+    background-color: var(background);
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: 1px solid;
+    border-color: var(gray1);
+}
+
+element {
+    spacing: 0.3em;
+    text-color: inherit;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+element selected.normal {
+    background-color: var(gray4);
+    text-color: var(black);
+}
