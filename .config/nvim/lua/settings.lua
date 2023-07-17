@@ -56,6 +56,7 @@ local indentations = {
   toml            = { width=4, style='space', ruler=121 },
   blueprint       = { width=4, style='space', ruler=121 },
   markdown        = { width=4, style='space', ruler=80 },
+  proto           = { width=4, style='space', ruler=121 },
 }
 
 for lang, options in pairs(indentations) do
