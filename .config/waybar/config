@@ -36,7 +36,7 @@
 	},
 	"clock": {
 		"interval": 1,
-		"format": "{:%a %b %d %H:%M:%S}",
+		"format": "{:%a %b %d %H:%M:%OS}",
 		"tooltip": false
 	},
 	"pulseaudio": {
