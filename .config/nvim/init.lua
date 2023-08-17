@@ -135,6 +135,16 @@ require('lazy').setup({
         require('indent_blankline').setup(opts)
       end,
     },
+
+    {
+      'ahmedkhalf/project.nvim',
+      opts = {
+      },
+      config = function (_, opts)
+        require('project_nvim').setup(opts)
+      end,
+    }
+
     --     -- local dapui = require('dapui')
     --     --
     --     -- dap.listeners.after.event_initialized['dapui_config'] = function ()
