@@ -10,6 +10,8 @@ return {
         'lua',
         'bash',
         'c',
+        'json',
+        'jsonc',
       },
       highlight = {
         enable = true,
