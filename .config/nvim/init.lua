@@ -22,7 +22,7 @@ require('lazy').setup({
     { import = 'plugins.comment' },
     { import = 'plugins.lsp' },
     { import = 'plugins.cmp' },
-    { import = 'plugins.langs' },
+    { import = 'langs' },
 
     {
       'nvim-telescope/telescope.nvim',
@@ -144,29 +144,9 @@ require('lazy').setup({
         require('project_nvim').setup(opts)
       end,
     }
-
-    --     -- local dapui = require('dapui')
-    --     --
-    --     -- dap.listeners.after.event_initialized['dapui_config'] = function ()
-    --     --   dapui.open()
-    --     -- end
-    --     -- dap.listeners.before.event_terminated['dapui_config'] = function ()
-    --     --   dapui.close()
-    --     -- end
-    --     -- dap.listeners.before.event_exited['dapui_config'] = function ()
-    --     --   dapui.close()
-    --     -- end
-    --     --
-    --     -- require("project_nvim").setup {}
-
   },
 })
 
-
--- vim.loader.enable()
---
--- local _, _ = pcall(require, 'impatient')
---
 --   use {
 --     'norcalli/nvim-colorizer.lua',
 --     ft = {'css', 'scss'},
@@ -181,14 +161,6 @@ require('lazy').setup({
 --     requires = "nvim-treesitter/nvim-treesitter",
 --   }
 --
---
---   use {
---     'rcarriga/nvim-dap-ui',
---     requires = "mfussenegger/nvim-dap",
---     config = function ()
---       require('dapui').setup()
---     end
---   }
 --
 --   use {
 --     'NTBBloodbath/rest.nvim',
