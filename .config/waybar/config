@@ -3,9 +3,7 @@
 	"position": "bottom",
 
 	"modules-left": [
-		"wlr/workspaces",
-		"sway/workspaces",
-		"sway/mode"
+		"hyprland/workspaces"
 	],
 	"modules-center": [
 		"clock"
@@ -19,14 +17,7 @@
 		"battery",
 		"tray"
 	],
-	"sway/mode": {
-		"format": "{}"
-	},
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{name}"
-	},
-	"wlr/workspaces": {
+	"hyprland/workspaces": {
 		"disable-scroll": true,
 		"format": "{name}"
 	},
@@ -78,7 +69,7 @@
 			"warning": 30,
 			"critical": 15
 		},
-		"format": "{icon} {capacity}%{time}",
+		"format": "{icon}  {capacity}%{time}",
 		"format-charging": "{icon} {capacity}%{time} ",
 		"format-icons": ["", "", "", "", ""],
 		"format-time": " {H}:{M:02}",
