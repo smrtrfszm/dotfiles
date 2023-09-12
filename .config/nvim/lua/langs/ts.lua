@@ -13,9 +13,22 @@ return {
         tsserver = {
         },
         cssmodules_ls = {
-        }
+        },
+        cssls = {
+        },
       }
     }
   },
+
+  {
+    'norcalli/nvim-colorizer.lua',
+    opts = {
+      'css';
+      'scss';
+    },
+    config = function (_, opts)
+      require('colorizer').setup(opts)
+    end,
+  }
 }
 
