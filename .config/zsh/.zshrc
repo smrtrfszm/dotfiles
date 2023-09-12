@@ -28,7 +28,7 @@ compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
 DOTFILES_DIR="$XDG_DATA_HOME/dotfiles/"
 
-alias ls="exa --color=always --group-directories-first"
+alias ls="eza --color=always --group-directories-first"
 alias grep="grep --color=auto"
 alias vim="nvim"
 alias :q="exit"
