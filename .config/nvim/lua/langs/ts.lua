@@ -2,7 +2,7 @@ return {
   {
     'nvim-treesitter',
     opts = function (_, opts)
-      vim.list_extend(opts.ensure_installed, { 'typescript', 'tsx', 'javascript' })
+      vim.list_extend(opts.ensure_installed, { 'typescript', 'tsx', 'javascript', 'css', 'scss', 'graphql' })
     end,
   },
 
@@ -15,6 +15,8 @@ return {
         cssmodules_ls = {
         },
         cssls = {
+        },
+        graphql = {
         },
       }
     }
