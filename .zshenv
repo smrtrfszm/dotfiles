@@ -31,6 +31,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export PSQL_HISTORY="$XDG_STATE_HOME/psql_history"
 export GHCUP_USE_XDG_DIRS="true"
 export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
+export JUPYTER_PLATFORM_DIRS=1
 
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
