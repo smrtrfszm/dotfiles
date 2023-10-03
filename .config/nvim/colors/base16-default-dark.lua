@@ -134,8 +134,8 @@ local highlights = {
 
   DiagnosticUnnecessary = { fg = colors.gray3, undercurl = false },
 
-  IndentBlanklineChar = { fg = colors.gray1, nocombine = true };
-  IndentBlanklineContextChar = { fg = colors.gray3, nocombine = true };
+  IblIndent = { fg = colors.gray1, nocombine = true },
+  IblScope = { fg = colors.gray3, nocombine = true },
 
   ['@keyword']               = { link = 'Keyword' },
   ['@preproc']               = { link = '@keyword' },

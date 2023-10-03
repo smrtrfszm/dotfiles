@@ -121,18 +121,15 @@ require('lazy').setup({
       'lukas-reineke/indent-blankline.nvim',
       event = { 'BufReadPost', 'BufNewFile' },
       opts = {
-        show_end_of_line = true,
-        show_current_context = true,
-        space_char_blankline = ' ',
-        char = '▏',
-        context_char = '▏',
-        show_trailing_blankline_indent = false,
+        indent = {
+          char = '▏',
+        },
       },
       config = function (_, opts)
         vim.opt.list = true
         vim.opt.listchars:append('eol:↴')
 
-        require('indent_blankline').setup(opts)
+        require('ibl').setup(opts)
       end,
     },
 
