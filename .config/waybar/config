@@ -32,7 +32,7 @@
 	},
 	"pulseaudio": {
 		"format": "{icon} {volume:2}% {format_source}",
-		"format-muted": " {volume:2}% {format_source}",
+		"format-muted": "󰝟 {volume:2}% {format_source}",
 		"format-source": "",
 		"format-source-muted": "",
 		"format-icons": {
