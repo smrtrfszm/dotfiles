@@ -18,6 +18,8 @@ return {
         },
         graphql = {
         },
+        emmet_ls = {
+        },
       }
     }
   },
