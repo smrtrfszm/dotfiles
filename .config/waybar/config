@@ -58,7 +58,7 @@
 		"interval": 2,
 		"format": "",
 		"format-disconnected": "Offline",
-		"format-wifi": "{essid} ",
+		"format-wifi": "{essid} {signalStrength}% ",
 		"on-click": "cmst",
 		"tooltip": false
 	},
