@@ -58,6 +58,7 @@ local indentations = {
   blueprint       = { width=4, style='space', ruler=121 },
   markdown        = { width=4, style='space', ruler=80 },
   proto           = { width=4, style='space', ruler=121 },
+  sql             = { width=2, style='space', ruler=121 },
 }
 
 for lang, options in pairs(indentations) do
