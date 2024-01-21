@@ -150,6 +150,7 @@ local highlights = {
   ['@storageclass.lifetime'] = { fg = colors.cyan },
   ['@variable']              = { fg = colors.white },
   ['@variable.builtin']      = { fg = colors.blue },
+  ['@module']                = { fg = colors.cyan },
 
   ["@lsp.type.class"]                      = {},
   ["@lsp.type.function"]                   = { link = 'Function' },
@@ -165,9 +166,13 @@ local highlights = {
   ['@lsp.type.type']                       = {},
   ['@lsp.type.struct']                     = {},
   ['@lsp.type.enumMember']                 = { fg = colors.orange },
-  ['@lsp.type.macro']                      = {},
+  ['@lsp.type.macro']                      = { fg = colors.red },
   ['@lsp.type.decorator']                  = {},
   ['@lsp.mod.deprecated']                  = { strikethrough = true },
+
+  ['@keyword.import.tsx'] = { link = '@include' },
+  ['@keyword.import.rust'] = { link = '@include' },
+  ['@variable.member.rust'] = { fg = colors.red },
 }
 
 vim.cmd('hi clear')
