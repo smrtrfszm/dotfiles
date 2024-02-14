@@ -173,6 +173,8 @@ local highlights = {
   ['@keyword.import.tsx'] = { link = '@include' },
   ['@keyword.import.rust'] = { link = '@include' },
   ['@keyword.import.python'] = { link = '@include' },
+  ['@keyword.import.c'] = { link = '@include' },
+
   ['@variable.member.rust'] = { fg = colors.red },
 }
 
