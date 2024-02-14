@@ -174,6 +174,10 @@ local highlights = {
   ['@keyword.import.rust'] = { link = '@include' },
   ['@keyword.import.python'] = { link = '@include' },
   ['@keyword.import.c'] = { link = '@include' },
+  ['@keyword.import.haskell'] = { link = '@include' },
+
+  ['@module.haskell'] = { fg = colors.blue },
+  ['@constructor.haskell'] = { fg = colors.blue },
 
   ['@variable.member.rust'] = { fg = colors.red },
 }
