@@ -2,7 +2,7 @@ return {
   {
     'nvim-treesitter',
     opts = function (_, opts)
-      vim.list_extend(opts.ensure_installed, { 'c', 'cpp', 'meson' })
+      vim.list_extend(opts.ensure_installed, { 'c', 'cpp', 'meson', 'cmake' })
     end,
   },
 
@@ -11,7 +11,9 @@ return {
     opts = {
       servers = {
         clangd = {
-        }
+        },
+        cmake = {
+        },
       }
     }
   },
