@@ -1,9 +1,9 @@
 [[ $- != *i* ]] && return
 
 if [[ -z "$SSH_CONNECTION" ]]; then
-    PROMPT='%B%F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
+    PROMPT='%F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f '
 else
-    PROMPT='%B%F{green}%m %F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f%b '
+    PROMPT='%F{green}%m %F{cyan}%~ %(?.%F{yellow}.%F{red})❱%f '
 fi
 
 bindkey -v
