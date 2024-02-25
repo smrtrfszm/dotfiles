@@ -205,20 +205,17 @@ myLayoutHook = smartBorders
     $ mySpacing gapSize
     $ Tall 1 (3/100) (1/2)
 
-isHideWs :: Query Bool
-isHideWs = do
-    ws <- liftX (withWindowSet $ return . W.currentTag)
-    return $ isPrefixOf "hide-" ws
-
-isModal :: Query Bool
-isModal = isInProperty "_NET_WM_STATE" "_NET_WM_STATE_MODAL"
-
--- Window rules
+myManageHook :: ManageHook
 myManageHook = composeAll
     [ ((className =? "steam" <||> className =? "steamwebhelper") <&&> title =? "Friends List") --> doFloat
     , (isHideWs) --> doShift (myWorkspaces !! 0)
     , (isDialog <||> isModal) --> doFloat
     ]
+    where
+        isModal = isInProperty "_NET_WM_STATE" "_NET_WM_STATE_MODAL"
+        isHideWs = do
+            ws <- liftX (withWindowSet $ return . W.currentTag)
+            return $ isPrefixOf "hide-" ws
 
 myEventHook :: Event -> X All
 myEventHook = mempty
