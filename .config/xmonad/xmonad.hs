@@ -238,17 +238,11 @@ myLogHook :: X ()
 myLogHook = do
     currentWorkspaceOnTop
 
-getXmobarConfigPath :: IO FilePath
-getXmobarConfigPath = do
-    dir <- getXdgDirectory XdgConfig "xmobar"
-    pure $ dir ++ "/config.hs"
-
 barSpawner :: ScreenId -> IO StatusBarConfig
 barSpawner screen = do
-    xmobarConfig <- getXmobarConfigPath
-    let command = concat ["xmobar -x ", (show . fromEnum) screen, " ", xmobarConfig]
-    config <- statusBarPipe command (pure statusBarPP)
-    pure config
+    dir <- getXdgDirectory XdgConfig "xmobar"
+    let command = concat ["xmobar -x ", (show . fromEnum) screen, " ", dir ++ "/config.hs"]
+    statusBarPipe command (pure statusBarPP)
 
 main :: IO ()
 main = do
