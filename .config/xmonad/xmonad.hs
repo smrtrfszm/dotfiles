@@ -238,30 +238,31 @@ barSpawner screen = do
     let command = concat ["xmobar -x ", (show . fromEnum) screen, " ", dir ++ "/config.hs"]
     statusBarPipe command (pure statusBarPP)
 
+myConfig = def
+    { terminal           = terminalEmulator
+    , focusFollowsMouse  = myFocusFollowsMouse
+    , clickJustFocuses   = myClickJustFocuses
+    , borderWidth        = myBorderWidth
+    , modMask            = myModMask
+    , workspaces         = myWorkspaces
+    , normalBorderColor  = myNormalBorderColor
+    , focusedBorderColor = myFocusedBorderColor
+    , keys               = myKeys
+    , mouseBindings      = myMouseBindings
+    , manageHook         = myManageHook
+    , handleEventHook    = myEventHook
+    , layoutHook         = myLayoutHook
+    , startupHook        = myStartupHook
+    , logHook            = myLogHook
+    }
+
 main :: IO ()
-main = do
-    xmonad
-        $ dynamicSBs barSpawner
-        $ toggleFullFloatEwmhFullscreen
-        $ ewmhFullscreen
-        $ ewmh
-        $ gtkFrameExtents
-        $ docks
-        $ def
-        { terminal           = terminalEmulator
-        , focusFollowsMouse  = myFocusFollowsMouse
-        , clickJustFocuses   = myClickJustFocuses
-        , borderWidth        = myBorderWidth
-        , modMask            = myModMask
-        , workspaces         = myWorkspaces
-        , normalBorderColor  = myNormalBorderColor
-        , focusedBorderColor = myFocusedBorderColor
-        , keys               = myKeys
-        , mouseBindings      = myMouseBindings
-        , manageHook         = myManageHook
-        , handleEventHook    = myEventHook
-        , layoutHook         = myLayoutHook
-        , startupHook        = myStartupHook
-        , logHook            = myLogHook
-        }
+main = xmonad
+    $ dynamicSBs barSpawner
+    $ toggleFullFloatEwmhFullscreen
+    $ ewmhFullscreen
+    $ ewmh
+    $ gtkFrameExtents
+    $ docks
+    $ myConfig
 
