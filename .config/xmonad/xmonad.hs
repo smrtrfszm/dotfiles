@@ -54,9 +54,6 @@ import Brightness (setBrightness, incBrightness, decBrightness)
 import GtkFrameExtents (gtkFrameExtents)
 
 
-
-
-
 -- Variables
 
 -- Set terminal emulator
@@ -110,7 +107,6 @@ filterOutHideWs = filter (\workspace -> not $ isPrefixOf "hide-" (W.tag workspac
 -- Keybinds
 myKeys conf = mkKeymap conf $
     [ ("M-<Return>",              spawn terminalEmulator)
-    -- , ("M-o",                     spawn "dmenu_run -h 24")
     , ("M-o",                     spawn "rofi -show run")
     , ("M-<Backspace>",           kill)
     , ("M-<Tab>",                 windows W.focusDown)
@@ -133,11 +129,9 @@ myKeys conf = mkKeymap conf $
     , ("M-e",                     focusScreen 1)
     , ("M-f",                     withFocused $ sendMessage . maximizeRestore)
     , ("M-n",                     toggleWS)
-    , ("M-S-d",                   spawn "dc")
     , ("M-<Space>",               spawn "dunstctl close-all")
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
     , ("<XF86MonBrightnessDown>", decBrightness 0.1)
-    , ("<KP_Insert>",             spawn "curl 127.0.0.1:50633")
     ]
     ++
     -- Select or shift to workspace
