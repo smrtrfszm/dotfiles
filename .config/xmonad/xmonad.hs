@@ -20,6 +20,7 @@ import qualified XMonad.StackSet as W (focusDown, focusMaster, swapMaster, swapD
 
 import XMonad.Actions.CycleWS (toggleWS)
 import XMonad.Actions.DynamicWorkspaces (appendWorkspace)
+import XMonad.Actions.ToggleFullFloat
 import qualified XMonad.Actions.FlexibleManipulate as Flex
 
 import XMonad.Util.Cursor (setDefaultCursor)
@@ -253,6 +254,7 @@ main :: IO ()
 main = do
     xmonad
         $ dynamicSBs barSpawner
+        $ toggleFullFloatEwmhFullscreen
         $ ewmhFullscreen
         $ ewmh
         $ gtkFrameExtents
