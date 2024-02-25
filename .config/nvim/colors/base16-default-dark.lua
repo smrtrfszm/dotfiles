@@ -180,6 +180,8 @@ local highlights = {
   ['@constructor.haskell'] = { fg = colors.blue },
 
   ['@variable.member.rust'] = { fg = colors.red },
+
+  ['@lsp.type.builtinType.rust'] = { fg = colors.yellow },
 }
 
 vim.cmd('hi clear')
