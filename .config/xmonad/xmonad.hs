@@ -34,11 +34,9 @@ import XMonad.Hooks.DynamicLog (ppOutput, ppCurrent, ppVisible, ppHidden, ppHidd
 import XMonad.Hooks.EwmhDesktops (ewmhFullscreen, ewmh)
 import XMonad.Hooks.ManageDocks (docks, avoidStruts)
 import XMonad.Hooks.ManageHelpers ((/=?), currentWs, isDialog, isInProperty)
-import XMonad.Hooks.UrgencyHook (readUrgents, withUrgencyHook, NoUrgencyHook(..))
 import XMonad.Hooks.StatusBar (statusBarPipe, StatusBarConfig, dynamicSBs)
 import XMonad.Hooks.StatusBar.PP (PP(..))
 
-import XMonad.Layout.Fullscreen (fullscreenSupport)
 import XMonad.Layout.IndependentScreens (countScreens)
 import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
 import XMonad.Layout.NoBorders (smartBorders)
@@ -257,10 +255,9 @@ main = do
         $ dynamicSBs barSpawner
         $ ewmhFullscreen
         $ ewmh
-        $ fullscreenSupport
-        $ withUrgencyHook NoUrgencyHook
         $ gtkFrameExtents
-        $ docks def
+        $ docks
+        $ def
         { terminal           = terminalEmulator
         , focusFollowsMouse  = myFocusFollowsMouse
         , clickJustFocuses   = myClickJustFocuses
