@@ -42,6 +42,7 @@ import XMonad.Layout.IndependentScreens (countScreens)
 import XMonad.Layout.Maximize (maximizeWithPadding, maximizeRestore)
 import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (spacingRaw, Border(..))
+import XMonad.Layout.Fullscreen
 
 import Graphics.X11 (Dimension, KeyMask, Atom, mod4Mask, button1, button3, Window, raiseWindow, Position, resizeWindow)
 import Graphics.X11.Xlib.Cursor (xC_left_ptr)
@@ -128,6 +129,7 @@ myKeys conf = mkKeymap conf $
     , ("M-w",                     focusScreen 0)
     , ("M-e",                     focusScreen 1)
     , ("M-f",                     withFocused $ sendMessage . maximizeRestore)
+    , ("M-S-f",                   withFocused $ toggleFullFloat)
     , ("M-n",                     toggleWS)
     , ("M-<Space>",               spawn "dunstctl close-all")
     , ("<XF86MonBrightnessUp>",   incBrightness 0.1)
