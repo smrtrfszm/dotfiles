@@ -175,6 +175,7 @@ local highlights = {
   ['@keyword.import.python'] = { link = '@include' },
   ['@keyword.import.c'] = { link = '@include' },
   ['@keyword.import.haskell'] = { link = '@include' },
+  ['@keyword.import.typescript'] = { link = '@include' },
 
   ['@module.haskell'] = { fg = colors.blue },
   ['@constructor.haskell'] = { fg = colors.blue },
