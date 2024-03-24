@@ -10,3 +10,5 @@
 	ui = true
 [init]
 	defaultBranch = master
+[rerere]
+	enabled = true
