@@ -53,6 +53,7 @@ local indentations = {
   lua             = { width=2, style='space', ruler=121 },
   sh              = { width=4, style='space', ruler=81  },
   json            = { width=2, style='space', ruler=121 },
+  jsonc           = { width=2, style='space', ruler=121 },
   cmake           = { width=4, style='space', ruler=121 },
   go              = { width=4, style='tab',   ruler=121 },
   xml             = { width=2, style='space' },
