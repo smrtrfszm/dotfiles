@@ -62,7 +62,7 @@ local indentations = {
   toml            = { width=4, style='space', ruler=121 },
   blueprint       = { width=2, style='space', ruler=121 },
   markdown        = { width=4, style='space', ruler=80 },
-  proto           = { width=4, style='space', ruler=121 },
+  proto           = { width=2, style='space', ruler=121 },
   sql             = { width=2, style='space', ruler=121 },
 }
 
