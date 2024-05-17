@@ -24,7 +24,10 @@ vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSig
 vim.cmd('syntax on')
 
 vim.filetype.add({
-  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+  pattern = {
+    ['.*/hypr/.*%.conf'] = 'hyprlang',
+    ['.*/kube/config'] = 'yaml',
+  },
 })
 
 vim.opt.shortmess:append({ C = true })
