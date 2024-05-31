@@ -19,6 +19,7 @@ local colors = {
 
 local highlights = {
   Normal       = { fg = colors.white, bg = colors.black },
+  NormalFloat  = { fg = colors.white, bg = colors.gray1 },
   Bold         = { bold = true },
   Debug        = { fg = colors.red },
   Directory    = { fg = colors.blue },
