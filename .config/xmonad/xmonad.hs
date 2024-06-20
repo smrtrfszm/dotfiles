@@ -60,9 +60,6 @@ import GtkFrameExtents (gtkFrameExtents)
 -- Set terminal emulator
 terminalEmulator :: String
 terminalEmulator = "kitty"
--- Set web browser
-webBrowser :: String
-webBrowser = "librewolf"
 -- Focus doesn't follow the mouse pointer
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
@@ -122,7 +119,8 @@ myKeys conf = mkKeymap conf $
     , ("M-x",                     spawn "dmenu-shutdown -h 24")
     , ("M-r",                     spawn "xmonad --restart")
     , ("M-S-r",                   spawn "xmonad --recompile; xmonad --restart")
-    , ("M-b",                     spawn webBrowser)
+    , ("M-b",                     spawn "librewolf")
+    , ("M-C-b",                   spawn "librewolf --private-window")
     , ("<Print>",                 spawn "screenshot")
     , ("M-C-l",                   spawn "i3lock -f --color 000000")
     , ("M-d",                     toggleWindows)
