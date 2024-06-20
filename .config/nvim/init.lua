@@ -19,6 +19,9 @@ require('settings')
 require('keys')
 
 require('lazy').setup({
+  dev = {
+    path = '~/dev/',
+  },
   spec = {
     { import = 'plugins.treesitter' },
     { import = 'plugins.comment' },
