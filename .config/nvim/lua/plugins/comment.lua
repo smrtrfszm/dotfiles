@@ -4,7 +4,7 @@ return {
     event = 'VeryLazy',
     dependencies = {
       {'JoosepAlviste/nvim-ts-context-commentstring', branch = 'main'},
-      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter',
     },
     opts = {
       opleader = {
