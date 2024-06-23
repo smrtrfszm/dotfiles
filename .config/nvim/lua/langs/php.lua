@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter",
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { 'terraform' })
+      vim.list_extend(opts.ensure_installed, { "php" })
     end
   },
 
@@ -10,7 +10,8 @@ return {
     "nvim-lspconfig",
     opts = {
       servers = {
-        terraformls = {}
+        phpactor = {
+        }
       }
     }
   },
@@ -18,8 +19,8 @@ return {
   {
     'settings',
     opts = {
-      ['terraform'] = { width = 2, style = 'space' },
-      ['terraform-vars'] = { width = 2, style = 'space' },
+      ['php'] = { width = 2, style = 'space', ruler = 121 },
     },
   },
 }
+

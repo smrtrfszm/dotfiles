@@ -7,17 +7,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     opts = {
-      servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = {
-                globals = { 'vim' },
-              }
-            }
-          }
-        }
-      },
+      servers = {},
       setup = {},
     },
     config = function (_, opts)

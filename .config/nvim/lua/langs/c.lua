@@ -17,4 +17,14 @@ return {
       }
     }
   },
+
+  {
+    'settings',
+    opts = {
+      ['c'] = { width = 4, style = 'space', ruler = 81  },
+      ['cmake'] = { width = 4, style = 'space', ruler = 121 },
+      ['cpp'] = { width = 4, style = 'space', ruler = 121 },
+      ['meson'] = { width = 2, style = 'space', ruler = 121 },
+    },
+  },
 }

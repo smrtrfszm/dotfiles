@@ -15,4 +15,12 @@ return {
       },
     },
   },
+
+  {
+    'settings',
+    opts = {
+      ['json'] = { width = 2, style = 'space', ruler = 121 },
+      ['jsonc'] = { width = 2, style = 'space', ruler = 121 },
+    },
+  },
 }

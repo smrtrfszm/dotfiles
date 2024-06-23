@@ -2,14 +2,14 @@ return {
   {
     'nvim-treesitter',
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { 'glsl' })
+      vim.list_extend(opts.ensure_installed, { 'markdown' })
     end,
   },
 
   {
     'settings',
     opts = {
-      ['glsl'] = { width=4, style='space', ruler=81 },
+      ['markdown'] = { width = 4, style = 'space', ruler = 80 },
     },
   },
 }

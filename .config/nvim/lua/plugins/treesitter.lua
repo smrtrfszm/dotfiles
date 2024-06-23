@@ -6,10 +6,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     cmd = { 'TSUpdateSync' },
     opts = {
-      ensure_installed = {
-        'lua',
-        'bash',
-      },
+      ensure_installed = {},
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,

@@ -33,5 +33,12 @@ return {
         }
       }
     }
-  }
+  },
+
+  {
+    'settings',
+    opts = {
+      ['yaml'] = { width = 2, style = 'space', ruler = 121 },
+    },
+  },
 }
