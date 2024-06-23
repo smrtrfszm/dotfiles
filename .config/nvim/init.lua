@@ -176,29 +176,3 @@ require('lazy').setup({
     }
   },
 })
-
---   use {
---     'norcalli/nvim-colorizer.lua',
---     ft = {'css', 'scss'},
---     config = function ()
---       require('colorizer').setup()
---     end,
---   }
---
---   use {
---     'windwp/nvim-ts-autotag',
---     ft = 'html',
---     requires = "nvim-treesitter/nvim-treesitter",
---   }
---
---
---   use {
---     'NTBBloodbath/rest.nvim',
---     requires = {'nvim-lua/plenary.nvim'},
---     ft = 'http',
---     config = function ()
---       local rest_nvim = require('rest-nvim')
---       rest_nvim.setup({})
---       vim.keymap.set('n', '<leader>rn', rest_nvim.run)
---     end,
---   }
