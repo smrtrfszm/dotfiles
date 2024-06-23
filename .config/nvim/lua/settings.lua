@@ -27,6 +27,8 @@ vim.filetype.add({
   pattern = {
     ['.*/hypr/.*%.conf'] = 'hyprlang',
     ['.*/kube/config'] = 'yaml',
+    ['.*.fsh'] = 'glsl',
+    ['.*.vsh'] = 'glsl',
   },
 })
 
@@ -69,6 +71,7 @@ local indentations = {
   ['sql']             = { width=2, style='space', ruler=121 },
   ['terraform']       = { width=2, style='space' },
   ['terraform-vars']  = { width=2, style='space' },
+  ['glsl']            = { width=4, style='space', ruler=81 },
 }
 
 for lang, options in pairs(indentations) do
