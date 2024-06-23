@@ -9,7 +9,6 @@ return {
       ensure_installed = {
         'lua',
         'bash',
-        'c',
       },
       highlight = {
         enable = true,
