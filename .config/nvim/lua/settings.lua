@@ -14,12 +14,12 @@ vim.api.nvim_win_set_option(0, 'cursorline', true)
 vim.api.nvim_win_set_option(0, 'signcolumn', 'yes')
 
 vim.api.nvim_set_option('undofile', true)
-vim.api.nvim_set_option('undodir', os.getenv("XDG_STATE_HOME") .. "/nvim/undo")
+vim.api.nvim_set_option('undodir', os.getenv('XDG_STATE_HOME') .. '/nvim/undo')
 
-vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError"})
-vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn"})
-vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo"})
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint"})
+vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError'})
+vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn'})
+vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo'})
+vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint'})
 
 vim.cmd('syntax on')
 

@@ -30,8 +30,8 @@ require('lazy').setup({
     { import = 'langs' },
 
     {
-      "settings",
-      dir = "./plugins/settings",
+      'settings',
+      dir = './plugins/settings',
       lazy = false,
       opts = {},
       config = function (_, opts)

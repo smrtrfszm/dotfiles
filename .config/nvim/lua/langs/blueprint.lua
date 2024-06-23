@@ -17,7 +17,7 @@ return {
   },
 
   {
-    "settings",
+    'settings',
     opts = {
       ['blueprint'] = { width = 2, style = 'space', ruler = 121 },
     },

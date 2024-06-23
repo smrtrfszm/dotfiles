@@ -10,53 +10,53 @@ end
 
 return {
   {
-    "nvim-cmp",
+    'nvim-cmp',
     dependencies = {
       {
-        "Saecki/crates.nvim",
+        'Saecki/crates.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        event = { "BufRead Cargo.toml" },
+        event = { 'BufRead Cargo.toml' },
         config = true,
       },
     },
     opts = function(_, opts)
-      local cmp = require("cmp")
+      local cmp = require('cmp')
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "crates" },
+        { name = 'crates' },
       }))
     end,
   },
 
   {
-    "nvim-treesitter",
+    'nvim-treesitter',
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
+      vim.list_extend(opts.ensure_installed, { 'ron', 'rust', 'toml' })
     end,
   },
 
   {
-    "mason.nvim",
+    'mason.nvim',
     optional = true,
     opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, { "codelldb" })
+      vim.list_extend(opts.ensure_installed, { 'codelldb' })
     end,
   },
 
 
   {
-    "simrat39/rust-tools.nvim",
+    'simrat39/rust-tools.nvim',
     lazy = true,
     opts = function()
-      local ok, mason_registry = pcall(require, "mason-registry")
+      local ok, mason_registry = pcall(require, 'mason-registry')
       local adapter
       if ok then
         -- rust tools configuration for debugging support
-        local codelldb = mason_registry.get_package("codelldb")
-        local extension_path = codelldb:get_install_path() .. "/extension/"
-        local codelldb_path = extension_path .. "adapter/codelldb"
-        local liblldb_path = vim.fn.has("mac") == 1 and extension_path .. "lldb/lib/liblldb.dylib"
-          or extension_path .. "lldb/lib/liblldb.so"
-        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path)
+        local codelldb = mason_registry.get_package('codelldb')
+        local extension_path = codelldb:get_install_path() .. '/extension/'
+        local codelldb_path = extension_path .. 'adapter/codelldb'
+        local liblldb_path = vim.fn.has('mac') == 1 and extension_path .. 'lldb/lib/liblldb.dylib'
+          or extension_path .. 'lldb/lib/liblldb.so'
+        adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
       end
       return {
         dap = {
@@ -76,7 +76,7 @@ return {
   },
 
   {
-    "nvim-lspconfig",
+    'nvim-lspconfig',
     opts = {
       servers = {
         rust_analyzer = {
@@ -86,7 +86,7 @@ return {
           --   { "<leader>dr", "<cmd>RustDebuggables<cr>", desc = "Run Debuggables (Rust)" },
           -- },
           settings = {
-            ["rust-analyzer"] = {
+            ['rust-analyzer'] = {
               cargo = {
                 allFeatures = true,
                 loadOutDirsFromCheck = true,
@@ -94,13 +94,13 @@ return {
               },
               checkOnSave = {
                 allFeatures = true,
-                command = "clippy",
-                extraArgs = { "--no-deps" },
+                command = 'clippy',
+                extraArgs = { '--no-deps' },
               },
               procMacro = {
                 enable = true,
                 ignored = {
-                  ["async-trait"] = { "async_trait" },
+                  ['async-trait'] = { 'async_trait' },
                 },
               },
             },
@@ -109,8 +109,8 @@ return {
       },
       setup = {
         rust_analyzer = function(_, opts)
-          local rust_tools_opts = get_opts("rust-tools.nvim")
-          require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
+          local rust_tools_opts = get_opts('rust-tools.nvim')
+          require('rust-tools').setup(vim.tbl_deep_extend('force', rust_tools_opts or {}, { server = opts }))
           return true
         end,
       },

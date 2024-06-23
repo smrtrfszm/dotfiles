@@ -27,8 +27,8 @@ return {
           if opts.setup[server](server, server_opts) then
             return
           end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
+        elseif opts.setup['*'] then
+          if opts.setup['*'](server, server_opts) then
             return
           end
         end
