@@ -59,12 +59,23 @@ require('lazy').setup({
 
     {
       'nvim-telescope/telescope.nvim',
-      dependencies = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
-      cmd = 'Telescope',
+      dependencies = {
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
+      },
+      -- cmd = 'Telescope',
       opts = {
         file_ignore_patterns = {'node_modules/.*', '.git/.*', 'target/.*'},
+        extensions = {
+          ['ui-select'] = {},
+        },
       },
-      config = true,
+      config = function (opts)
+        local telescope = require('telescope')
+        telescope.setup(opts)
+        telescope.load_extension('ui-select')
+      end
     },
 
     {
