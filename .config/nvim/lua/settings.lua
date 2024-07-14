@@ -29,6 +29,7 @@ vim.filetype.add({
     ['.*/kube/config'] = 'yaml',
     ['.*.fsh'] = 'glsl',
     ['.*.vsh'] = 'glsl',
+    ['.*.Containerfile'] = 'dockerfile',
   },
 })
 
