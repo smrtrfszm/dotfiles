@@ -30,6 +30,7 @@ vim.filetype.add({
     ['.*.fsh'] = 'glsl',
     ['.*.vsh'] = 'glsl',
     ['.*.Containerfile'] = 'dockerfile',
+    ['.*/containers/containers.conf'] = 'toml',
   },
 })
 
