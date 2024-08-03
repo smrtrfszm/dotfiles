@@ -31,6 +31,7 @@ vim.filetype.add({
     ['.*.vsh'] = 'glsl',
     ['.*.Containerfile'] = 'dockerfile',
     ['.*/containers/containers.conf'] = 'toml',
+    ['.*.mtxcfg'] = 'json',
   },
 })
 
