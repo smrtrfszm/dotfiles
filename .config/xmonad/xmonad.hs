@@ -122,7 +122,7 @@ myKeys conf = mkKeymap conf $
     , ("M-b",                     spawn "librewolf")
     , ("M-C-b",                   spawn "librewolf --private-window")
     , ("<Print>",                 spawn "screenshot")
-    , ("M-C-l",                   spawn "i3lock -f --color 000000")
+    , ("M-í",                     spawn "i3lock -f --color 000000")
     , ("M-d",                     toggleWindows)
     , ("M-w",                     focusScreen 0)
     , ("M-e",                     focusScreen 1)
