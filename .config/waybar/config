@@ -18,8 +18,13 @@
     "tray"
   ],
   "hyprland/workspaces": {
+    "all-outputs": true,
     "disable-scroll": true,
-    "format": "{name}"
+    "format": "{name}",
+    "sort-by": "number",
+    "persistent-workspaces": {
+      "*": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+    }
   },
   "custom/kernel": {
     "exec": "uname -r",
