@@ -32,6 +32,7 @@ vim.filetype.add({
     ['.*.Containerfile'] = 'dockerfile',
     ['.*/containers/containers.conf'] = 'toml',
     ['.*.mtxcfg'] = 'json',
+    ['.*/waybar/config'] = 'jsonc',
   },
 })
 
