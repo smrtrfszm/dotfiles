@@ -13,7 +13,7 @@ window#waybar {
 }
 
 #workspaces button {
-  color: #fff;
+  color: #f8f8f8;
   padding: 0 2px;
   border-radius: 0;
 }
@@ -25,6 +25,11 @@ window#waybar {
 
 #workspaces button.empty {
   color: #585858;
+}
+
+#workspaces button.visible {
+  color: #fff;
+  background-color: #585858;
 }
 
 #workspaces button.active {
