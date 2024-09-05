@@ -33,6 +33,7 @@ vim.filetype.add({
     ['.*/containers/containers.conf'] = 'toml',
     ['.*.mtxcfg'] = 'json',
     ['.*/waybar/config'] = 'jsonc',
+    ['.env.*'] = 'sh',
   },
 })
 
