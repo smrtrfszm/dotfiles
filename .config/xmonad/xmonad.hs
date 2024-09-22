@@ -229,11 +229,11 @@ myLogHook :: X ()
 myLogHook = do
     currentWorkspaceOnTop
 
-barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner :: ScreenId -> X StatusBarConfig
 barSpawner screen = do
-    dir <- getXdgDirectory XdgConfig "xmobar"
+    dir <- io $ getXdgDirectory XdgConfig "xmobar"
     let command = concat ["xmobar -x ", (show . fromEnum) screen, " ", dir ++ "/config.hs"]
-    statusBarPipe command (pure statusBarPP)
+    io $ statusBarPipe command (pure statusBarPP)
 
 myConfig = def
     { terminal           = terminalEmulator
