@@ -119,7 +119,7 @@ myKeys conf = mkKeymap conf $
     , ("M-x",                     spawn "dmenu-shutdown -h 24")
     , ("M-r",                     spawn "xmonad --restart")
     , ("M-S-r",                   spawn "xmonad --recompile; xmonad --restart")
-    , ("M-b",                     spawn "librewolf")
+    , ("M-b",                     spawn "flatpak run io.gitlab.librewolf-community")
     , ("M-C-b",                   spawn "librewolf --private-window")
     , ("<Print>",                 spawn "screenshot")
     , ("M-í",                     spawn "i3lock -f --color 000000")
