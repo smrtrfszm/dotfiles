@@ -3,9 +3,9 @@ import atexit
 import readline
 
 if 'XDG_STATE_HOME' in os.environ:
-    history = os.path.join(os.path.expanduser(os.environ['XDG_STATE_HOME']), 'python_history')
+    history = os.path.join(os.path.expanduser(os.environ['XDG_STATE_HOME']), 'python', 'history')
 else:
-    history = os.path.join(os.path.expanduser('~'), '.local', 'state', 'python_history')
+    history = os.path.join(os.path.expanduser('~'), '.local', 'state', 'python', 'history')
 
 history = os.path.abspath(history)
 history_dir, _ = os.path.split(history)
