@@ -1,5 +1,6 @@
 export TERM="xterm-256color"
 export EDITOR="nvim"
+export DL="$HOME/dl"
 
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
