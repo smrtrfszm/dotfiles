@@ -1,5 +1,3 @@
 [Icon Theme]
-Name=Cursor Pack
-Inherits=xcursor-breeze-snow
-
+Inherits=Breeze
 
