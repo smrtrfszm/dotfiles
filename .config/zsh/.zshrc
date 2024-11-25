@@ -38,6 +38,7 @@ alias config="git --git-dir=$DOTFILES_DIR --work-tree=$HOME"
 alias python="python3.12"
 alias k="kubectl"
 alias rgf="rg --files | rg"
+alias open="xdg-open"
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
