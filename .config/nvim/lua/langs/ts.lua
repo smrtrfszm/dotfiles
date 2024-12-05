@@ -10,7 +10,7 @@ return {
     'nvim-lspconfig',
     opts = {
       servers = {
-        ts_ls = {
+        tsserver = {
         },
         cssmodules_ls = {
         },
