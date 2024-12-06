@@ -8,6 +8,7 @@
     "clock"
   ],
   "modules-right": [
+    "privacy",
     "custom/kernel",
     "pulseaudio",
     "cpu",
@@ -16,6 +17,17 @@
     "battery",
     "tray"
   ],
+  "privacy": {
+    "icon-size": 16,
+    "modules": [
+      {
+        "type": "screenshare"
+      },
+      {
+        "type": "audio-in"
+      }
+    ]
+  },
   "hyprland/workspaces": {
     "all-outputs": true,
     "disable-scroll": true,

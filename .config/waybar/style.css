@@ -86,3 +86,9 @@ window#waybar {
 #battery.warning {
   color: #dc9656;
 }
+
+#privacy {
+  color: #000;
+  background-color: #f7ca88;
+  padding: 0 6px;
+}
