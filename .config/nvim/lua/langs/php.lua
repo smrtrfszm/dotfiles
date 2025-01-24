@@ -1,3 +1,9 @@
+local settings = require('settings2')
+
+settings.set({
+  ['php'] = { width = 2, style = 'space', ruler = 121 },
+});
+
 return {
   {
     'nvim-treesitter',
@@ -14,13 +20,6 @@ return {
         }
       }
     }
-  },
-
-  {
-    'settings',
-    opts = {
-      ['php'] = { width = 2, style = 'space', ruler = 121 },
-    },
   },
 }
 

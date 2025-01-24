@@ -1,3 +1,9 @@
+local settings = require('settings2')
+
+settings.set({
+  ['lua'] = { width = 2, style = 'space', ruler = 121 },
+});
+
 return {
   {
     'nvim-treesitter',
@@ -20,13 +26,6 @@ return {
           }
         }
       },
-    },
-  },
-
-  {
-    'settings',
-    opts = {
-      ['lua'] = { width = 2, style = 'space', ruler = 121 },
     },
   },
 }

@@ -34,34 +34,6 @@ require('lazy').setup({
     { import = 'langs' },
 
     {
-      'settings',
-      dir = './plugins/settings',
-      lazy = false,
-      opts = {},
-      config = function (_, opts)
-        for lang, options in pairs(opts) do
-          vim.api.nvim_create_autocmd('Filetype', {
-            pattern = lang,
-            callback = function ()
-              vim.opt_local.tabstop = options.width
-              vim.opt_local.shiftwidth = options.width
-              vim.opt_local.smarttab = true
-
-              if options.style == 'space' then
-                vim.opt_local.expandtab = true
-                vim.opt_local.softtabstop = options.width
-              end
-
-              if options.ruler then
-                vim.opt_local.colorcolumn = { options.ruler }
-              end
-            end,
-          })
-        end
-      end
-    },
-
-    {
       'nvim-telescope/telescope.nvim',
       dependencies = {
         'nvim-lua/plenary.nvim',

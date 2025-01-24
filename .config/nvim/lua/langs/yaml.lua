@@ -1,3 +1,9 @@
+local settings = require('settings2')
+
+settings.set({
+  ['yaml'] = { width = 2, style = 'space', ruler = 121 },
+});
+
 return {
   {
     'nvim-treesitter',
@@ -34,12 +40,5 @@ return {
         }
       }
     }
-  },
-
-  {
-    'settings',
-    opts = {
-      ['yaml'] = { width = 2, style = 'space', ruler = 121 },
-    },
   },
 }
