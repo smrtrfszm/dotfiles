@@ -20,6 +20,9 @@ require('settings')
 require('keys')
 
 require('lazy').setup({
+  install = {
+    colorscheme = { "base16-default-dark" },
+  },
   dev = {
     path = '~/dev/',
   },
