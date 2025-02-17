@@ -159,6 +159,13 @@ require('lazy').setup({
       config = function (_, opts)
         require('project_nvim').setup(opts)
       end,
-    }
+    },
+    {
+      'smrtrfszm/dataprime.nvim',
+      dependencies = {'nvim-treesitter', 'Comment.nvim'},
+      config = function (_, _)
+        require('dataprime').setup()
+      end,
+    },
   },
 })
