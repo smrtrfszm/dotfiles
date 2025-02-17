@@ -22,7 +22,7 @@ return {
     'nvim-lspconfig',
     opts = {
       servers = {
-        tsserver = {
+        ts_ls = {
         },
         cssmodules_ls = {
         },
