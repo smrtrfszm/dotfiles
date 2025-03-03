@@ -1,3 +1,25 @@
 #!/bin/sh
 
-exec swaylock -f -c 000000
+error() {
+    echo "error: $1"
+    exit 1
+}
+
+check_command() {
+    ( ! command -v "$1" 1> /dev/null ) && error "$1 not found"
+}
+
+case "$XDG_SESSION_TYPE" in
+    "wayland")
+        check_command "swaylock"
+
+        exec swaylock -f -c 000000
+        ;;
+    "x11")
+        check_command "i3lock"
+
+        exec i3lock -f -c 000000
+        ;;
+    "tty") error "can't lock session in a tty";;
+    *) error "XDG_SESSION_TYPE is not set or not supported";;
+esac
