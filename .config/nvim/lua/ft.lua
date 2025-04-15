@@ -6,7 +6,6 @@ vim.filetype.add({
     mtxcfg = 'json',
   },
   pattern = {
-    ['.*/hypr/.*%.conf'] = 'hyprlang',
     ['.*/kube/config'] = 'yaml',
     ['.*/containers/containers.conf'] = 'toml',
     ['.*/containers/storage.conf'] = 'toml',
