@@ -1,10 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['rust'] = { width = 4, style = 'space', ruler = 121 },
-  ['toml'] = { width = 4, style = 'space', ruler = 121 },
-});
-
 local function get_opts(name)
   local plugin = require('lazy.core.config').plugins[name]
   if not plugin then

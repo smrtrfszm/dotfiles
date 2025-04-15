@@ -1,10 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['go'] = { width = 4, style = 'tab', ruler = 121 },
-  ['proto'] = { width = 2, style = 'space', ruler = 121 },
-});
-
 return {
   {
     'nvim-treesitter',

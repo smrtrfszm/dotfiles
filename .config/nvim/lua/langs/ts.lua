@@ -1,15 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['javascript'] = { width = 2, style = 'space', ruler = 121 },
-  ['typescript'] = { width = 2, style = 'space', ruler = 121 },
-  ['typescriptreact'] = { width = 2, style = 'space', ruler = 121 },
-  ['svelte'] = { width = 2, style = 'space', ruler = 121 },
-  ['html'] = { width = 2, style = 'space', ruler = 121 },
-  ['css'] = { width = 2, style = 'space', ruler = 121 },
-  ['scss'] = { width = 2, style = 'space', ruler = 121 },
-});
-
 return {
   {
     'nvim-treesitter',

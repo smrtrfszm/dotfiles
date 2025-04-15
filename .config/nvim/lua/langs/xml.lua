@@ -1,9 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['xml'] = { width = 2, style = 'space' },
-});
-
 return {
   {
     'nvim-treesitter',

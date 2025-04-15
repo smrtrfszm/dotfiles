@@ -1,9 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['haskell'] = { width = 4, style = 'space' },
-});
-
 return {
   {
     'nvim-treesitter',

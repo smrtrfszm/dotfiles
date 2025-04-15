@@ -1,9 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['markdown'] = { width = 4, style = 'space', ruler = 80 },
-});
-
 return {
   {
     'nvim-treesitter',

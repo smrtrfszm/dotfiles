@@ -1,10 +1,3 @@
-local settings = require('settings2')
-
-settings.set({
-  ['terraform'] = { width = 2, style = 'space' },
-  ['terraform-vars'] = { width = 2, style = 'space' },
-});
-
 return {
   {
     'nvim-treesitter',
