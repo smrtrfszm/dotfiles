@@ -23,21 +23,6 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSig
 
 vim.cmd('syntax on')
 
-vim.filetype.add({
-  pattern = {
-    ['.*/hypr/.*%.conf'] = 'hyprlang',
-    ['.*/kube/config'] = 'yaml',
-    ['.*.fsh'] = 'glsl',
-    ['.*.vsh'] = 'glsl',
-    ['.*.Containerfile'] = 'dockerfile',
-    ['.*/containers/containers.conf'] = 'toml',
-    ['.*/containers/storage.conf'] = 'toml',
-    ['.*.mtxcfg'] = 'json',
-    ['.*/waybar/config'] = 'jsonc',
-    ['.env.*'] = 'sh',
-  },
-})
-
 vim.opt.shortmess:append({ C = true })
 
 vim.api.nvim_create_autocmd('CursorHold', {
