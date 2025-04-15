@@ -139,30 +139,24 @@ require('lazy').setup({
 
     {
       'lukas-reineke/indent-blankline.nvim',
+      main = 'ibl',
       opts = {
         indent = {
           char = '▏',
         },
       },
-      config = function (_, opts)
-        require('ibl').setup(opts)
-      end,
     },
 
     {
       'ahmedkhalf/project.nvim',
-      opts = {
-      },
-      config = function (_, opts)
-        require('project_nvim').setup(opts)
-      end,
+      main = 'project_nvim',
+      opts = {},
     },
+
     {
       'smrtrfszm/dataprime.nvim',
       dependencies = {'nvim-treesitter', 'Comment.nvim'},
-      config = function (_, _)
-        require('dataprime').setup()
-      end,
+      opts = {},
     },
   },
 })
