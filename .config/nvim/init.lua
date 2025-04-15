@@ -145,9 +145,6 @@ require('lazy').setup({
         },
       },
       config = function (_, opts)
-        vim.opt.list = true
-        vim.opt.listchars:append('eol:↴')
-
         require('ibl').setup(opts)
       end,
     },

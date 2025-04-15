@@ -12,6 +12,7 @@ vim.api.nvim_win_set_option(0, 'relativenumber', true)
 vim.api.nvim_win_set_option(0, 'wrap', false)
 vim.api.nvim_win_set_option(0, 'cursorline', true)
 vim.api.nvim_win_set_option(0, 'signcolumn', 'yes')
+vim.api.nvim_win_set_option(0, 'list', true)
 
 vim.api.nvim_set_option('undofile', true)
 vim.api.nvim_set_option('undodir', os.getenv('XDG_STATE_HOME') .. '/nvim/undo')
