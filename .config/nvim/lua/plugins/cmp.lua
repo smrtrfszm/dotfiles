@@ -5,7 +5,6 @@ return {
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'onsails/lspkind-nvim',
@@ -47,7 +46,6 @@ return {
         },
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
           { name = 'path' },
           { name = 'buffer', keyword_length = 3 },
         }),
@@ -61,7 +59,6 @@ return {
             with_text = true,
             menu = {
               nvim_lsp = '[LSP]',
-              nvim_lua = '[Lua]',
               path = '[path]',
               buffer = '[buf]',
             },
