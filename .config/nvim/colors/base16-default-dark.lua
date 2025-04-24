@@ -29,6 +29,9 @@ local highlights = {
   Search       = { bg = colors.gray2 },
   SignColumn   = { fg = colors.gray3, bg = colors.gray1 },
   Visual       = { bg = colors.gray2 },
+  WarningMsg   = { fg = colors.yellow },
+  ErrorMsg     = { fg = colors.red },
+  Question     = { fg = colors.cyan },
 
   DiagnosticUnderlineError = { undercurl = true, sp = colors.red },
   DiagnosticUnderlineWarn  = { undercurl = true, sp = colors.yellow },
