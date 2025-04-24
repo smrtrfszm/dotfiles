@@ -11,5 +11,6 @@ vim.filetype.add({
     ['.*/containers/storage.conf'] = 'toml',
     ['.*/waybar/config'] = 'jsonc',
     ['.env.*'] = 'sh',
+    ['.whitesource'] = 'json',
   },
 })
