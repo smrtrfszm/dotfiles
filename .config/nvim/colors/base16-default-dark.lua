@@ -100,6 +100,8 @@ local highlights = {
   ['@string.special.path.diff'] = { fg = colors.white },
   ['@punctuation.special.diff'] = {},
 
+  ['@constructor.lua'] = {},
+
   LazyReasonPLugin = { fg = colors.cyan },
   LazyReasonStart = { fg = colors.red },
   LazyReasonCmd = { fg = colors.gray4 },
