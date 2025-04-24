@@ -148,8 +148,7 @@ require('lazy').setup({
     },
 
     {
-      'ahmedkhalf/project.nvim',
-      main = 'project_nvim',
+      'notjedi/nvim-rooter.lua',
       opts = {},
     },
 
