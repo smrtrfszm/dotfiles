@@ -4,6 +4,7 @@ vim.filetype.add({
     vsh = 'glsl',
     Containerfile = 'dockerfile',
     mtxcfg = 'json',
+    j2 = 'jinja',
   },
   pattern = {
     ['.*/kube/config'] = 'yaml',
