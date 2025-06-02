@@ -4,6 +4,7 @@ return {
     opts = {
       automatic_enable = true,
       ensure_installed = {
+        'ansiblels',
         'clangd',
         'cmake',
         -- 'codelldb',
