@@ -21,6 +21,7 @@ return {
         'terraformls',
         'ts_ls',
         'yamlls',
+        'zls',
       },
     },
     dependencies = {
