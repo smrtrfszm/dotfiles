@@ -85,6 +85,7 @@ local highlights = {
   ['@variable'] = { fg = colors.white },
   ['@variable.builtin'] = { fg = colors.blue },
   ['@variable.member'] = { fg = colors.red },
+  ['@variable.parameter.builtin'] = { fg = colors.blue },
   ['@diff.minus'] = { fg = colors.red },
   ['@diff.plus'] = { fg = colors.green },
 
@@ -94,6 +95,9 @@ local highlights = {
   ['@lsp.type.macro'] = { fg = colors.red },
   ['@lsp.type.method'] = {},
 
+  ['@markup.raw.block'] = { fg = colors.gray4 },
+  ['@label.markdown'] = { fg = colors.gray4 },
+
   ['@tag.blade'] = { fg = colors.magenta },
   -- ['@lsp.mod.attribute'] = { fg = colors.red },
 
@@ -101,6 +105,9 @@ local highlights = {
   ['@punctuation.special.diff'] = {},
 
   ['@constructor.lua'] = {},
+
+  ['@lsp.type.keyword.yaml.ansible'] = {},
+  ['@lsp.type.class.yaml.ansible'] = {},
 
   LazyReasonPLugin = { fg = colors.cyan },
   LazyReasonStart = { fg = colors.red },
