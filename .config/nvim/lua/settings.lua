@@ -1,21 +1,23 @@
+vim.cmd('syntax on')
 vim.cmd.colorscheme('base16-default-dark')
 
-vim.api.nvim_set_option('mouse', 'a')
-vim.api.nvim_set_option('scrolloff', 5)
-vim.api.nvim_set_option('laststatus', 3)
-vim.api.nvim_set_option('showmode', false)
-vim.api.nvim_set_option('termguicolors', true)
-vim.api.nvim_set_option('pumheight', 10)
+vim.api.nvim_set_option_value('mouse', 'a', {})
+vim.api.nvim_set_option_value('scrolloff', 5, {})
+vim.api.nvim_set_option_value('laststatus', 3, {})
+vim.api.nvim_set_option_value('showmode', false, {})
+vim.api.nvim_set_option_value('termguicolors', true, {})
+vim.api.nvim_set_option_value('pumheight', 10, {})
+vim.api.nvim_set_option_value('undofile', true, {})
+vim.api.nvim_set_option_value('undodir', os.getenv('XDG_STATE_HOME') .. '/nvim/undo', {})
 
-vim.api.nvim_win_set_option(0, 'number', true)
-vim.api.nvim_win_set_option(0, 'relativenumber', true)
-vim.api.nvim_win_set_option(0, 'wrap', false)
-vim.api.nvim_win_set_option(0, 'cursorline', true)
-vim.api.nvim_win_set_option(0, 'signcolumn', 'yes')
-vim.api.nvim_win_set_option(0, 'list', true)
+vim.api.nvim_set_option_value('number', true, {})
+vim.api.nvim_set_option_value('relativenumber', true, {})
+vim.api.nvim_set_option_value('wrap', false, {})
+vim.api.nvim_set_option_value('cursorline', true, {})
+vim.api.nvim_set_option_value('signcolumn', 'yes', {})
+vim.api.nvim_set_option_value('list', true, {})
 
-vim.api.nvim_set_option('undofile', true)
-vim.api.nvim_set_option('undodir', os.getenv('XDG_STATE_HOME') .. '/nvim/undo')
+vim.opt.shortmess:append({ C = true })
 
 vim.diagnostic.config({
   signs = {
@@ -33,10 +35,6 @@ vim.diagnostic.config({
     },
   },
 })
-
-vim.cmd('syntax on')
-
-vim.opt.shortmess:append({ C = true })
 
 vim.api.nvim_create_autocmd('CursorHold', {
   pattern = '*',
