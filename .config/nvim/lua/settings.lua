@@ -1,4 +1,4 @@
-vim.cmd('syntax on')
+-- vim.cmd('syntax on')
 vim.cmd.colorscheme('base16-default-dark')
 
 vim.api.nvim_set_option_value('mouse', 'a', {})
