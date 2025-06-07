@@ -151,11 +151,5 @@ require('lazy').setup({
       'notjedi/nvim-rooter.lua',
       opts = {},
     },
-
-    {
-      'smrtrfszm/dataprime.nvim',
-      dependencies = {'nvim-treesitter', 'Comment.nvim'},
-      opts = {},
-    },
   },
 })
