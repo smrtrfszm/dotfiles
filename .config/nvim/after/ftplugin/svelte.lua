@@ -1,4 +1,4 @@
-local s = require('settings2')
-s.set_opts({ width = 2, style = 'space', ruler = 121 })
+local utils = require('utils')
+utils.set_opts({ width = 2, style = 'space', ruler = 121 })
 
 vim.treesitter.start()
