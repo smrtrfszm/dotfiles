@@ -96,6 +96,8 @@ local highlights = {
   ['@lsp.type.method'] = {},
 
   ['@markup.raw.block'] = { fg = colors.gray4 },
+  ['@markup.list'] = { fg = colors.brown },
+  ['@markup.list.checked'] = { fg = colors.orange },
   ['@label.markdown'] = { fg = colors.gray4 },
 
   ['@tag.blade'] = { fg = colors.magenta },
