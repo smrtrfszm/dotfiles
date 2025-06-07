@@ -13,6 +13,7 @@ return {
         'cmake',
         'cpp',
         'css',
+        'dataprime',
         'diff',
         'dockerfile',
         'git_config',
