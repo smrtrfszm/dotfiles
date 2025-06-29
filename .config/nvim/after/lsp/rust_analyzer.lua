@@ -13,8 +13,6 @@ return {
       },
       procMacro = {
         enable = true,
-        ignored = {
-        },
       },
     },
   },
