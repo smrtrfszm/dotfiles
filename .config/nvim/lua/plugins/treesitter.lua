@@ -42,6 +42,7 @@ return {
         'php',
         'proto',
         'python',
+        'qmljs',
         'requirements',
         'rust',
         'scss',
