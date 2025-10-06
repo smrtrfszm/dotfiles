@@ -1,9 +1,5 @@
 #!/bin/sh
 
-screenshot_dir="$HOME/screenshots"
-file_name="$(date +%Y%m%d_%H%M%S).png"
-full_path="$screenshot_dir/$file_name"
-
 error() {
     echo "error: $1"
     exit 1
@@ -13,20 +9,25 @@ check_command() {
     ( ! command -v "$1" 1> /dev/null ) && error "$1 not found"
 }
 
-mkdir -p "$screenshot_dir"
-
 case "$XDG_SESSION_TYPE" in
     "wayland")
         check_command "grim"
         check_command "slurp"
+        check_command "wl-copy"
 
         pos=$(slurp 2> /dev/null)
         if [ -n "$pos" ]; then
-            grim -g "$pos" "$full_path"
+            wl-copy --type image/png < <(grim -g "$pos" -)
         fi
         ;;
     "x11")
         check_command "scrot"
+
+        screenshot_dir="$HOME/screenshots"
+        file_name="$(date +%Y%m%d_%H%M%S).png"
+        full_path="$screenshot_dir/$file_name"
+
+        mkdir -p "$screenshot_dir"
 
         scrot --line style=dash,width=2,color="#ffffff" \
             --select --freeze "$full_path"
