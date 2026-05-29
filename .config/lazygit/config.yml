@@ -1,3 +1,4 @@
 quitOnTopLevelReturn: true
 git:
   autoFetch: false
+  overrideGpg: true
