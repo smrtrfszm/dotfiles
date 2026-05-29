@@ -30,6 +30,7 @@
   },
   "hyprland/workspaces": {
     "all-outputs": true,
+    "move-to-monitor": true,
     "disable-scroll": true,
     "format": "{name}",
     "sort-by": "number",
