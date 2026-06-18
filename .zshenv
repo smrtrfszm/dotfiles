@@ -33,3 +33,5 @@ export SQLITE_HISTORY="$XDG_STATE_HOME/sqlite_history"
 path+=("$HOME/.local/bin")
 path+=("$CARGO_HOME/bin")
 path+=("$GOPATH/bin")
+
+fpath+=("$XDG_DATA_HOME/zsh/site-functions")
