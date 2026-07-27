@@ -7,7 +7,6 @@ vim.filetype.add({
     j2 = 'jinja',
   },
   pattern = {
-    ['.*/kube/config'] = 'yaml',
     ['.*/containers/containers.conf'] = 'toml',
     ['.*/containers/storage.conf'] = 'toml',
     ['.*/waybar/config'] = 'jsonc',

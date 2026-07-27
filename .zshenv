@@ -21,6 +21,7 @@ export CUDA_CACHE_PATH="$XDG_CACHE_HOME/nv"
 export PYTHON_HISTORY="$XDG_STATE_HOME/python/history"
 export KUBECACHEDIR="$XDG_CACHE_HOME/kube/"
 export KUBECONFIG="$XDG_CONFIG_HOME/kube/config"
+export KUBERC="$XDG_CONFIG_HOME/kube/kuberc"
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
 export _JAVA_AWT_WM_NONREPARENTING=1
 export GRADLE_USER_HOME="$XDG_DATA_HOME/gradle"
