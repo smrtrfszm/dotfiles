@@ -76,7 +76,7 @@
     "format": "",
     "format-disconnected": "Offline",
     "format-ethernet": "Net ↑ {bandwidthUpBytes} ↓ {bandwidthDownBytes}",
-    "format-wifi": "{essid} {signalStrength}% ",
+    "format-wifi": "{essid}  ",
     "on-click": "cmst",
     "tooltip": false
   },
