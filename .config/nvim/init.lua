@@ -5,7 +5,6 @@ utils.ensure_lazy()
 
 local colors = require('colors')
 
-require('ft')
 require('settings')
 require('keys')
 

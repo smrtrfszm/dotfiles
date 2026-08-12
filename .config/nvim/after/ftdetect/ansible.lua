@@ -1,20 +1,6 @@
+-- From: https://github.com/mfussenegger/nvim-ansible/blob/bba61168b7aef735e7f950fdfece5ef6c388eacf/ftdetect/ansible.lua#L4-L13
 vim.filetype.add({
-  extension = {
-    fsh = 'glsl',
-    vsh = 'glsl',
-    Containerfile = 'dockerfile',
-    mtxcfg = 'json',
-    j2 = 'jinja',
-  },
   pattern = {
-    ['.*/containers/containers.conf'] = 'toml',
-    ['.*/containers/storage.conf'] = 'toml',
-    ['.*/waybar/config'] = 'jsonc',
-    ['.env.*'] = 'sh',
-    ['.whitesource'] = 'json',
-    ['.yamllint'] = 'yaml',
-
-    -- From: https://github.com/mfussenegger/nvim-ansible/blob/bba61168b7aef735e7f950fdfece5ef6c388eacf/ftdetect/ansible.lua#L4-L13
     ['.*/defaults/.*%.ya?ml'] = 'yaml.ansible',
     ['.*/host_vars/.*%.ya?ml'] = 'yaml.ansible',
     ['.*/group_vars/.*%.ya?ml'] = 'yaml.ansible',
